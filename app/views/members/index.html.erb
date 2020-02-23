@@ -1,0 +1,7 @@
+<% content_for :heading, 'Members' %>
+
+<ul>
+  <% @members.each do |member| %>
+    <%= render member %>
+  <% end %>
+</ul>

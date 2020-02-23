@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>CUADC Membership System</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <%= link_to root_path, class: 'navbar-brand' do %>
+          CUADC Membership Management System
+        <% end %>
+        <div class="collapse navbar-collapse" id="navbarCollapse"></div>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <h1 class="mt-3 mb-5"><%= yield(:heading) %></h1>
+      <%= yield %>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">CUADC MMS revision <%= `git log --pretty="%h" -n1 HEAD`.chomp %> (<%= DateTime.parse(`git log -n1 --pretty=%ci HEAD`.chomp).to_s %>)</span>
+      </div>
+    </footer>
+  </body>
+</html>
