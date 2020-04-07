@@ -1,7 +1,17 @@
-<% content_for :heading, 'Members' %>
+<% content_for :heading, 'Member List' %>
+
+<p>
+  Please use ctrl+F (cmd+F on Mac) to search this page from your web browser.
+</p>
+
+<p>
+  Last Name, Other Names (Graduation Year) - Membership Expiry Date
+</p>
 
 <ul>
   <% @members.each do |member| %>
-    <%= render member %>
+    <li>
+      <%= link_to list_text(member), url_for(member) %>
+    </li>
   <% end %>
 </ul>
