@@ -1,1 +1,46 @@
 <% content_for :heading, 'Member' %>
+
+<p>
+  <%= link_to "Edit details", edit_member_path(@member) %>
+</p>
+
+<table class="table table-sm table-striped table-bordered mb-0">
+  <tbody>
+    <tr>
+      <td>Name:</td>
+      <td><%= member_name(@member) %></td>
+    </tr>
+    <tr>
+      <td>CRSid:</td>
+      <td><%= @member.crsid %></td>
+    </tr>
+    <tr>
+      <td>Camdram ID:</td>
+      <td><%= @member.camdram_id %></td>
+    </tr>
+    <tr>
+      <td>Primary Email:</td>
+      <td><%= @member.primary_email %></td>
+    </tr>
+    <tr>
+      <td>Secondary Email:</td>
+      <td><%= @member.secondary_email %></td>
+    </tr>
+    <tr>
+      <td>Institution:</td>
+      <td><%= @member.institution.name %></td>
+    </tr>
+    <tr>
+      <td>Graduation Year:</td>
+      <td><%= @member.graduation_year %></td>
+    </tr>
+    <tr>
+      <td>Membership Type:</td>
+      <td><%= @member.type.name %></td>
+    </tr>
+    <tr>
+      <td>Membership Expiry:</td>
+      <td><%= member_expiry(@member) %></td>
+    </tr>
+  </tbody>
+</table>
