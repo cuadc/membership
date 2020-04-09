@@ -1,0 +1,95 @@
+<%= form_with model: @member, local: true do |form| %>
+  <div class="form-group row">
+    <%= form.label :camdram_id, "Camdram ID", class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :camdram_id, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :crsid, "CRSid", class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :crsid, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :other_names, "First name(s)", class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :other_names, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :last_name, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :last_name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :primary_email, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :primary_email, class: 'form-control' %>
+      <small id="primaryEmailHelpTag" class="form-text text-muted">
+        For University of Cambridge students, please use an @cam email address.
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :secondary_email, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :secondary_email, class: 'form-control' %>
+      <small id="secondaryEmailHelpTag" class="form-text text-muted">
+        A non-University email address for the alumni mailing list.
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :institution_id, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.collection_select :institution_id, Institution.all.order(:id), :id, :name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :graduation_year, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :graduation_year, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :type_id, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.collection_select :room_id, Type.all.order(:id), :id, :name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :expiry, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :expiry, class: 'form-control' %>
+      <small id="expiryHelpTag" class="form-text text-muted">
+        yyyy-mm-dd
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row mt-2">
+    <div class="col-sm-10">
+      <%= form.submit class: 'btn btn-primary' %>
+      <small id="submitHelpBlock" class="form-text text-muted my-3">
+        Please email membership@cuadc.org if there is any incorrect information on this page which you cannot change yourself.
+      </small>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+
+

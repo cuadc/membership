@@ -1,0 +1,10 @@
+<% content_for :heading, 'Check Show' %>
+
+<p>
+  Please enter the slug of the show you want to check. The slug is the part of the URL after the https://www.camdram.net/shows/.
+</p>
+
+<%= form_tag check_camdram_shows_path, class: 'form-inline', method: :get do %>
+  <%= search_field_tag :slug, '', placeholder: "Show's slug on Camdram", class: 'form-control mr-1' %>
+  <%= submit_tag 'Check Show', class: 'btn btn-primary ml-1' %>
+<% end %>
