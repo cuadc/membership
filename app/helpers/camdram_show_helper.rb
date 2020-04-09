@@ -1,7 +1,7 @@
 module CamdramShowHelper
   def ordinary_member_row(tuple)
     member = tuple[1]
-    link_to member_name(member), member
+    link_to member.full_name, member
   end
 
   def non_ordinary_member_row(tuple)
