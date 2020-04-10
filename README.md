@@ -1,24 +1,10 @@
-# README
+<img align="right" src="https://cuadc.org/wp-content/themes/cuadc%20update/Images/logo.png">
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# CUADC Membership System
+The CUADC Membership System is a web application used by the Membership Secretary pro tempore of the Cambridge University Amateur Dramatic Club for managing the details of the society's paid up members.
 
-Things you may want to cover:
+The system runs as a Ruby on Rails app and speaks to a MySQL database on the backend.
+Please note the this project is currently a work in progress.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Contributing
+The intention is to keep the project very simple and provide nothing more than a basic web frontend for the membership database. That being said, if you do notice something that's broken, could use improvement or is otherwise not working properly then please do contribute! You can submit bug reports, feature requests and pull requests on GitHub.
