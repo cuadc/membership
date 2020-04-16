@@ -3,6 +3,11 @@ class MembersController < ApplicationController
     @members = Member.all
   end
 
+  def ballot_list
+    type = Type.find_by(name: "Ordinary")
+    @members = Member.where(type: type).where("expiry IS NULL or expiry >= ?", Date.today)
+  end
+
   def new
     @member = Member.new
   end
