@@ -16,7 +16,6 @@ class MembersController < ApplicationController
     if @member.save
       redirect_to @member
     else
-      byebug
       render :new
     end
   end
@@ -43,15 +42,6 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:camdram_id)
-                           .permit(:crsid)
-                           .permit(:last_name)
-                           .permit(:other_names)
-                           .permit(:primary_email)
-                           .permit(:secondary_email)
-                           .permit(:institution)
-                           .permit(:graduation_year)
-                           .permit(:type)
-                           .permit(:expiry)
+    params.require(:member).permit(:camdram_id, :crsid, :last_name, :other_names, :primary_email, :secondary_email, :institution_id, :graduation_year, :type_id, :expiry)
   end
 end

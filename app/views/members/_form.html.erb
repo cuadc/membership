@@ -64,7 +64,7 @@
   <div class="form-group row">
     <%= form.label :type_id, class: 'col-sm-2 col-form-label' %>
     <div class="col-sm-10">
-      <%= form.collection_select :room_id, Type.all.order(:id), :id, :name, class: 'form-control' %>
+      <%= form.collection_select :type_id, Type.all.order(:id), :id, :name, class: 'form-control' %>
     </div>
   </div>
 
