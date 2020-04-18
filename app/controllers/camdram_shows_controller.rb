@@ -6,19 +6,20 @@ class CamdramShowsController < ApplicationController
     if slug.nil? || slug.blank?
       render plain: 'Invalid show slug!' and return
     end
-    @ordinary_member_tuples = []
-    @non_ordinary_member_tuples = []
+    type_ord = Type.find_by(name: "Ordinary")
+    @valid_tuples = []
+    @invalid_tuples = []
     show = client.get_show(slug)
     show.roles.each do |role|
       person = role.person
       member = Member.where(camdram_id: person.id).first
       if member.nil?
-        @non_ordinary_member_tuples.push([person, nil])
+        @invalid_tuples.push([person, nil])
       else
-        if member.type.name == 'Ordinary'
-          @ordinary_member_tuples.push([person, member])
+        if member.type == type_ord && !member.expired?
+          @valid_tuples.push([person, member])
         else
-          @non_ordinary_member_tuples.push([person, member])
+          @invalid_tuples.push([person, member])
         end
       end
     end

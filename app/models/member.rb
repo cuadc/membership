@@ -19,4 +19,8 @@ class Member < ApplicationRecord
       "#{other_names} #{last_name}"
     end
   end
+
+  def expired?
+    expiry.present? && expiry <= Date.today
+  end
 end

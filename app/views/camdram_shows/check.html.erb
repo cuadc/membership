@@ -1,8 +1,8 @@
 <% content_for :heading, 'Results of Show Check' %>
 
 <div class="alert alert-success" role="alert">
-  <h3 class="mb-3">Ordinary Members</h3>
-  <% @ordinary_member_tuples.each do |tuple| %>
+  <h3 class="mb-3">Valid Show Participants</h3>
+  <% @valid_tuples.each do |tuple| %>
     <div class="row">
       <%= ordinary_member_row(tuple) %>
     </div>
@@ -10,8 +10,8 @@
 </div>
 
 <div class="alert alert-danger" role="alert">
-  <h3 class="mb-3">Non-Ordinary Members</h3>
-  <% @non_ordinary_member_tuples.each do |tuple| %>
+  <h3 class="mb-3">Invalid Show Participants</h3>
+  <% @invalid_tuples.each do |tuple| %>
     <div class="row">
       <%= non_ordinary_member_row(tuple) %>
     </div>
