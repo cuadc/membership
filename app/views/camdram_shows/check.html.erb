@@ -1,5 +1,11 @@
 <% content_for :heading, 'Results of Show Check' %>
 
+<p>
+  This page shows the results of the cross-check between the membership database and Camdram.
+  Ordinary Members with unexpired membership are listed in the green section and everyone else in the red section.
+  Recognised members will be listed with a link to their individual pages on the membership system.
+</p>
+
 <div class="alert alert-success" role="alert">
   <h3 class="mb-3">Valid Show Participants</h3>
   <% @valid_tuples.each do |tuple| %>
