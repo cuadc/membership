@@ -36,6 +36,9 @@ gem 'rails_admin_history_rollback', '~> 1.0'
 # Static page serving
 gem 'high_voltage', '~> 3.1'
 
+# Raven OmniAuth login flow
+gem 'omniauth-ucam-raven', '~> 1.0'
+
 # Camdram API wrapper
 gem 'camdram', git: 'https://github.com/CHTJonas/camdram-ruby.git', require: 'camdram/client'
 
