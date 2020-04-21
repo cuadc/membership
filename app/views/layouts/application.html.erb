@@ -19,7 +19,12 @@
         <%= link_to root_path, class: 'navbar-brand' do %>
           CUADC Membership System
         <% end %>
-        <div class="collapse navbar-collapse" id="navbarCollapse"></div>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto"></ul>
+          <% if user_logged_in? %>
+            <%= link_to 'Logout', logout_path, class: 'btn btn-outline-light my-2 my-sm-0' %>
+          <% end %>
+        </div>
       </nav>
     </header>
 

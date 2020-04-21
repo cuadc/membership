@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
   before_action :check_user!
+  helper_method :user_logged_in?
 
   # Prevent CSRF attacks by raising an exception.
   protect_from_forgery with: :exception
@@ -11,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def user_signed_in?
+  def user_logged_in?
     return true if current_user
   end
 
@@ -24,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_user!
-    unless user_signed_in?
+    unless user_logged_in?
       redirect_to login_path
     end
   end
