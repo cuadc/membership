@@ -16,3 +16,11 @@
   background-size:cover;
   margin-left:10px;
 }
+
+.legal-notice {
+  max-width: 72ch;
+  margin: 2em auto;
+  padding: 4px;
+  border-radius: .3rem;
+  font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
