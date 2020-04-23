@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_214235) do
+ActiveRecord::Schema.define(version: 2020_04_23_221453) do
 
   create_table "institutions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 2020_04_20_214235) do
     t.index ["user_id"], name: "index_provider_accounts_on_user_id"
   end
 
+  create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "login_at", null: false
+    t.datetime "expires_at", null: false
+    t.string "ip", null: false
+    t.string "user_agent", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
   create_table "types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
   end
@@ -55,4 +64,5 @@ ActiveRecord::Schema.define(version: 2020_04_20_214235) do
   end
 
   add_foreign_key "provider_accounts", "users"
+  add_foreign_key "sessions", "users"
 end

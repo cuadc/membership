@@ -7,8 +7,9 @@ class SessionsController < ApplicationController
     reset_session
     auth_hash = request.env["omniauth.auth"]
     user = User.from_omniauth(auth_hash)
-    redirect_to root_url and return if user.nil?
-    session[:user_id] = user.id
+    redirect_to login_url and return if user.nil?
+    sesh = Session.from_user_and_request(user, request)
+    session[:sesh_id] = sesh.id
     redirect_to root_url
   end
 

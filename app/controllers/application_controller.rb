@@ -12,21 +12,29 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def user_logged_in?
-    return true if current_user
-  end
-
-  def current_user
-    begin
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    rescue
-      nil
+  def check_user!
+    unless session_valid? && user_logged_in?
+      redirect_to login_path
     end
   end
 
-  def check_user!
-    unless user_logged_in?
-      redirect_to login_path
+  def session_valid?
+    !current_session.expired?
+  end
+
+  def user_logged_in?
+    current_user.present?
+  end
+
+  def current_user
+    @current_user ||= current_session.try(:user)
+  end
+
+  def current_session
+    begin
+      @current_session ||= Session.find(session[:sesh_id]) if session[:sesh_id]
+    rescue
+      nil
     end
   end
 

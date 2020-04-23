@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :sessions, dependent: :delete_all
   has_many :provider_accounts, dependent: :delete_all
 
   validates :name, presence: true
