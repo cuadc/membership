@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_04_23_221453) do
 
   create_table "institutions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
   end
 
   create_table "members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -21,14 +21,18 @@ ActiveRecord::Schema.define(version: 2020_04_23_221453) do
     t.string "crsid"
     t.string "last_name"
     t.string "other_names"
-    t.string "primary_email"
+    t.string "primary_email", null: false
     t.string "secondary_email"
     t.bigint "institution_id"
-    t.integer "graduation_year"
+    t.integer "graduation_year", null: false
     t.bigint "type_id"
     t.date "expiry"
     t.text "password"
+    t.index ["camdram_id"], name: "index_members_on_camdram_id", unique: true
+    t.index ["crsid"], name: "index_members_on_crsid", unique: true
     t.index ["institution_id"], name: "index_members_on_institution_id"
+    t.index ["primary_email"], name: "index_members_on_primary_email", unique: true
+    t.index ["secondary_email"], name: "index_members_on_secondary_email", unique: true
     t.index ["type_id"], name: "index_members_on_type_id"
   end
 
@@ -51,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_04_23_221453) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  create_table "types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
   end
 

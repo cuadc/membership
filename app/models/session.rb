@@ -4,6 +4,7 @@ class Session < ApplicationRecord
   validates :login_at, presence: true
   validates :expires_at, presence: true
   validates :ip, presence: true
+  validates :user_agent, presence: true
 
   def self.from_user_and_request(user, request)
     login_at = Time.zone.now
