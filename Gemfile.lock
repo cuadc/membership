@@ -260,6 +260,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sqlite3 (1.4.2)
     strip_attributes (1.9.2)
       activemodel (>= 3.0, < 7.0)
     temple (0.8.2)
@@ -317,6 +318,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  sqlite3
   strip_attributes (~> 1.9)
   turbolinks (~> 5)
   tzinfo-data
