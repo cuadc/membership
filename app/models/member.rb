@@ -2,6 +2,9 @@ class Member < ApplicationRecord
   belongs_to :institution
   belongs_to :type
 
+  scope :ordinary, -> { where(type: Type.find_by(name: "Ordinary")) }
+  scope :not_expired, -> { where("expiry IS NULL OR expiry > ?", Date.today) }
+
   validates :primary_email, presence: true
   validates :graduation_year, presence: true
   validate :must_have_a_name

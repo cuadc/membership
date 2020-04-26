@@ -4,8 +4,7 @@ class MembersController < ApplicationController
   end
 
   def ballot_list
-    type = Type.find_by(name: "Ordinary")
-    @members = Member.where(type: type).where("expiry IS NULL or expiry >= ?", Date.today)
+    @members = Member.ordinary.not_expired
   end
 
   def new
