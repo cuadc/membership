@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def session_valid?
-    !current_session.expired?
+    current_session.present? && !current_session.expired?
   end
 
   def user_logged_in?
