@@ -1,0 +1,13 @@
+<% content_for :heading, 'Mailing List' %>
+
+<p>
+  You can copy/paste this list into the <a href="https://lists.cam.ac.uk/mailman/admin/soc-adc-members/members/add">
+  Mailman admin interface</a> to mass subscribe all members at once (except those whose membership has expired).
+</p>
+
+<code>
+  <% @members.each do |member| %>
+    <%= member.primary_email %>
+    <br>
+  <% end %>
+</code>

@@ -7,6 +7,10 @@ class MembersController < ApplicationController
     @members = Member.ordinary.not_expired
   end
 
+  def mailing_list
+    @members = Member.not_expired
+  end
+
   def new
     @member = Member.new
   end
