@@ -22,7 +22,7 @@
         <%= content_tag(:td, link_to(member.full_name, member)) %>
         <%= content_tag(:td, member.crsid) %>
         <%= content_tag(:td, member.graduation_year) %>
-        <%= content_tag(:td, member.expiry) %>
+        <%= content_tag(:td, expiry_text(member)) %>
       <% end %>
     <% end %>
   </tbody>
