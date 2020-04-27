@@ -5,6 +5,8 @@ class Member < ApplicationRecord
   scope :ordinary, -> { where(type: Type.find_by(name: "Ordinary")) }
   scope :not_expired, -> { where("expiry IS NULL OR expiry > ?", Date.today) }
 
+  before_validation :normalise_crsid
+
   validates :primary_email, presence: true
   validates :graduation_year, presence: true
   validate :must_have_a_name
@@ -25,5 +27,11 @@ class Member < ApplicationRecord
 
   def expired?
     expiry.present? && expiry <= Date.today
+  end
+
+  private
+
+  def normalise_crsid
+    self.crsid = crsid.downcase
   end
 end

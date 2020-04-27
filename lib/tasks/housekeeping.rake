@@ -9,7 +9,7 @@ namespace :membership do
         parts = member.primary_email.split("@")
         begin
           if parts.length == 2 && parts[1] == "cam.ac.uk"
-            member.crsid = parts[0]
+            member.crsid = parts[0].downcase
             member.save(validate: false)
           end
         rescue => e
