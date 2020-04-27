@@ -1,13 +1,8 @@
 <% content_for :heading, 'Mailing List' %>
 
 <p>
-  You can copy/paste this list into the <a href="https://lists.cam.ac.uk/mailman/admin/soc-adc-members/members/add">
-  Mailman admin interface</a> to mass subscribe all members at once (except those whose membership has expired).
+  Press the button below to download a list with the email addresses of all current members (except those whose membership has expired).
+  This file can then be imported into the <a href="https://lists.cam.ac.uk/mailman/admin/soc-adc-members/members/import">Mailman admin interface</a>.
 </p>
 
-<code>
-  <% @members.each do |member| %>
-    <%= member.primary_email %>
-    <br>
-  <% end %>
-</code>
+<%= link_to "Download File", import_members_path(:txt), class: "btn btn-primary" %>

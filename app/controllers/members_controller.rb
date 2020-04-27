@@ -7,8 +7,9 @@ class MembersController < ApplicationController
     @members = Member.ordinary.not_expired
   end
 
-  def mailing_list
+  def import
     @members = Member.not_expired
+    response.headers["Content-Type"] = "application/octet-stream"
   end
 
   def new
