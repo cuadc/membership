@@ -4,6 +4,7 @@ class Member < ApplicationRecord
 
   scope :ordinary, -> { where(type: Type.find_by(name: "Ordinary")) }
   scope :not_expired, -> { where("expiry IS NULL OR expiry > ?", Date.today) }
+  scope :not_legacy_email, -> { where("primary_email NOT LIKE 'unknown-member-email-_%@cuadc.org'") }
 
   before_validation :normalise_crsid
 
