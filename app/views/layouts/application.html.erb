@@ -35,7 +35,7 @@
 
     <footer class="footer">
       <div class="container">
-        <span class="text-muted">CUADC Membership System revision <%= `git log --pretty="%h" -n1 HEAD`.chomp %> (<%= DateTime.parse(`git log -n1 --pretty=%ci HEAD`.chomp).to_s %>)</span>
+        <span class="text-muted">CUADC Membership System &vert; <%= Membership::Version.git_desc %></span>
       </div>
     </footer>
   </body>
