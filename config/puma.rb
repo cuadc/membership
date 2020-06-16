@@ -22,8 +22,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 
 # Specifies the `port` or `socket` that Puma will listen on to receive requests.
 #
-if environment == 'production'
-  prune_bundler
+if ENV['RAILS_ENV'] == 'production'
   bind      'unix:///var/run/membership/puma.sock?umask=0077'
 else
   port      ENV.fetch("PORT") { 3000 }
