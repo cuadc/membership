@@ -9,7 +9,7 @@ class CamdramShowsController < ApplicationController
     type_ord = Type.find_by(name: "Ordinary")
     @valid_tuples = []
     @invalid_tuples = []
-    show = client.get_show(slug)
+    show = Membership::Camdram.client.get_show(slug)
     show.roles.each do |role|
       person = role.person
       member = Member.where(camdram_id: person.id).first
@@ -22,16 +22,6 @@ class CamdramShowsController < ApplicationController
           @invalid_tuples.push([person, member])
         end
       end
-    end
-  end
-
-  private
-
-  def client
-    Camdram::Client.new do |config|
-      config.read_only
-      config.user_agent = "CUADC Membership System v2"
-      config.base_url = "https://www.camdram.net"
     end
   end
 end
