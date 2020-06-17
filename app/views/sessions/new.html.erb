@@ -1,9 +1,9 @@
 <% content_for :heading, 'Login' %>
 
 <div class="login">
-  <img class="mb-4" src="assets/cuadc_logo.png" alt="" width="173" height="200">
+  <%= image_tag 'cuadc_logo.png', height: '200', width: '173', class: 'mb-4' %>
   <%= link_to '/auth/ucamraven', class: "btn btn-lg btn-primary btn-block ravenbtn" do %>
-    <div class="ravenicon"></div>
+    <%= image_tag 'raven.png', class: 'ravenicon' %>
     <div class="raventext">Login with Raven</div>
   <% end %>
 </div>
