@@ -41,7 +41,9 @@
     <div class="col-sm-10">
       <%= form.text_field :primary_email, class: 'form-control' %>
       <small id="primaryEmailHelpTag" class="form-text text-muted">
-        For University of Cambridge students, please use an @cam email address.
+        For University of Cambridge students, please use a cam.ac.uk email address.
+        <br>
+        For ARU students, please use an anglia.ac.uk email address.
       </small>
     </div>
   </div>
@@ -90,9 +92,6 @@
   <div class="form-group row mt-2">
     <div class="col-sm-10">
       <%= form.submit class: 'btn btn-primary' %>
-      <small id="submitHelpBlock" class="form-text text-muted my-3">
-        Please email membership@cuadc.org if there is any incorrect information on this page which you cannot change yourself.
-      </small>
     </div>
   </div>
 <% end %>
