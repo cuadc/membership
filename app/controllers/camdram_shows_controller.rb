@@ -12,7 +12,7 @@ class CamdramShowsController < ApplicationController
     show = Membership::Camdram.client.get_show(slug)
     show.roles.each do |role|
       person = role.person
-      member = Member.where(camdram_id: person.id).first
+      member = Member.find_by(camdram_id: person.id)
       if member.nil?
         @invalid_tuples.push([person, nil])
       else
@@ -23,5 +23,7 @@ class CamdramShowsController < ApplicationController
         end
       end
     end
+    @valid_tuples = @valid_tuples.uniq { |tuple| tuple.first.id }
+    @invalid_tuples = @invalid_tuples.uniq { |tuple| tuple.first.id }
   end
 end
