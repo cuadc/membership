@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
   skip_before_action :check_user!
 
-  def new; end
+  def new
+    invalidate_session
+  end
 
   def create
     reset_session
