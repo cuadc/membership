@@ -12,6 +12,8 @@ class Member < ApplicationRecord
   validates :graduation_year, presence: true
   validate :must_have_a_name
 
+  strip_attributes
+
   def must_have_a_name
     if full_name.blank?
       errors.add(:base, "Member must have a name")
