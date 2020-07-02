@@ -4,6 +4,12 @@
   <%= link_to "Edit details", edit_member_path(@member) %>
 </p>
 
+<% if @member.expired? %>
+  <div class="alert alert-warning" role="alert">
+    This person's membership has expired!
+  </div>
+<% end %>
+
 <table class="table table-sm table-striped table-bordered mb-0">
   <tbody>
     <tr>
