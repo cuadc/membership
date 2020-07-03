@@ -9,7 +9,7 @@ class MembersController < ApplicationController
 
   def import
     @members = Member.not_expired.not_legacy_email
-    response.headers["Content-Type"] = "application/octet-stream"
+    response.headers["Content-Disposition"] = "attachment"
   end
 
   def new
