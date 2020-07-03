@@ -28,6 +28,24 @@ class Member < ApplicationRecord
     end
   end
 
+  def list_email
+    if type == Type.find_by(name: "Ordinary")
+      primary_email
+    elsif type == Type.find_by(name: "Associate")
+      if secondary_email.present?
+        secondary_email
+      else
+        if primary_email.ends_with? "@cam.ac.uk"
+          crsid + "@cantab.ac.uk"
+        else
+          primary_email
+        end
+      end
+    else
+      nil
+    end
+  end
+
   def expired?
     expiry.present? && expiry <= Date.today
   end
