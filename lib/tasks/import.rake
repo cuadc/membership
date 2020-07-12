@@ -6,6 +6,10 @@ namespace :membership do
       File.readlines('members.csv').each do |line|
         parts = line.chomp.split(',')
         name = "#{parts[2]} #{parts[1]}"
+        unless parts[0].blank?
+          puts "#{name} is already linked to a person on Camdram, skipping..."
+          next
+        end
         puts "Searching Camdram for #{name} who graduated in #{parts[6]}..."
         entities = ::Membership::Camdram.client.search(name).select do |entity|
           entity.entity_type == 'person'
