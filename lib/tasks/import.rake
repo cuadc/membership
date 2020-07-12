@@ -16,7 +16,7 @@ namespace :membership do
         end
         puts 'Found the following people:'
         entities.each do |entity|
-          puts "#{entity.name} (id #{entity.id}) who was last active on #{entity.last_active}"
+          puts "  *  #{entity.name} (id #{entity.id}) who was last active on #{entity.last_active}"
         end
         print 'Enter Camdram ID or leave blank to accept first: '
         parts[0] = STDIN.gets.chomp
