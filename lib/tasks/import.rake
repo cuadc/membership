@@ -22,7 +22,6 @@ namespace :membership do
         parts[0] = STDIN.gets.chomp
         parts[0] = entities.first.id if parts[0].blank? && entities.length > 0
         file.puts parts.join(',')
-        puts parts.inspect
         puts ''
       end
     end
