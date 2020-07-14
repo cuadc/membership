@@ -27,4 +27,21 @@ namespace :membership do
       end
     end
   end
+
+  task import: :environment do
+    File.readlines('members.csv').each do |line|
+      parts = line.chomp.split(',')
+      Member.create!({
+        camdram_id: parts[0],
+        last_name: parts[1],
+        other_names: parts[2],
+        primary_email: parts[3],
+        secondary_email: parts[4],
+        institution: Institution.find_by(name: parts[5]),
+        graduation_year: parts[6],
+        type_id: parts[7],
+        expiry: parts[8]
+      })
+    end
+  end
 end
