@@ -53,6 +53,6 @@ class Member < ApplicationRecord
   private
 
   def normalise_crsid
-    self.crsid = crsid.downcase
+    self.crsid = crsid.downcase unless crsid.blank?
   end
 end
