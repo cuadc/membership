@@ -1,11 +1,12 @@
 GIT
   remote: https://github.com/CHTJonas/camdram-ruby.git
-  revision: 738926a6d8c9475451224affc60584302349a729
+  revision: 5aa63b25e83ccfbc9152901b7e723ef4d2f4c459
   specs:
     camdram (2.0.0)
       mime-types (~> 3.2)
       oauth2 (~> 1.4)
-      ruby_multiton (~> 0.1)
+      ruby_multiton (~> 0.1.2)
+      sync (~> 0.5.0)
 
 GEM
   remote: https://rubygems.org/
@@ -150,7 +151,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.1)
     msgpack (1.3.3)
-    multi_json (1.14.1)
+    multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     mysql2 (0.5.3)
@@ -266,6 +267,7 @@ GEM
     sqlite3 (1.4.2)
     strip_attributes (1.11.0)
       activemodel (>= 3.0, < 7.0)
+    sync (0.5.0)
     temple (0.8.2)
     thor (1.0.1)
     thread_safe (0.3.6)
