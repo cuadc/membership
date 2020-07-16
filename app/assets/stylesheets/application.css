@@ -41,3 +41,8 @@ body > .container {
 code {
   font-size: 80%;
 }
+
+.list-unbulleted {
+  list-style-type: none;
+  padding: 0;
+}

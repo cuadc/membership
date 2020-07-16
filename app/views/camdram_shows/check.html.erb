@@ -1,26 +1,31 @@
 <% content_for :heading, 'Results of Show Check' %>
+<h5><%= @show.name %></h5>
 
 <p>
-  This page shows the results of the cross-check between the membership database and Camdram.
+  This page shows the results of the cross-check between the list of people involved with the show according to Camdram and the CUADC membership database.
   Ordinary Members with unexpired membership are listed in the green section and everyone else in the red section.
   Recognised members will be listed with a link to their individual pages on the membership system.
   You can also <%= link_to 'view this show on Camdram', Membership::Camdram.url_for(@show) %>.
 </p>
 
 <div class="alert alert-success" role="alert">
-  <h3 class="mb-3">Valid Show Participants</h3>
-  <% @valid_tuples.each do |tuple| %>
-    <div class="row">
-      <%= ordinary_member_row(tuple) %>
-    </div>
-  <% end %>
+  <h4 class="mb-3">Valid Show Participants</h4>
+  <ul class="list-unbulleted">
+    <% @valid_tuples.each do |tuple| %>
+      <li>
+        <%= ordinary_member_row(tuple) %>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
 <div class="alert alert-danger" role="alert">
-  <h3 class="mb-3">Invalid Show Participants</h3>
-  <% @invalid_tuples.each do |tuple| %>
-    <div class="row">
-      <%= non_ordinary_member_row(tuple) %>
-    </div>
-  <% end %>
+  <h4 class="mb-3">Invalid Show Participants</h4>
+  <ul class="list-unbulleted">
+    <% @invalid_tuples.each do |tuple| %>
+      <li>
+        <%= non_ordinary_member_row(tuple) %>
+      </li>
+    <% end %>
+  </ul>
 </div>
