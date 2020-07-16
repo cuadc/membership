@@ -14,3 +14,15 @@
     </div>
   </div>
 <% end %>
+
+<p>
+  Alternatively you can select an upcoming show from the list below:
+</p>
+
+<ol>
+  <% @shows.each do |show| %>
+    <li>
+      <%= link_to show.name, check_camdram_shows_path(slug: show.slug) %>
+    </li>
+  <% end %>
+</ol>

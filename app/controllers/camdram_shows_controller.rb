@@ -1,5 +1,7 @@
 class CamdramShowsController < ApplicationController
-  def index; end
+  def index
+    @shows = Membership::Camdram.client.get_society("cambridge-university-amateur-dramatic-club").shows
+  end
 
   def check
     slug = params[:slug]
