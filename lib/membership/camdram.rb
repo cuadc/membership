@@ -10,6 +10,10 @@ module Membership
           config.base_url = "https://www.camdram.net"
         end
       end
+
+      def url_for(entity)
+        client.base_url + entity.url_slug.chomp('.json')
+      end
     end
   end
 end

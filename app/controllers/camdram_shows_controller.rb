@@ -11,8 +11,8 @@ class CamdramShowsController < ApplicationController
     type_ord = Type.find_by(name: "Ordinary")
     @valid_tuples = []
     @invalid_tuples = []
-    show = Membership::Camdram.client.get_show(slug)
-    show.roles.each do |role|
+    @show = Membership::Camdram.client.get_show(slug)
+    @show.roles.each do |role|
       person = role.person
       member = Member.find_by(camdram_id: person.id)
       if member.nil?
