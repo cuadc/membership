@@ -95,7 +95,7 @@ GEM
     chronic (0.10.2)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
-    concurrent-ruby (1.1.7)
+    concurrent-ruby (1.1.8)
     crass (1.0.6)
     datey (1.1.0)
     dotenv (2.7.6)
