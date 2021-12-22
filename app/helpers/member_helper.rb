@@ -8,7 +8,7 @@ module MemberHelper
   end
 
   def list_text(member)
-    return "#{member.full_name} (#{member.graduation_year}) - #{member_expiry(member)}"
+    return "#{member.name} (#{member.graduation_year}) - #{member_expiry(member)}"
   end
 
   def expiry_text(member)

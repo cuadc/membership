@@ -33,8 +33,7 @@ namespace :membership do
       begin
         Member.create!({
           camdram_id: parts[0],
-          last_name: parts[1],
-          other_names: parts[2],
+          name: "#{parts[2]} #{parts[1]}".strip
           primary_email: parts[3],
           secondary_email: parts[4],
           institution: Institution.find_by(name: parts[5]),
