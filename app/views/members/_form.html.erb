@@ -9,48 +9,55 @@
 
 <%= form_with model: @member, local: true do |form| %>
   <div class="form-group row">
-    <%= form.label :camdram_id, "Camdram ID", class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
+    <%= form.label :camdram_id, "Camdram ID", class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
       <%= form.text_field :camdram_id, class: 'form-control' %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= form.label :crsid, "CRSid", class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= form.text_field :crsid, class: 'form-control' %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= form.label :other_names, "First name(s)", class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= form.text_field :other_names, class: 'form-control' %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= form.label :last_name, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= form.text_field :last_name, class: 'form-control' %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= form.label :primary_email, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= form.text_field :primary_email, class: 'form-control' %>
-      <small id="primaryEmailHelpTag" class="form-text text-muted">
-        For University of Cambridge students, please use a cam.ac.uk email address.
-        <br>
-        For ARU students, please use an anglia.ac.uk email address.
+      <small id="camdramIDHelpTag" class="form-text text-muted">
+        Please enter their Camdram ID if they have one.
+        This can be found by appending <code>.json</code> to the end of their profile page URL.
       </small>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :secondary_email, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
+    <%= form.label :crsid, "CRSid", class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
+      <%= form.text_field :crsid, class: 'form-control' %>
+      <small id="crsidHelpTag" class="form-text text-muted">
+        For University of Cambridge students, please enter their CRSid.
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :other_names, "First name(s)", class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
+      <%= form.text_field :other_names, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :last_name, class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
+      <%= form.text_field :last_name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :primary_email, class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
+      <%= form.text_field :primary_email, class: 'form-control' %>
+      <small id="primaryEmailHelpTag" class="form-text text-muted">
+        For University of Cambridge students, please use their cam.ac.uk email address.
+        <br>
+        For ARU students, please use their anglia.ac.uk email address.
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :secondary_email, class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
       <%= form.text_field :secondary_email, class: 'form-control' %>
       <small id="secondaryEmailHelpTag" class="form-text text-muted">
         A non-University email address for the alumni mailing list.
@@ -61,29 +68,29 @@
   </div>
 
   <div class="form-group row">
-    <%= form.label :institution_id, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
+    <%= form.label :institution_id, 'Institution/College', class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
       <%= form.collection_select :institution_id, Institution.all.order(:id), :id, :name, class: 'form-control' %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :graduation_year, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
+    <%= form.label :graduation_year, 'Expected graduation year', class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
       <%= form.text_field :graduation_year, class: 'form-control' %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :type_id, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
+    <%= form.label :type_id, 'Membership type', class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
       <%= form.collection_select :type_id, Type.all.order(:id), :id, :name, class: 'form-control' %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :expiry, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
+    <%= form.label :expiry, class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
       <%= form.text_field :expiry, class: 'form-control' %>
       <small id="expiryHelpTag" class="form-text text-muted">
         Please format date as yyyy-mm-dd or leave blank for life membership.
@@ -92,7 +99,7 @@
   </div>
 
   <div class="form-group row mt-2">
-    <div class="col-sm-10">
+    <div class="col-sm-9">
       <%= form.submit class: 'btn btn-primary' %>
     </div>
   </div>
