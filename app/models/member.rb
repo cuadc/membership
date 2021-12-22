@@ -9,7 +9,7 @@ class Member < ApplicationRecord
   before_validation :normalise_crsid
 
   validates :name, presence: true
-  validates :primary_email, presence: true
+  validates :primary_email, presence: true, uniqueness: true
   validates :graduation_year, presence: true
 
   strip_attributes
