@@ -9,6 +9,13 @@
 
 <%= form_with model: @member, local: true do |form| %>
   <div class="form-group row">
+    <%= form.label :name, class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
     <%= form.label :camdram_id, "Camdram ID", class: 'col-sm-3 col-form-label' %>
     <div class="col-sm-9">
       <%= form.text_field :camdram_id, class: 'form-control' %>
@@ -26,13 +33,6 @@
       <small id="crsidHelpTag" class="form-text text-muted">
         For University of Cambridge students, please enter their CRSid.
       </small>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= form.label :name, class: 'col-sm-3 col-form-label' %>
-    <div class="col-sm-9">
-      <%= form.text_field :name, class: 'form-control' %>
     </div>
   </div>
 
