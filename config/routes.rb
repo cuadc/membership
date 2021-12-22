@@ -13,4 +13,8 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy', as: :logout
   get '/auth/:provider/callback' => 'sessions#create', as: :auth_callback
   get '/auth/failure' => 'sessions#failure', as: :auth_failure
+
+  get '/pay' => 'signup#pay'
+  get '/signup' => 'signup#new'
+  post '/signup' => 'signup#create'
 end
