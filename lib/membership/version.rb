@@ -8,6 +8,10 @@ module Membership
       def git_commit
         @git_commit ||= `git rev-parse --short HEAD`.chomp.freeze
       end
+
+      def git_date
+        @git_date ||= `git log -1 --format=%cd`.chomp.freeze
+      end
     end
   end
 end

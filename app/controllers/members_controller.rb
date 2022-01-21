@@ -1,10 +1,10 @@
 class MembersController < ApplicationController
   def index
-    @members = Member.all
+    @members = Member.all.order(:graduation_year)
   end
 
   def ballot_list
-    @members = Member.ordinary.not_expired
+    @members = Member.ordinary.not_expired.order(:graduation_year)
   end
 
   def import

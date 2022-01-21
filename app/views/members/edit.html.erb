@@ -1,2 +1,7 @@
 <% content_for :heading, 'Edit Member' %>
+
+<p>
+  <%= link_to "Cancel", member_path(@member) %>
+</p>
+
 <%= render 'form' %>

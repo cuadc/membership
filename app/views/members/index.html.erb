@@ -11,7 +11,13 @@
 </p>
 
 <ul>
-  <% @members.each do |member| %>
+  <% @members.each_with_index do |member, idx| %>
+    <% if idx != 0 && idx % 15 == 0 %>
+      <div class="alert alert-warning my-3" role="alert">
+        Remember: do <b>not</b> use this list for AGMs, SGMs, ballots
+        or elections as it includes those who are not Ordinary Members!
+      </div>
+    <% end %>
     <li>
       <%= link_to list_text(member), url_for(member) %>
     </li>
