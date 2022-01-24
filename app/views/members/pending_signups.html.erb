@@ -1,0 +1,26 @@
+<% content_for :heading, 'Member List' %>
+
+<p>
+  This page lists pending signups. You should regularly cross-check the
+  individuals listed here with the Spektrix data from the ADC Theatre
+  and update their membership type from "Awaiting Payment" to "Ordinary
+  Member" when their payment can be confirmed. Don't forget to set their
+  expiry unless they have purchased lifetime subscription!
+</p>
+<p>
+  Note that you will need to manually concatenate three purchases of
+  Annual Subscription into Lifetime Subscription. Neither this software
+  nor Spektrix will do this automatically.
+</p>
+
+<p>
+  Name (Singup Date/Time)
+</p>
+
+<ul>
+  <% @members.each do |member| %>
+    <li>
+      <%= link_to "#{member.name} (#{member.created_at.strftime("%d/%m/%Y %H:%M:%S")})", url_for(member) %>
+    </li>
+  <% end %>
+</ul>

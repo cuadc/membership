@@ -7,6 +7,10 @@ class MembersController < ApplicationController
     @members = Member.ordinary.not_expired.order(:graduation_year)
   end
 
+  def pending_signups
+    @members = Member.where(type_id: 999).order(:id)
+  end
+
   def import
     @members = Member.not_expired.not_legacy_email
     response.headers["Content-Disposition"] = "attachment"
