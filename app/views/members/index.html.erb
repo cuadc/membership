@@ -8,20 +8,35 @@
   You can search this page from your web browser by pressing ctrl+F (cmd+F on Mac).
 </p>
 
-<p>
-  Name (Graduation Year) - Membership Expiry Date
-</p>
-
-<ul>
-  <% @members.each_with_index do |member, idx| %>
-    <% if idx != 0 && idx % 15 == 0 %>
-      <div class="alert alert-warning my-3" role="alert">
-        Determining voting or quoracy eligibility? Please use the dedicated
-        <%= link_to 'ballot list page', ballot_list_members_path %> for that.
-      </div>
+<table class="table table-condensed table-bordered table-hover">
+  <thead>
+    <%= content_tag :tr do %>
+      <%= content_tag(:th, 'Full Name') %>
+      <%= content_tag(:th, 'CRSid') %>
+      <%= content_tag(:th, 'Primary Email') %>
+      <%= content_tag(:th, 'Graduation Year') %>
+      <%= content_tag(:th, 'Membership Type') %>
+      <%= content_tag(:th, 'Subscription Expiry') %>
     <% end %>
-    <li>
-      <%= link_to member_index_text(member), url_for(member) %>
-    </li>
-  <% end %>
-</ul>
+  </thead>
+  <tbody>
+    <% @members.each_with_index do |member, idx| %>
+      <% if idx != 0 && idx % 15 == 0 %>
+        <tr class="alert alert-warning" role="alert">
+          <td colspan="6">
+            Determining voting or quoracy eligibility? Please use the dedicated
+            <%= link_to 'ballot list page', ballot_list_members_path %> for that.
+          </td>
+        </tr>
+      <% end %>
+      <%= content_tag :tr do %>
+        <%= content_tag(:td, link_to(member.name, member)) %>
+        <%= content_tag(:td, member.crsid) %>
+        <%= content_tag(:td, member.primary_email) %>
+        <%= content_tag(:td, member.graduation_year) %>
+        <%= content_tag(:td, member.type.name) %>
+        <%= content_tag(:td, expiry_text(member)) %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
