@@ -10,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_22_211927) do
+ActiveRecord::Schema.define(version: 2022_01_24_010507) do
 
   create_table "institutions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "members", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -27,6 +29,8 @@ ActiveRecord::Schema.define(version: 2021_12_22_211927) do
     t.date "expiry"
     t.text "password"
     t.string "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["camdram_id"], name: "index_members_on_camdram_id", unique: true
     t.index ["crsid"], name: "index_members_on_crsid", unique: true
     t.index ["institution_id"], name: "index_members_on_institution_id"
@@ -56,6 +60,8 @@ ActiveRecord::Schema.define(version: 2021_12_22_211927) do
 
   create_table "types", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
