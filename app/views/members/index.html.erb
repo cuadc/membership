@@ -16,12 +16,12 @@
   <% @members.each_with_index do |member, idx| %>
     <% if idx != 0 && idx % 15 == 0 %>
       <div class="alert alert-warning my-3" role="alert">
-        Remember: do <b>not</b> use this list for AGMs, SGMs, ballots
-        or elections as it includes those who are not Ordinary Members!
+        Determining voting or quoracy eligibility? Please use the dedicated
+        <%= link_to 'ballot list page', ballot_list_members_path %> for that.
       </div>
     <% end %>
     <li>
-      <%= link_to list_text(member), url_for(member) %>
+      <%= link_to member_index_text(member), url_for(member) %>
     </li>
   <% end %>
 </ul>
