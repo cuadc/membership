@@ -10,9 +10,11 @@ class IngestController < ApplicationController
     str = request.body.string.force_encoding('utf-8').sub("\xEF\xBB\xBF", '')
     CSV.parse(str, headers: true).each do |row|
       PurchaseIngestItem.create! do |item|
+        item.cid = row["Customer Id"]
         item.name = "#{row["First Name"]} #{row["Last Name"]}"
         item.email = row["Email Address"]
-        item.type = row["Membership Name"]
+        item.mtype = row["Membership Name"].sub('CUADC ', '')
+        item.first = row["First Of This Membership"]
         item.purchased = row["Purchase Date"]
         item.starts = row["Start Date"]
         item.expires = row["Expiry Date"]

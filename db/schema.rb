@@ -50,14 +50,18 @@ ActiveRecord::Schema.define(version: 2022_01_25_180238) do
   end
 
   create_table "purchase_ingest_items", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "type"
-    t.timestamp "purchased"
-    t.timestamp "starts"
+    t.string "cid", null: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "mtype", null: false
+    t.boolean "first", null: false
+    t.timestamp "purchased", null: false
+    t.timestamp "starts", null: false
     t.timestamp "expires"
+    t.bigint "member_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_purchase_ingest_items_on_member_id"
   end
 
   create_table "sessions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -84,5 +88,6 @@ ActiveRecord::Schema.define(version: 2022_01_25_180238) do
   end
 
   add_foreign_key "provider_accounts", "users"
+  add_foreign_key "purchase_ingest_items", "members"
   add_foreign_key "sessions", "users"
 end

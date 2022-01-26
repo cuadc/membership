@@ -9,6 +9,7 @@ class MembersController < ApplicationController
 
   def pending_signups
     @members = Member.where(type_id: 999).order(:id)
+    @purchase_ingest_items = PurchaseIngestItem.where(member: nil).order(:purchased)
   end
 
   def import

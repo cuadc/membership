@@ -13,14 +13,52 @@
   nor Spektrix will do this automatically.
 </p>
 
-<p>
-  Name (Singup Date/Time)
-</p>
+<br>
 
-<ul>
-  <% @members.each do |member| %>
-    <li>
-      <%= link_to "#{member.name} (#{member.created_at.strftime("%d/%m/%Y %H:%M:%S")})", url_for(member) %>
-    </li>
-  <% end %>
-</ul>
+<h5>Membership System Signups</h5>
+<table class="table table-condensed table-bordered table-hover">
+  <thead>
+    <%= content_tag :tr do %>
+      <%= content_tag(:th, 'Name') %>
+      <%= content_tag(:th, 'Email') %>
+      <%= content_tag(:th, 'Time') %>
+    <% end %>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <%= content_tag :tr do %>
+        <%= content_tag(:td, link_to(member.name, member)) %>
+        <%= content_tag(:td, member.primary_email) %>
+        <%= content_tag(:td, member.created_at.strftime("%d/%m/%Y %H:%M:%S")) %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h5>Spektrix Payments Received</h5>
+<table class="table table-condensed table-bordered table-hover">
+  <thead>
+    <%= content_tag :tr do %>
+      <%= content_tag(:th, 'Name') %>
+      <%= content_tag(:th, 'Email') %>
+      <%= content_tag(:th, 'Type') %>
+      <%= content_tag(:th, 'Renewed') %>
+      <%= content_tag(:th, 'Purchased') %>
+      <%= content_tag(:th, 'Expires') %>
+    <% end %>
+  </thead>
+  <tbody>
+    <% @purchase_ingest_items.each do |item| %>
+      <%= content_tag :tr do %>
+        <%= content_tag(:td, item.name) %>
+        <%= content_tag(:td, item.email) %>
+        <%= content_tag(:td, item.mtype) %>
+        <%= content_tag(:td, item.renewed?) %>
+        <%= content_tag(:td, item.purchased.strftime("%d/%m/%Y %H:%M:%S")) %>
+        <%= content_tag(:td, item.expires.try(:strftime, "%d/%m/%Y")) %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
