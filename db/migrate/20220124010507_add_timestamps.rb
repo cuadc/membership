@@ -1,6 +1,6 @@
 class AddTimestamps < ActiveRecord::Migration[6.1]
   def change
-    # We don't add NOT NULL constraints here because of historical reasons.
+    # We don't add NOT NULL constraints here for historical reasons.
     add_column :institutions, :created_at, :datetime
     add_column :institutions, :updated_at, :datetime
 
