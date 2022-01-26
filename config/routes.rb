@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     get 'pending_signups', on: :collection
     get 'mailing_list', on: :collection
     get 'import', on: :collection
+    put 'ingest/expiry', on: :collection
+    put 'ingest/purchase', on: :collection
   end
 
   resources :camdram_shows, only: [:index] do

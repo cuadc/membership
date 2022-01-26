@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   before_action :check_user!
   helper_method :user_logged_in?
 
