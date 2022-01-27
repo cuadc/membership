@@ -1,19 +1,21 @@
 <% content_for :heading, 'Member List' %>
 
 <p>
-  This page lists pending signups. You should regularly cross-check the
-  individuals listed here with the Spektrix data from the ADC Theatre
-  and update their membership type from "Awaiting Payment" to "Ordinary
-  Member" when their payment can be confirmed. Don't forget to set their
-  expiry unless they have purchased lifetime subscription!
-</p>
-<p>
+  This page lists pending signups and purchase data ingested from Spektrix.
+  You should regularly check this page and link individuals' signups with
+  their purchases. When a member is 'linked' the following things will
+  happen automatically:
+  <ul>
+    <li>Their membership status will be updated from "Awaiting Payment" to "Ordinary
+  Member".</li>
+    <li>Their membership expiry date will be set if they have only purchased Annual Membership.</li>
+  </ul>
   Note that you will need to manually concatenate three purchases of
   Annual Subscription into Lifetime Subscription. Neither this software
   nor Spektrix will do this automatically.
 </p>
 
-<%= form_tag link_signups_members_path, class: 'asdf', method: :post do %>
+<%= form_tag link_signups_members_path, method: :post do %>
   <h5 class="mt-5">Membership System Signups</h5>
   <table class="table table-condensed table-bordered table-hover">
     <thead>
@@ -21,7 +23,7 @@
         <%= content_tag(:th, 'Name') %>
         <%= content_tag(:th, 'Primary Email') %>
         <%= content_tag(:th, 'Secondary Email') %>
-        <%= content_tag(:th, 'Time') %>
+        <%= content_tag(:th, 'Signup Time') %>
         <%= content_tag(:th, 'Link') %>
       <% end %>
     </thead>
@@ -50,8 +52,8 @@
         <%= content_tag(:th, 'Email') %>
         <%= content_tag(:th, 'Type') %>
         <%= content_tag(:th, 'Renewed') %>
-        <%= content_tag(:th, 'Purchased') %>
-        <%= content_tag(:th, 'Expires') %>
+        <%= content_tag(:th, 'Purchase Time') %>
+        <%= content_tag(:th, 'Expiry') %>
         <%= content_tag(:th, 'Link') %>
       <% end %>
     </thead>
