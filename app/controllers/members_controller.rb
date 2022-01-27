@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
   def index
-    @members = Member.all.order(:graduation_year)
+    @members = Member.where.not(type_id: 999).order(:graduation_year)
   end
 
   def ballot_list
