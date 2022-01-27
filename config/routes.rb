@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :members do
     get 'ballot_list', on: :collection
     get 'pending_signups', on: :collection
+    post 'link_signups', on: :collection
     get 'mailing_list', on: :collection
     get 'import', on: :collection
     put 'ingest/expiry', on: :collection

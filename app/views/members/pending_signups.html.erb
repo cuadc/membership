@@ -13,52 +13,66 @@
   nor Spektrix will do this automatically.
 </p>
 
-<br>
-
-<h5>Membership System Signups</h5>
-<table class="table table-condensed table-bordered table-hover">
-  <thead>
-    <%= content_tag :tr do %>
-      <%= content_tag(:th, 'Name') %>
-      <%= content_tag(:th, 'Email') %>
-      <%= content_tag(:th, 'Time') %>
-    <% end %>
-  </thead>
-  <tbody>
-    <% @members.each do |member| %>
+<%= form_tag link_signups_members_path, class: 'asdf', method: :post do %>
+  <h5 class="mt-5">Membership System Signups</h5>
+  <table class="table table-condensed table-bordered table-hover">
+    <thead>
       <%= content_tag :tr do %>
-        <%= content_tag(:td, link_to(member.name, member)) %>
-        <%= content_tag(:td, member.primary_email) %>
-        <%= content_tag(:td, member.created_at.strftime("%d/%m/%Y %H:%M:%S")) %>
+        <%= content_tag(:th, 'Name') %>
+        <%= content_tag(:th, 'Primary Email') %>
+        <%= content_tag(:th, 'Secondary Email') %>
+        <%= content_tag(:th, 'Time') %>
+        <%= content_tag(:th, 'Link') %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @members.each do |member| %>
+        <%= content_tag :tr do %>
+          <%= content_tag(:td, link_to(member.name, member)) %>
+          <%= content_tag(:td, member.primary_email) %>
+          <%= content_tag(:td, member.secondary_email) %>
+          <%= content_tag(:td, member.created_at.strftime("%d/%m/%Y %H:%M:%S")) %>
+          <td>
+            <label class="btn btn-secondary">
+              <input type="radio" name="member" value="<%= member.id %>" id="member-<%= member.id %>"> Link
+            </label>
+          </td>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 
-<br>
-
-<h5>Spektrix Payments Received</h5>
-<table class="table table-condensed table-bordered table-hover">
-  <thead>
-    <%= content_tag :tr do %>
-      <%= content_tag(:th, 'Name') %>
-      <%= content_tag(:th, 'Email') %>
-      <%= content_tag(:th, 'Type') %>
-      <%= content_tag(:th, 'Renewed') %>
-      <%= content_tag(:th, 'Purchased') %>
-      <%= content_tag(:th, 'Expires') %>
-    <% end %>
-  </thead>
-  <tbody>
-    <% @purchase_ingest_items.each do |item| %>
+  <h5 class="mt-5">Spektrix Payments Received</h5>
+  <table class="table table-condensed table-bordered table-hover">
+    <thead>
       <%= content_tag :tr do %>
-        <%= content_tag(:td, item.name) %>
-        <%= content_tag(:td, item.email) %>
-        <%= content_tag(:td, item.mtype) %>
-        <%= content_tag(:td, item.renewed?) %>
-        <%= content_tag(:td, item.purchased.strftime("%d/%m/%Y %H:%M:%S")) %>
-        <%= content_tag(:td, item.expires.try(:strftime, "%d/%m/%Y")) %>
+        <%= content_tag(:th, 'Name') %>
+        <%= content_tag(:th, 'Email') %>
+        <%= content_tag(:th, 'Type') %>
+        <%= content_tag(:th, 'Renewed') %>
+        <%= content_tag(:th, 'Purchased') %>
+        <%= content_tag(:th, 'Expires') %>
+        <%= content_tag(:th, 'Link') %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @purchase_ingest_items.each do |item| %>
+        <%= content_tag :tr do %>
+          <%= content_tag(:td, item.name) %>
+          <%= content_tag(:td, item.email) %>
+          <%= content_tag(:td, item.mtype) %>
+          <%= content_tag(:td, item.renewed?) %>
+          <%= content_tag(:td, item.purchased.strftime("%d/%m/%Y %H:%M:%S")) %>
+          <%= content_tag(:td, item.expires.try(:strftime, "%d/%m/%Y")) %>
+          <td>
+            <label class="btn btn-secondary">
+              <input type="radio" name="item" value="<%= item.id %>" id="item-<%= item.id %>"> Link
+            </label>
+          </td>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= submit_tag 'Perform Link', class: 'btn btn-primary mt-2' %>
+<% end %>
