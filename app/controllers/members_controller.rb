@@ -16,10 +16,9 @@ class MembersController < ApplicationController
     item = PurchaseIngestItem.find(params.require(:item))
     member = Member.find(params.require(:member))
     type_ord = Type.find_by(name: "Ordinary")
-    item.member = member
     ActiveRecord::Base.transaction do
-      item.save!
-      member.update!(type: type_ord)
+      item.update!(member: member)
+      member.update!(type: type_ord, expiry: nil) # Canned expiry
     end
     redirect_to pending_signups_members_path
   end
@@ -68,6 +67,6 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:name, :camdram_id, :crsid, :primary_email, :secondary_email, :institution_id, :graduation_year, :type_id, :expiry)
+    params.require(:member).permit(:name, :camdram_id, :crsid, :primary_email, :secondary_email, :institution_id, :graduation_year, :type_id, :canned_expiry)
   end
 end

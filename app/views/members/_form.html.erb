@@ -82,10 +82,10 @@
   </div>
 
   <div class="form-group row">
-    <%= form.label :expiry, class: 'col-sm-3 col-form-label' %>
+    <%= form.label :canned_expiry, 'Expiry', class: 'col-sm-3 col-form-label' %>
     <div class="col-sm-9">
-      <%= form.text_field :expiry, class: 'form-control' %>
-      <small id="expiryHelpTag" class="form-text text-muted">
+      <%= form.text_field :canned_expiry, class: 'form-control disabled', readonly: @member.canned_expiry? %>
+      <small id="cannedExpiryHelpTag" class="form-text text-muted">
         Please format date as yyyy-mm-dd or leave blank for life membership.
       </small>
     </div>
@@ -97,9 +97,3 @@
     </div>
   </div>
 <% end %>
-
-
-
-
-
-
