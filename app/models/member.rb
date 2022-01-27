@@ -1,10 +1,10 @@
 class Member < ApplicationRecord
   belongs_to :institution
   belongs_to :type
-  has_one :purchase_ingest_item
+  has_many :purchase_ingest_items
 
   scope :ordinary, -> { where(type: Type.find_by(name: "Ordinary")) }
-  scope :not_expired, -> { joins(:purchase_ingest_item).where('expiry IS NULL OR expiry > ? OR purchase_ingest_items.expires > ?', Date.today, Date.today) }
+  scope :not_expired, -> { joins(:purchase_ingest_items).where('expiry IS NULL OR expiry > ? OR purchase_ingest_items.expires > ?', Date.today, Date.today) }
   scope :not_legacy_email, -> { where("primary_email NOT LIKE 'unknown-member-email-_%@cuadc.org'") }
 
   before_validation :normalise_crsid
@@ -34,12 +34,16 @@ class Member < ApplicationRecord
   end
 
   def canned_expiry?
-    purchase_ingest_item.present?
+    purchase_ingest_items.present?
   end
 
   def canned_expiry
     if canned_expiry?
-      purchase_ingest_item.expires.to_date
+      if purchase_ingest_items.where(mtype: 'Life').present?
+        nil
+      else
+        purchase_ingest_items.order(:purchased).last.expires.to_date
+      end
     else
       expiry
     end
