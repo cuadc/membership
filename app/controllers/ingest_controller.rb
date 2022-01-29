@@ -18,7 +18,7 @@ class IngestController < ApplicationController
           item.first = row["First Of This Membership"]
           item.purchased = row["Purchase Date"]
           item.starts = row["Start Date"]
-          item.expires = row["Expiry Date"]
+          item.expires = Date.parse(row["Expiry Date"]) + 1.day if row["Expiry Date"].present? # Sigh, Spektrix.
         end
       end
     end
