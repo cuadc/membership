@@ -11,7 +11,7 @@ class PurchaseIngestItem < ApplicationRecord
   strip_attributes
 
   def self.needs_linking
-    PurchaseIngestItem.where(member: nil).order(:purchased)
+    PurchaseIngestItem.where(member: nil).where('purchased > ?', Date.today - 60.days).order(:purchased)
   end
 
   def renewed?

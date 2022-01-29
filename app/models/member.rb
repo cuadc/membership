@@ -18,7 +18,10 @@ class Member < ApplicationRecord
   strip_attributes
 
   def self.needs_linking
-    Member.where(type_id: 999) + Member.manual_expires_in(30.days) + Member.canned_expires_in(30.days)
+    interval = 30.days
+    Member.where(type_id: 999) +
+      Member.manual_expires_in(interval).where('members.expiry > ?', Date.today - interval) +
+      Member.canned_expires_in(interval).where('purchase_ingest_items.expires > ?', Date.today - interval)
   end
 
   def list_email
