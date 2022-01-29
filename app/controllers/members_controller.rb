@@ -1,20 +1,23 @@
 class MembersController < ApplicationController
   def index
-    @members = Member.where.not(type_id: 999).order(:graduation_year)
+    @members = Member.includes(:type, :purchase_ingest_items).where.not(type_id: 999).order(:graduation_year)
   end
 
   def ballot_list
-    @members = Member.ordinary.not_expired.order(:graduation_year)
+    @members = [
+      Member.includes(:type, :purchase_ingest_items).ordinary.not_manual_expires.order(:graduation_year),
+      Member.includes(:type, :purchase_ingest_items).ordinary.not_canned_expires.order(:graduation_year)
+    ].reduce(&:+).sort_by(&:graduation_year)
   end
 
   def pending_signups
-    @members = Member.where(type_id: 999).order(:id)
-    @purchase_ingest_items = PurchaseIngestItem.where(member: nil).order(:purchased)
+    @purchase_ingest_items = PurchaseIngestItem.needs_linking
+    @members = Member.needs_linking
   end
 
   def link_signups
-    item = PurchaseIngestItem.find(params.require(:item))
-    member = Member.find(params.require(:member))
+    item = PurchaseIngestItem.needs_linking.find(params.require(:item))
+    member = Member.needs_linking.find(params.require(:member))
     type_ord = Type.find_by(name: "Ordinary")
     ActiveRecord::Base.transaction do
       item.update!(member: member)
@@ -24,7 +27,7 @@ class MembersController < ApplicationController
   end
 
   def import
-    @members = Member.not_expired.not_legacy_email
+    @members = Member.not_expired.map { |i| i.not_legacy_email }.reduce(&:+)
     response.headers["Content-Disposition"] = "attachment"
   end
 

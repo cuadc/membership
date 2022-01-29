@@ -33,7 +33,7 @@
           <%= content_tag(:td, link_to(member.name, member)) %>
           <%= content_tag(:td, member.primary_email) %>
           <%= content_tag(:td, member.secondary_email) %>
-          <%= content_tag(:td, member.created_at.strftime("%d/%m/%Y %H:%M:%S")) %>
+          <%= content_tag(:td, member.try(:created_at).try(:strftime, "%d/%m/%Y %H:%M:%S")) %>
           <td>
             <label class="btn btn-secondary">
               <input type="radio" name="member" value="<%= member.id %>" id="member-<%= member.id %>"> Link
