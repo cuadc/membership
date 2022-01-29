@@ -25,9 +25,7 @@ class Member < ApplicationRecord
   end
 
   def list_email
-    if type_id == 1 # Ordinary
-      primary_email
-    elsif type == 2 # Associate
+    if type_id == 2 # Associate
       if secondary_email.present?
         secondary_email
       else
@@ -37,7 +35,9 @@ class Member < ApplicationRecord
           primary_email
         end
       end
-    else
+    elsif type_id.in? [1,3,4] # Ordinary, Special, Honorary
+      primary_email
+    else # Suspended, Banned, Awaiting Payment
       nil
     end
   end
