@@ -29,7 +29,7 @@
           </td>
         </tr>
       <% end %>
-      <%= content_tag :tr do %>
+      <%= content_tag(:tr, class: ('alert alert-danger' if member.suspended? || member.banned?)) do %>
         <%= content_tag(:td, link_to(member.name, member)) %>
         <%= content_tag(:td, member.crsid) %>
         <%= content_tag(:td, member.list_email || member.primary_email) %>

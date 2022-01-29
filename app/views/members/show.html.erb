@@ -10,6 +10,14 @@
   <div class="alert alert-warning" role="alert">
     This person's membership has expired!
   </div>
+<% elsif @member.suspended? %>
+  <div class="alert alert-danger" role="alert">
+    This person's membership has been suspended!
+  </div>
+<% elsif @member.banned? %>
+  <div class="alert alert-danger" role="alert">
+    This person has been banned from the club!
+  </div>
 <% end %>
 
 <table class="table table-sm table-striped table-bordered mb-0">

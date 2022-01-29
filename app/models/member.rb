@@ -68,6 +68,14 @@ class Member < ApplicationRecord
     canned_expiry.present? && canned_expiry <= Date.today
   end
 
+  def suspended?
+    type_id == 5
+  end
+
+  def banned?
+    type_id == 6
+  end
+
   private
 
   def normalise_crsid
