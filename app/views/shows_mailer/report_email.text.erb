@@ -1,0 +1,30 @@
+Hello,
+
+This is an automated message from the CUADC Membership System. Please do
+not reply.
+
+Please see below for the weekly membership report for upcoming CUADC shows.
+
+===== REPORT BEGINS =====
+<% @shows.each do |show| %>
+  <% people = show.roles.map(&:person).uniq(&:id) %>
+  <% tuples = people.map { |p| [p, Member.find_by(camdram_id: p.id)] } %>
+<%= "#{show.name}:" %>
+  The following individuals' Memberships have expired and need renewing:
+  <% tuples.select { |p| p[1].present? && p[1].type_id == 1 && p[1].expired? }.each do |tuple| %>
+    <%= tuple[0].name %>
+  <% end %>
+
+  The following individuals are not Ordinary Members:
+  <% tuples.select { |p| p[1].nil? || (p[1].present? && p[1].type_id != 1) }.each do |tuple| %>
+    <%= "* #{tuple[0].name}" %>
+  <% end %>
+
+
+
+<% end %>
+===== REPORT ENDS =====
+
+I have the honour to be your obedient servant,
+
+The CUADC Membership System
