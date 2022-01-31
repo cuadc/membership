@@ -10,13 +10,22 @@ Please see below for the weekly membership report for upcoming CUADC shows.
   <% people = show.roles.map(&:person).uniq(&:id) %>
   <% tuples = people.map { |p| [p, Member.find_by(camdram_id: p.id)] } %>
 <%= "#{show.name}:" %>
+  <% expired_tuples = tuples.select { |p| p[1].present? && p[1].type_id == 1 && p[1].expired? } %>
+  <% if expired_tuples.length > 0 %>
   The following individuals' Memberships have expired and need renewing:
-  <% tuples.select { |p| p[1].present? && p[1].type_id == 1 && p[1].expired? }.each do |tuple| %>
+  <% end %>
+  <% expired_tuples.each do |tuple| %>
     <%= tuple[0].name %>
   <% end %>
 
+  <% non_member_tuples = tuples.select { |p| p[1].nil? || (p[1].present? && p[1].type_id != 1) } %>
+  <% if expired_tuples.length == 0 && non_member_tuples.length == 0 %>
+  Nothing to report.
+  <% end %>
+  <% if non_member_tuples.length > 0 %>
   The following individuals are not Ordinary Members:
-  <% tuples.select { |p| p[1].nil? || (p[1].present? && p[1].type_id != 1) }.each do |tuple| %>
+  <% end %>
+  <% non_member_tuples.each do |tuple| %>
     <%= "* #{tuple[0].name}" %>
   <% end %>
 
