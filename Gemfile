@@ -8,7 +8,6 @@ gem 'mysql2', '~> 0.5'
 gem 'puma', '~> 5.5'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.4'
-gem 'turbolinks', '~> 5'
 gem 'dotenv-rails', '~> 2.7'
 
 # Use Active Model has_secure_password
