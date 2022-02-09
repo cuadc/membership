@@ -1,4 +1,4 @@
-<% content_for :heading, 'Member List' %>
+<% content_for :heading, 'Pending Signups' %>
 
 <p>
   This page lists pending signups and upcoming renewals, together with
@@ -22,7 +22,7 @@
 </p>
 
 <%= form_tag link_signups_members_path, method: :post do %>
-  <h5 class="mt-5">Membership System Signups</h5>
+  <h5 class="mt-5">Membership System Signups &amp; Upcoming Renewals</h5>
   <table class="table table-condensed table-bordered table-hover">
     <thead>
       <%= content_tag :tr do %>
