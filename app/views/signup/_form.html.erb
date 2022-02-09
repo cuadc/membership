@@ -64,15 +64,16 @@
     </div>
   </div>
 
+  <div class="form-group row">
+    <%= form.label :recaptcha, 'Are you a human?', class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
+      <%= recaptcha_tags %>
+    </div>
+  </div>
+
   <div class="form-group row mt-4">
     <div class="col-sm-9">
       <%= form.submit 'Submit', class: 'btn btn-primary' %>
     </div>
   </div>
 <% end %>
-
-
-
-
-
-

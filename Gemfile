@@ -20,6 +20,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'paper_trail', '~> 11.1'
 gem 'paper_trail-association_tracking', '~> 2.1'
 
+# Stopping the script kiddies
+gem 'recaptcha', '~> 5.8'
+
 # Encrypt sensitive model attributes
 gem 'attr_encrypted', '~> 3.1'
 

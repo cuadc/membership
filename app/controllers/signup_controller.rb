@@ -10,7 +10,7 @@ class SignupController < ApplicationController
   def create
     @member = Member.new(member_params)
     @member.type = Type.find_by(name: "Awaiting Payment")
-    if @member.save
+    if verify_recaptcha(model: @member) && @member.save
       redirect_to :pay
     else
       render :new
