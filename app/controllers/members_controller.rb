@@ -18,10 +18,12 @@ class MembersController < ApplicationController
   def link_signups
     item = PurchaseIngestItem.needs_linking.find(params.require(:item))
     member = Member.needs_linking.detect { |i| i.id.to_s == params.require(:member) }
+    memoized_date = item.purchased.dup
     ActiveRecord::Base.transaction do
       item.update!(member: member)
       member.update!(mtype_id: 1, expiry: nil) # Canned expiry
     end
+    PurchaseIngestItem.find(item.id).update!(purchased: memoized_date) # Sign, MySQL.
     redirect_to pending_signups_members_path
   end
 
