@@ -34,7 +34,7 @@
         <%= content_tag(:td, member.crsid) %>
         <%= content_tag(:td, member.list_email || member.primary_email) %>
         <%= content_tag(:td, member.graduation_year) %>
-        <%= content_tag(:td, member.type.name) %>
+        <%= content_tag(:td, member.mtype.name) %>
         <%= content_tag(:td, expiry_text(member)) %>
       <% end %>
     <% end %>

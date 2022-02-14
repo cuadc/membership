@@ -20,9 +20,9 @@ namespace :membership do
 
     desc "Mark graduating ordinary members as associate members"
     task process_graduates: :environment do
-      type_asc = Type.find_by(name: "Associate")
+      assoc_mtype = Type.find_by(name: "Associate")
       Member.ordinary.where("graduation_year <= ?", Date.today.year).find_each do |member|
-        member.type = type_asc
+        member.mtype = assoc_mtype
         member.save(validate: false)
       end
     end

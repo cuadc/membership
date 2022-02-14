@@ -1,12 +1,12 @@
 class MembersController < ApplicationController
   def index
-    @members = Member.includes(:type, :purchase_ingest_items).where.not(type_id: 999).order(:graduation_year)
+    @members = Member.includes(:mtype, :purchase_ingest_items).where.not(mtype_id: 999).order(:graduation_year)
   end
 
   def ballot_list
     @members = [
-      Member.includes(:type, :purchase_ingest_items).ordinary.not_manual_expires.order(:graduation_year),
-      Member.includes(:type, :purchase_ingest_items).ordinary.not_canned_expires.order(:graduation_year)
+      Member.includes(:mtype, :purchase_ingest_items).ordinary.not_manual_expires.order(:graduation_year),
+      Member.includes(:mtype, :purchase_ingest_items).ordinary.not_canned_expires.order(:graduation_year)
     ].reduce(&:+).sort_by(&:graduation_year)
   end
 
@@ -20,7 +20,7 @@ class MembersController < ApplicationController
     member = Member.needs_linking.detect { |i| i.id.to_s == params.require(:member) }
     ActiveRecord::Base.transaction do
       item.update!(member: member)
-      member.update!(type_id: 1, expiry: nil) # Canned expiry
+      member.update!(mtype_id: 1, expiry: nil) # Canned expiry
     end
     redirect_to pending_signups_members_path
   end
@@ -69,6 +69,6 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:name, :camdram_id, :crsid, :primary_email, :secondary_email, :institution_id, :graduation_year, :type_id, :canned_expiry)
+    params.require(:member).permit(:name, :camdram_id, :crsid, :primary_email, :secondary_email, :institution_id, :graduation_year, :mtype_id, :canned_expiry)
   end
 end

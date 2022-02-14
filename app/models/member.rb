@@ -1,9 +1,9 @@
 class Member < ApplicationRecord
   belongs_to :institution
-  belongs_to :type
+  belongs_to :mtype, class_name: 'Type'
   has_many :purchase_ingest_items
 
-  scope :ordinary, -> { where(type_id: 1) }
+  scope :ordinary, -> { where(mtype_id: 1) }
   scope :not_legacy_email, -> { where("primary_email NOT LIKE 'unknown-member-email-_%@cuadc.org'") }
   scope :not_manual_expires, -> { left_joins(:purchase_ingest_items).where('purchase_ingest_items.member_id IS NULL').where('members.expiry IS NULL OR members.expiry > ?', Date.today) }
   scope :not_canned_expires, -> { joins(:purchase_ingest_items).where('purchase_ingest_items.expires IS NULL OR purchase_ingest_items.expires > ?', Date.today) }
@@ -19,13 +19,13 @@ class Member < ApplicationRecord
 
   def self.needs_linking
     interval = 30.days
-    Member.where(type_id: 999) +
+    Member.where(mtype_id: 999) +
       Member.manual_expires_in(interval).where('members.expiry > ?', Date.today - interval) +
       Member.canned_expires_in(interval).where('purchase_ingest_items.expires > ?', Date.today - interval)
   end
 
   def list_email
-    if type_id == 2 # Associate
+    if mtype_id == 2 # Associate
       if secondary_email.present?
         secondary_email
       else
@@ -35,7 +35,7 @@ class Member < ApplicationRecord
           primary_email
         end
       end
-    elsif type_id.in? [1,3,4] # Ordinary, Special, Honorary
+    elsif mtype_id.in? [1,3,4] # Ordinary, Special, Honorary
       primary_email
     else # Suspended, Banned, Awaiting Payment
       nil
@@ -72,11 +72,11 @@ class Member < ApplicationRecord
   end
 
   def suspended?
-    type_id == 5
+    mtype_id == 5
   end
 
   def banned?
-    type_id == 6
+    mtype_id == 6
   end
 
   private

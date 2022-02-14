@@ -38,7 +38,7 @@ namespace :membership do
           secondary_email: parts[4],
           institution: Institution.find_by(name: parts[5]),
           graduation_year: parts[6],
-          type_id: parts[7],
+          mtype_id: parts[7],
           expiry: parts[8]
         })
       rescue => exception

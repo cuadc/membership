@@ -40,12 +40,12 @@
           <%= content_tag(:td, link_to(member.name, member)) %>
           <%= content_tag(:td, member.primary_email) %>
           <%= content_tag(:td, member.secondary_email) %>
-          <% if member.type_id == 999 %>
+          <% if member.mtype_id == 999 %>
             <%= content_tag(:td, member.try(:created_at).try(:strftime, "%d/%m/%Y %H:%M:%S")) %>
           <% else %>
             <%= content_tag(:td, 'N/A') %>
           <% end %>
-          <% if member.type_id == 999 %>
+          <% if member.mtype_id == 999 %>
             <%= content_tag(:td, 'N/A') %>
           <% else %>
             <%= content_tag(:td, member.canned_expiry.strftime("%d/%m/%Y")) %>
