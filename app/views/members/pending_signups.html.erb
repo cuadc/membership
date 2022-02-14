@@ -51,7 +51,7 @@
             <%= content_tag(:td, member.canned_expiry.strftime("%d/%m/%Y")) %>
           <% end %>
           <td>
-            <label class="btn btn-secondary">
+            <label class="btn btn-secondary" id="btn-member-<%= member.id %>">
               <input type="radio" name="member" value="<%= member.id %>" id="member-<%= member.id %>"> Link
             </label>
           </td>
@@ -83,7 +83,7 @@
           <%= content_tag(:td, item.purchased.strftime("%d/%m/%Y %H:%M:%S")) %>
           <%= content_tag(:td, item.expires.try(:strftime, "%d/%m/%Y")) %>
           <td>
-            <label class="btn btn-secondary">
+            <label class="btn btn-secondary" id="btn-item-<%= item.id %>">
               <input type="radio" name="item" value="<%= item.id %>" id="item-<%= item.id %>"> Link
             </label>
           </td>
