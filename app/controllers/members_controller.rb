@@ -18,10 +18,9 @@ class MembersController < ApplicationController
   def link_signups
     item = PurchaseIngestItem.needs_linking.find(params.require(:item))
     member = Member.needs_linking.detect { |i| i.id.to_s == params.require(:member) }
-    type_ord = Type.find_by(name: "Ordinary")
     ActiveRecord::Base.transaction do
       item.update!(member: member)
-      member.update!(type: type_ord, expiry: nil) # Canned expiry
+      member.update!(type_id: 1, expiry: nil) # Canned expiry
     end
     redirect_to pending_signups_members_path
   end

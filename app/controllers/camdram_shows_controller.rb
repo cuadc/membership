@@ -8,7 +8,6 @@ class CamdramShowsController < ApplicationController
     if slug.nil? || slug.blank?
       render plain: 'Invalid show slug!' and return
     end
-    type_ord = Type.find_by(name: "Ordinary")
     @valid_tuples = []
     @invalid_tuples = []
     @show = Membership::Camdram.client.get_show(slug)
@@ -18,7 +17,7 @@ class CamdramShowsController < ApplicationController
       if member.nil?
         @invalid_tuples.push([person, nil])
       else
-        if member.type == type_ord && !member.expired?
+        if member.type_id == 1 && !member.expired?
           @valid_tuples.push([person, member])
         else
           @invalid_tuples.push([person, member])
