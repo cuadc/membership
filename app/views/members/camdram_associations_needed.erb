@@ -1,0 +1,25 @@
+<% content_for :heading, 'Camdram Associations' %>
+
+<p>
+  This page lists members who need their membership accounts
+  associating with a public profile on Camdram. You should
+  regularly check this page and update the details of the members
+  listed here, searching Camdram for matching profiles.
+</p>
+
+<table class="table table-condensed table-bordered table-hover">
+  <thead>
+    <%= content_tag :tr do %>
+      <%= content_tag(:th, 'Name') %>
+      <%= content_tag(:th, 'Signup Time') %>
+    <% end %>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <%= content_tag :tr do %>
+        <%= content_tag(:td, link_to(member.name, member)) %>
+        <%= content_tag(:td, member.created_at.strftime("%d/%m/%Y %H:%M:%S")) %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

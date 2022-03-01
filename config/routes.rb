@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     get 'ballot_list', on: :collection
     get 'pending_signups', on: :collection
     post 'link_signups', on: :collection
+    get 'camdram_associations_needed', on: :collection
     get 'cards_needed', on: :collection
     post 'issue_card', on: :member
     get 'mailing_list', on: :collection

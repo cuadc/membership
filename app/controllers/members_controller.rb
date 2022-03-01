@@ -28,6 +28,10 @@ class MembersController < ApplicationController
     redirect_to pending_signups_members_path
   end
 
+  def camdram_associations_needed
+    @members = Member.where(mtype_id: 1, camdram_id: nil).last(50)
+  end
+
   def cards_needed
     @members = Member.where(mtype_id: 1, card_issued: nil).where.not(created_at: nil)
   end
