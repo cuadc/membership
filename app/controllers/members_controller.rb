@@ -23,7 +23,7 @@ class MembersController < ApplicationController
       item.update!(member: member)
       member.update!(mtype_id: 1, expiry: nil) # Canned expiry
     end
-    PurchaseIngestItem.find(item.id).update!(purchased: memoized_date) # Sign, MySQL.
+    PurchaseIngestItem.find(item.id).update!(purchased: memoized_date) # Sigh, MySQL.
     redirect_to pending_signups_members_path
   end
 
