@@ -28,6 +28,17 @@ class MembersController < ApplicationController
     redirect_to pending_signups_members_path
   end
 
+  def cards_needed
+    @members = Member.where(mtype_id: 1, card_issued: nil).where.not(created_at: nil)
+  end
+
+  def issue_card
+    member = Member.find(params[:id])
+    raise 'card already issued' if member.card_issued.present?
+    member.update!(card_issued: Date.today)
+    redirect_to cards_needed_members_path
+  end
+
   def import
     @members = Member.not_expired.map { |i| i.not_legacy_email }.reduce(&:+)
     response.headers["Content-Disposition"] = "attachment"

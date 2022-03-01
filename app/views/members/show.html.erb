@@ -58,5 +58,9 @@
       <td>Membership Expiry:</td>
       <td><%= member_expiry(@member) %></td>
     </tr>
+    <tr>
+      <td>Membership Card Issued:</td>
+      <td><%= @member.card_issued.try(:strftime, "%d/%m/%Y") %></td>
+    </tr>
   </tbody>
 </table>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_25_180238) do
+ActiveRecord::Schema.define(version: 2022_03_01_223604) do
 
   create_table "institutions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -25,18 +25,19 @@ ActiveRecord::Schema.define(version: 2022_01_25_180238) do
     t.string "secondary_email"
     t.bigint "institution_id"
     t.integer "graduation_year", null: false
-    t.bigint "type_id"
+    t.bigint "mtype_id"
     t.date "expiry"
     t.text "password"
     t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date "card_issued"
     t.index ["camdram_id"], name: "index_members_on_camdram_id", unique: true
     t.index ["crsid"], name: "index_members_on_crsid", unique: true
     t.index ["institution_id"], name: "index_members_on_institution_id"
+    t.index ["mtype_id"], name: "index_members_on_mtype_id"
     t.index ["primary_email"], name: "index_members_on_primary_email", unique: true
     t.index ["secondary_email"], name: "index_members_on_secondary_email", unique: true
-    t.index ["type_id"], name: "index_members_on_type_id"
   end
 
   create_table "provider_accounts", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
