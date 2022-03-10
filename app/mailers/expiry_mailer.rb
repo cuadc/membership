@@ -3,6 +3,7 @@
 class ExpiryMailer < ApplicationMailer
   def reminder_email
     @member = params[:member]
+    raise ArgumentError, 'not an Ordinary Member' if @member.mtype_id != 1
     emails = [@member.primary_email]
     emails << @member.secondary_email if @member.secondary_email.present?
     mail(to: emails, subject: 'CUADC Membership Expiry')

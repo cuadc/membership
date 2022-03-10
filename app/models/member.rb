@@ -20,8 +20,8 @@ class Member < ApplicationRecord
   def self.needs_linking
     interval = 30.days
     Member.where(mtype_id: 999) +
-      Member.manual_expires_in(interval).where('members.expiry > ?', Date.today - interval) +
-      Member.canned_expires_in(interval).where('purchase_ingest_items.expires > ?', Date.today - interval)
+      Member.where(mtype_id: 1).manual_expires_in(interval).where('members.expiry > ?', Date.today - interval) +
+      Member.where(mtype_id: 1).canned_expires_in(interval).where('purchase_ingest_items.expires > ?', Date.today - interval)
   end
 
   def list_email
