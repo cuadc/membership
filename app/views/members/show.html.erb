@@ -4,6 +4,8 @@
   <%= link_to "Members list", members_path %>
   |
   <%= link_to "Edit details", edit_member_path(@member) %>
+  |
+  <%= link_to 'view on Camdram', Membership::Camdram.client.base_url + "/people/by-id/#{@member.camdram_id}" %>
 </p>
 
 <% if @member.expired? %>
