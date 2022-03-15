@@ -24,13 +24,17 @@ class Member < ApplicationRecord
       Member.where(mtype_id: 1).canned_expires_in(interval).where('purchase_ingest_items.expires > ?', Date.today - interval)
   end
 
-  def list_email
+  def contact_email
     if mtype_id == 2 # Associate
       if secondary_email.present?
         secondary_email
       else
         if primary_email.ends_with? "@cam.ac.uk"
-          crsid + "@cantab.ac.uk"
+          if graduation_year >= 2018
+            crsid + "@cantab.ac.uk"
+          else
+            nil
+          end
         else
           primary_email
         end
