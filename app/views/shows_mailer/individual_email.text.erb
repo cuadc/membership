@@ -1,0 +1,31 @@
+Hello,
+
+This is an automated message from the CUADC Membership System. Please do
+not reply.
+
+Please see below for the weekly membership report for <%= @show.name %>.
+
+===== REPORT BEGINS =====
+<% if @expired_tuples.length > 0 %>
+The following individuals' Memberships have expired and need renewing:
+<% @expired_tuples.each do |tuple| %>
+  <%= "* #{tuple[0].name}" %>
+<% end %>
+<% end %>
+<% if @non_member_tuples.length > 0 %>
+<% if @expired_tuples.length > 0 %>
+
+<% end %>
+The following individuals are not Ordinary Members:
+<% @non_member_tuples.each do |tuple| %>
+  <%= "* #{tuple[0].name}" %>
+<% end %>
+<% end %>
+<% if @expired_tuples.length == 0 && @non_member_tuples.length == 0 %>
+Nothing to report.
+<% end %>
+===== REPORT ENDS =====
+
+I have the honour to be your obedient servant,
+
+The CUADC Membership System

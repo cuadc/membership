@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_01_223604) do
+ActiveRecord::Schema.define(version: 2022_03_18_162345) do
 
   create_table "institutions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -72,6 +72,11 @@ ActiveRecord::Schema.define(version: 2022_03_01_223604) do
     t.string "ip", null: false
     t.string "user_agent", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "show_contact_details", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "camdram_id", null: false
+    t.string "email", null: false
   end
 
   create_table "types", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|

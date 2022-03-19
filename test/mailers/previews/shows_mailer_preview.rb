@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class ShowsMailerPreview < ActionMailer::Preview
-  def report_email
-    ShowsMailer.report_email
+  def overview_email
+    ShowsMailer.overview_email
+  end
+
+  def individual_email
+    ShowsMailer.with(show_id: 7511).individual_email
   end
 end
