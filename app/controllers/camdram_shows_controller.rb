@@ -1,6 +1,6 @@
 class CamdramShowsController < ApplicationController
   def index
-    @shows = Membership::Camdram.client.get_society("cambridge-university-amateur-dramatic-club").shows
+    @shows = Membership::Camdram.client.get_society(1).shows
   end
 
   def check
