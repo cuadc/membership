@@ -27,5 +27,12 @@ namespace :membership do
       end
     end
 
+    desc "Search for shows without contact details"
+    task new_shows: :environment do
+      show_ids = Membership::Camdram.client.get_society(1).shows.map(&:id)
+      contact_ids = ShowContactDetails.pluck(:camdram_id).uniq
+      new_show_ids = show_ids.reject { |id| contact_ids.include?(id) }
+      puts "New show IDs: #{new_show_ids}" unless new_show_ids.empty?
+    end
   end
 end
