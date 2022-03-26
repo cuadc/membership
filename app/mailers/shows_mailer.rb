@@ -3,7 +3,7 @@
 class ShowsMailer < ApplicationMailer
   def overview_email
     @shows = Membership::Camdram.client.get_society(1).shows
-    to_addr = params.try(:fetch, :to) || ['president@cuadc.org', 'members@cuadc.org']
+    to_addr = overridable_to('members@cuadc.org')
     mail(to: to_addr, bcc: 'chtj2@srcf.net', subject: 'CUADC Show Membership Report')
   end
 
