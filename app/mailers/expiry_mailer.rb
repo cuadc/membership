@@ -6,6 +6,6 @@ class ExpiryMailer < ApplicationMailer
     raise ArgumentError, 'not an Ordinary Member' if @member.mtype_id != 1
     emails = [@member.primary_email]
     emails << @member.secondary_email if @member.secondary_email.present?
-    mail(to: emails, subject: 'CUADC Membership Expiry')
+    mail(to: emails, from: 'bookkeeping@membership.cuadc.org', subject: 'CUADC Membership Expiry')
   end
 end
