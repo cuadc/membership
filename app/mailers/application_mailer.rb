@@ -5,6 +5,7 @@ class ApplicationMailer < ActionMailer::Base
   layout 'mailer'
 
   def overridable_to(addr)
-    params.try(:fetch, :to, addr) || addr
+    val = params.try(:fetch, :to, addr) || addr
+    val.try(:uniq) || val
   end
 end

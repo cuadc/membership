@@ -10,7 +10,7 @@ class IncompleteMailer < ApplicationMailer
       emails << crsid + "@cantab.ac.uk" unless emails.map { |s| s.ends_with?('@cantab.ac.uk') }.include?(true)
     end
     emails.uniq!.reject! { |e| e.starts_with?('unknown-member-email-') && e.ends_with?('@cuadc.org') }
-    mail(to: emails, from: 'bookkeeping@membership.cuadc.org', subject: 'CUADC Membership Details')
+    mail(to: emails.uniq, from: 'bookkeeping@membership.cuadc.org', subject: 'CUADC Membership Details')
   end
 
   def no_payment_email
@@ -18,7 +18,7 @@ class IncompleteMailer < ApplicationMailer
     raise ArgumentError, 'member not awaiting payment' if @member.mtype_id != 999
     emails = [@member.primary_email]
     emails << @member.secondary_email if @member.secondary_email.present?
-    mail(to: emails, from: 'bookkeeping@membership.cuadc.org', subject: 'CUADC Membership Payment')
+    mail(to: emails.uniq, from: 'bookkeeping@membership.cuadc.org', subject: 'CUADC Membership Payment')
   end
 
   def no_signup_email
