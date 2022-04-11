@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: members
+#
+#  id              :bigint           not null, primary key
+#  camdram_id      :integer
+#  crsid           :string(255)
+#  primary_email   :string(255)      not null
+#  secondary_email :string(255)
+#  institution_id  :bigint
+#  graduation_year :integer          not null
+#  mtype_id        :bigint
+#  expiry          :date
+#  password        :text(65535)
+#  name            :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  card_issued     :date
+#
 class Member < ApplicationRecord
   belongs_to :institution
   belongs_to :mtype, class_name: 'Type'

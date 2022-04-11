@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: sessions
+#
+#  id         :bigint           not null, primary key
+#  user_id    :bigint           not null
+#  login_at   :datetime         not null
+#  expires_at :datetime         not null
+#  ip         :string(255)      not null
+#  user_agent :string(255)      not null
+#
 class Session < ApplicationRecord
   belongs_to :user
 
