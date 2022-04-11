@@ -26,6 +26,9 @@
               <li class="nav-item"><%= link_to 'List Members', members_path, class: 'nav-link' %></li>
               <li class="nav-item"><%= link_to 'Check Show', camdram_shows_path, class: 'nav-link' %></li>
               <li class="nav-item"><%= link_to 'Ballot List', ballot_list_members_path, class: 'nav-link' %></li>
+              <% if current_user.sysop? %>
+                <li class="nav-item"><%= link_to 'Sysop Interface', rails_admin_path, class: 'nav-link' %></li>
+              <% end %>
             <% end %>
           </ul>
           <% if user_logged_in? %>

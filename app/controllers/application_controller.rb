@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :check_user!
+  helper_method :current_user
   helper_method :user_logged_in?
 
   # Prevent CSRF attacks by raising an exception.
@@ -8,8 +9,6 @@ class ApplicationController < ActionController::Base
     invalidate_session
     redirect_to login_path
   end
-
-  private
 
   def check_user!
     unless session_valid? && user_logged_in?

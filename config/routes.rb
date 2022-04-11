@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :members do
     get 'ballot_list', on: :collection
     get 'pending_signups', on: :collection
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
 
   get '/login' => 'sessions#new', as: :login
   get '/logout' => 'sessions#destroy', as: :logout
+  delete '/logout' => 'sessions#destroy'
   get '/auth/:provider/callback' => 'sessions#create', as: :auth_callback
   get '/auth/failure' => 'sessions#failure', as: :auth_failure
 
