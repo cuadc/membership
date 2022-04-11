@@ -24,6 +24,9 @@ The details submitted can be previewed below.
   <% if @request_uuid %>
   Request: <%= @request_uuid %>
   <% end %>
+  <% if @request_ip %>
+  IP address: <%= @request_ip %>
+  <% end %>
   Name: <%= @member.name %>
   CRSid: <%= @member.crsid %>
   Primary email: <%= @member.primary_email %>

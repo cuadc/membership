@@ -4,6 +4,7 @@ class WelcomeMailer < ApplicationMailer
   def new_signup_email
     @member = params[:member]
     @request_uuid = params[:request_uuid]
+    @request_ip = params[:request_ip]
     to_addr = overridable_to('members@cuadc.org')
     reply_to_addr = [@member.primary_email]
     reply_to_addr << @member.secondary_email unless @member.secondary_email.nil?
