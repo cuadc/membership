@@ -16,7 +16,7 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #  card_issued     :date
-#  inhibited       :boolean
+#  inhibited       :boolean          default(FALSE), not null
 #  notes           :text(65535)
 #
 class Member < ApplicationRecord

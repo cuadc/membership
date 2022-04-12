@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2022_04_12_224331) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date "card_issued"
-    t.boolean "inhibited"
+    t.boolean "inhibited", default: false, null: false
     t.text "notes"
     t.index ["camdram_id"], name: "index_members_on_camdram_id", unique: true
     t.index ["crsid"], name: "index_members_on_crsid", unique: true
