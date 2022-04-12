@@ -17,6 +17,7 @@
 #  updated_at      :datetime
 #  card_issued     :date
 #  inhibited       :boolean
+#  notes           :text(65535)
 #
 class Member < ApplicationRecord
   belongs_to :institution

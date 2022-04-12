@@ -27,7 +27,7 @@
   address your email to <%= @member.contact_email || 'EXPIRED_EMAIL_DO_NOT_CONTACT' %>
 </p>
 
-<table class="table table-sm table-striped table-bordered mb-0">
+<table class="table table-sm table-striped table-bordered">
   <tbody>
     <tr>
       <td>Name:</td>
@@ -71,3 +71,5 @@
     </tr>
   </tbody>
 </table>
+
+<%= simple_format @member.notes %>
