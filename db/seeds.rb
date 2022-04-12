@@ -1,4 +1,4 @@
-cj = User.create(name: "Charlie Jonas", email: "charlie@charliejonas.co.uk")
+cj = User.create(name: "Charlie Jonas", email: "charlie@charliejonas.co.uk", sysop: true)
 ProviderAccount.create(provider: "ucamraven", uid: "chtj2", user: cj)
 
 Type.create(id: 1, name: "Ordinary")
