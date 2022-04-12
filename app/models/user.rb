@@ -8,6 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  sysop      :boolean          default(FALSE), not null
+#  active     :boolean          default(TRUE), not null
 #
 class User < ApplicationRecord
   has_many :sessions, dependent: :delete_all
