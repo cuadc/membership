@@ -16,6 +16,7 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #  card_issued     :date
+#  inhibited       :boolean
 #
 class Member < ApplicationRecord
   belongs_to :institution

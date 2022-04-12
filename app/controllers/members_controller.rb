@@ -18,6 +18,7 @@ class MembersController < ApplicationController
   def link_signups
     item = PurchaseIngestItem.needs_linking.find(params.require(:item))
     member = Member.needs_linking.detect { |i| i.id.to_s == params.require(:member) }
+    raise 'protected operation' if member.inhibited? && !current_user.sysop?
     memoized_date = item.purchased.dup
     ActiveRecord::Base.transaction do
       item.update!(member: member)
@@ -38,6 +39,7 @@ class MembersController < ApplicationController
 
   def issue_card
     member = Member.find(params[:id])
+    raise 'protected operation' if member.inhibited? && !current_user.sysop?
     raise 'card already issued' if member.card_issued.present?
     member.update!(card_issued: Date.today)
     redirect_to cards_needed_members_path
@@ -67,6 +69,7 @@ class MembersController < ApplicationController
 
   def update
     @member = Member.find(params[:id])
+    raise 'protected operation' if @member.inhibited? && !current_user.sysop?
     if @member.update(member_params)
       redirect_to @member
     else
@@ -80,6 +83,7 @@ class MembersController < ApplicationController
 
   def destroy
     @member = Member.find(params[:id])
+    raise 'protected operation' unless current_user.sysop?
     @member.destroy
     redirect_to members_path
   end

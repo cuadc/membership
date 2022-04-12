@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_11_205701) do
+ActiveRecord::Schema.define(version: 2022_04_12_214702) do
 
   create_table "institutions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2022_04_11_205701) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date "card_issued"
+    t.boolean "inhibited"
     t.index ["camdram_id"], name: "index_members_on_camdram_id", unique: true
     t.index ["crsid"], name: "index_members_on_crsid", unique: true
     t.index ["institution_id"], name: "index_members_on_institution_id"
