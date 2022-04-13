@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@membership.cuadc.org'
   layout 'mailer'
+  default(
+    from: 'noreply@membership.cuadc.org',
+    'Auto-Submitted' => 'auto-generated'
+  )
 
   def overridable_to(addr)
     val = params.try(:fetch, :to, addr) || addr
