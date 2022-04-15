@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class WelcomeMailerPreview < ActionMailer::Preview
+  def card_awaiting_email
+    member = Member.first
+    WelcomeMailer.with(member: member).card_awaiting_email
+  end
+
   def new_signup_email
     member = Member.first
     request_uuid = "bff7be6b-cc25-4e01-aa4d-2e27ac878419"

@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class WelcomeMailer < ApplicationMailer
+  def card_awaiting_email
+    @member = params[:member]
+    mail(to: @member.primary_email, subject: 'CUADC Membership Card')
+  end
+
   def new_signup_email
     @member = params[:member]
     @request_uuid = params[:request_uuid]
