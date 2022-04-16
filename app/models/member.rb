@@ -31,9 +31,14 @@ class Member < ApplicationRecord
   scope :manual_expires_in, ->(days) { left_joins(:purchase_ingest_items).where('purchase_ingest_items.member_id IS NULL').where('members.expiry < ?', Date.today + days) }
   scope :canned_expires_in, ->(days) { joins(:purchase_ingest_items).where('purchase_ingest_items.expires < ?', Date.today + days) }
 
+  attr_accessor :validate_secondary_email
+
   before_validation :normalise_crsid
   validates :name, presence: true
   validates :primary_email, presence: true, uniqueness: true
+  validates :secondary_email, presence: true, uniqueness: true, if: -> { validate_secondary_email }
+  validate -> { errors.add(:secondary_email, 'needs to be different') if primary_email == secondary_email },
+    if: -> { validate_secondary_email }
   validates :graduation_year, presence: true
 
   strip_attributes

@@ -20,32 +20,31 @@
     <%= form.label :crsid, "CRSid", class: 'col-sm-3 col-form-label' %>
     <div class="col-sm-9">
       <%= form.text_field :crsid, class: 'form-control' %>
-      <small id="crsidHelpTag" class="form-text text-muted">
+      <small id="member_crsid_help_tag" class="form-text text-muted">
         If you are a University of Cambridge student, please enter your CRSid.
+        Otherwise please leave blank.
       </small>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :primary_email, class: 'col-sm-3 col-form-label' %>
+    <%= form.label :primary_email, 'Primary/Academic email', class: 'col-sm-3 col-form-label' %>
     <div class="col-sm-9">
       <%= form.text_field :primary_email, class: 'form-control' %>
-      <small id="primaryEmailHelpTag" class="form-text text-muted">
+      <small id="member_primary_email_help_tag" class="form-text text-muted">
         If you are a University of Cambridge student, please enter your cam.ac.uk email address.
-        <br>
         If you are an ARU students, please enter your student.aru.ac.uk email address.
+        Otherwise please enter another appropriate educational institution email address.
       </small>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :secondary_email, class: 'col-sm-3 col-form-label' %>
+    <%= form.label :secondary_email, 'Secondary/Personal email', class: 'col-sm-3 col-form-label' %>
     <div class="col-sm-9">
       <%= form.text_field :secondary_email, class: 'form-control' %>
-      <small id="secondaryEmailHelpTag" class="form-text text-muted">
-        A non-University email address for the alumni and members mailing lists after you graduate.
-        <br>
-        This is not required but is recommended.
+      <small id="member_secondary_email_help_tag" class="form-text text-muted">
+        A personal email address so that we can contact you after your graduate.
       </small>
     </div>
   </div>
@@ -54,6 +53,9 @@
     <%= form.label :institution_id, 'College/Institution', class: 'col-sm-3 col-form-label' %>
     <div class="col-sm-9"><%# TODO make a list of admin-only Institutions %>
       <%= form.collection_select :institution_id, Institution.where.not(id: 1).order(:id), :id, :name, class: 'form-control' %>
+      <small id="member_institution_id_help_tag" class="form-text text-muted">
+        If your higher educational establishment isn't shown here then please select 'Unknown'.
+      </small>
     </div>
   </div>
 
