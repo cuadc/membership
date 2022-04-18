@@ -11,13 +11,12 @@ RailsAdmin.config do |config|
     end
   end
 
-  # config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
-  # excluded_models = []
-  # audited_models = []
+  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
+  PAPER_TRAIL_AUDIT_MODEL = ['Member', 'PurchaseIngestItem']
 
   config.actions do
-    dashboard                     # mandatory
-    index                         # mandatory
+    dashboard
+    index
     new
     export
     bulk_delete
@@ -25,9 +24,11 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
-
-    ## With an audit adapter, you can add:
-    # history_index
-    # history_show
+    history_index do
+      only PAPER_TRAIL_AUDIT_MODEL
+    end
+    history_show do
+      only PAPER_TRAIL_AUDIT_MODEL
+    end
   end
 end

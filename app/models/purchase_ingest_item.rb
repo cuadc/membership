@@ -26,6 +26,7 @@ class PurchaseIngestItem < ApplicationRecord
   validates :starts, presence: true
 
   strip_attributes
+  has_paper_trail on: [:update, :destroy]
 
   def self.needs_linking
     PurchaseIngestItem.where(member: nil).where('purchased > ?', Date.today - 60.days).order(:purchased)

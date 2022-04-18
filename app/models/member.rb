@@ -42,6 +42,7 @@ class Member < ApplicationRecord
   validates :graduation_year, presence: true
 
   strip_attributes
+  has_paper_trail
 
   def self.needs_linking
     interval = 30.days

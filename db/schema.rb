@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_12_224331) do
+ActiveRecord::Schema.define(version: 2022_04_18_132417) do
 
   create_table "institutions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -95,6 +95,33 @@ ActiveRecord::Schema.define(version: 2022_04_12_224331) do
     t.boolean "sysop", default: false, null: false
     t.boolean "active", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "version_associations", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "version_id"
+    t.string "foreign_key_name", null: false
+    t.integer "foreign_key_id"
+    t.string "foreign_type"
+    t.index ["foreign_key_name", "foreign_key_id", "foreign_type"], name: "index_version_associations_on_foreign_key"
+    t.index ["version_id"], name: "index_version_associations_on_version_id"
+  end
+
+  create_table "versions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "item_type", limit: 191, null: false
+    t.bigint "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.text "object", size: :long
+    t.datetime "created_at", precision: 6
+    t.text "object_changes", size: :long
+    t.integer "transaction_id"
+    t.string "item_subtype"
+    t.string "request_uuid", null: false
+    t.bigint "session"
+    t.string "ip", null: false
+    t.string "user_agent", null: false
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+    t.index ["transaction_id"], name: "index_versions_on_transaction_id"
   end
 
   add_foreign_key "provider_accounts", "users"

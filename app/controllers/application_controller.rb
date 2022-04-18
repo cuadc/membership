@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :check_user!
+  before_action :set_paper_trail_whodunnit
   helper_method :current_user
   helper_method :user_logged_in?
 
@@ -42,5 +43,14 @@ class ApplicationController < ActionController::Base
   def invalidate_session
     @current_user = session[:user_id] = nil
     reset_session
+  end
+
+  def info_for_paper_trail
+    {
+      request_uuid: request.uuid,
+      session: current_session.try(:id),
+      ip: request.remote_ip,
+      user_agent: request.user_agent
+    }
   end
 end
