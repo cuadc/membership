@@ -72,4 +72,35 @@
   </tbody>
 </table>
 
-<%= simple_format @member.notes %>
+<h4>Notes</h4>
+<%= simple_format @member.notes || 'None' %>
+
+<h4>Audit History</h4>
+<% if @audit.count > 0 %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">What</th>
+        <th scope="col">When</th>
+        <th scope="col">Who</th>
+        <th scope="col">Changes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @audit.each do |ver| %>
+        <tr>
+          <td><%= ver[:event] %></td>
+          <td><%= ver[:time].strftime("%d/%m/%Y %H:%M:%S") %></td>
+          <td><%= ver[:user] %></td>
+          <td>
+            <% ver[:changeset].each do |field, change| %>
+              <%= field %> changed from <%= change[0] || 'nil' %> to <%= change[1] %><br>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Unavailable</p>
+<% end %>

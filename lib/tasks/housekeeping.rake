@@ -18,11 +18,11 @@ namespace :membership do
       end
     end
 
-    desc "Mark graduating ordinary members as associate members"
+    desc "Mark graduated Ordinary Members as Associate Members"
     task process_graduates: :environment do
-      assoc_mtype = Type.find_by(name: "Associate")
+      PaperTrail.request.whodunnit = 'Batch Job'
       Member.ordinary.where("graduation_year <= ?", Date.today.year).find_each do |member|
-        member.mtype = assoc_mtype
+        member.mtype_id = 2
         member.save(validate: false)
       end
     end

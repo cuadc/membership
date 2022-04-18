@@ -31,5 +31,6 @@ class IngestController < ApplicationController
     unless ENV['INGEST_TOKEN'].present? && token == ENV['INGEST_TOKEN']
       render plain: 'Bad credentials', status: 403
     end
+    PaperTrail.request.whodunnit = 'Spektrix Auto-Ingest'
   end
 end

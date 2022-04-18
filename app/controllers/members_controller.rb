@@ -80,6 +80,15 @@ class MembersController < ApplicationController
 
   def show
     @member = Member.find(params[:id])
+    @audit = []
+    @member.versions.each do |ver|
+      @audit << {
+        event: ver.event,
+        time: ver.created_at,
+        user: user_name_from_whodunnit(ver),
+        changeset: ver.changeset
+      }
+    end
   end
 
   def destroy
@@ -93,5 +102,13 @@ class MembersController < ApplicationController
 
   def member_params
     params.require(:member).permit(:name, :camdram_id, :crsid, :primary_email, :secondary_email, :institution_id, :graduation_year, :mtype_id, :canned_expiry, :notes)
+  end
+
+  def user_name_from_whodunnit(ver)
+    begin
+      User.find(ver.whodunnit).name
+    rescue
+      ver.whodunnit
+    end
   end
 end

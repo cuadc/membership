@@ -8,6 +8,7 @@ class SignupController < ApplicationController
   end
 
   def create
+    PaperTrail.request.whodunnit = 'Web Signup'
     @member = Member.new(member_params)
     @member.mtype_id = 999
     @member.validate_secondary_email = true
