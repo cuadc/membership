@@ -116,10 +116,10 @@ ActiveRecord::Schema.define(version: 2022_04_18_132417) do
     t.text "object_changes", size: :long
     t.integer "transaction_id"
     t.string "item_subtype"
-    t.string "request_uuid", null: false
+    t.string "request_uuid"
     t.bigint "session"
-    t.string "ip", null: false
-    t.string "user_agent", null: false
+    t.string "ip"
+    t.string "user_agent"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
     t.index ["transaction_id"], name: "index_versions_on_transaction_id"
   end
