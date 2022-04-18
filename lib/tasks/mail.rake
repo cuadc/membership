@@ -14,5 +14,12 @@ namespace :membership do
         ShowsMailer.with(show_id: show.id).individual_email.deliver_now
       end
     end
+
+    desc "Email all Ordinary Members who said they'd be graduating this year to confirm this is still correct"
+    task graduands: :environment do
+      Member.graduating.find_each do |member|
+        GraduatingMailer.with(member: member).check_email.deliver_now
+      end
+    end
   end
 end

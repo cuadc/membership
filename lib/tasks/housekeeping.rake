@@ -5,7 +5,7 @@ namespace :membership do
     desc "Mark graduated Ordinary Members as Associate Members"
     task process_graduates: :environment do
       PaperTrail.request.whodunnit = 'Batch Job'
-      Member.ordinary.where("graduation_year <= ?", Date.today.year).find_each do |member|
+      Member.graduating.find_each do |member|
         member.mtype_id = 2
         member.save(validate: false)
       end
