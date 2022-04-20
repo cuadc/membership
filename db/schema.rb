@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_18_132417) do
+ActiveRecord::Schema.define(version: 2022_04_20_193908) do
 
   create_table "institutions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -23,11 +23,10 @@ ActiveRecord::Schema.define(version: 2022_04_18_132417) do
     t.string "crsid"
     t.string "primary_email", null: false
     t.string "secondary_email"
-    t.bigint "institution_id"
+    t.bigint "institution_id", null: false
     t.integer "graduation_year", null: false
-    t.bigint "mtype_id"
+    t.bigint "mtype_id", null: false
     t.date "expiry"
-    t.text "password"
     t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"

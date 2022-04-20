@@ -7,11 +7,10 @@
 #  crsid           :string(255)
 #  primary_email   :string(255)      not null
 #  secondary_email :string(255)
-#  institution_id  :bigint
+#  institution_id  :bigint           not null
 #  graduation_year :integer          not null
-#  mtype_id        :bigint
+#  mtype_id        :bigint           not null
 #  expiry          :date
-#  password        :text(65535)
 #  name            :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
@@ -36,10 +35,13 @@ class Member < ApplicationRecord
 
   before_validation :normalise_crsid
   validates :name, presence: true
+  validates :crsid, presence: false, uniqueness: true
   validates :primary_email, presence: true, uniqueness: true
+  validates :secondary_email, presence: false, uniqueness: true
   validates :secondary_email, presence: true, uniqueness: true, if: -> { validate_secondary_email }
-  validate -> { errors.add(:secondary_email, 'needs to be different') if primary_email == secondary_email },
-    if: -> { validate_secondary_email }
+  validate -> { errors.add(:secondary_email, 'needs to be different') if primary_email == secondary_email }, if: -> { validate_secondary_email }
+  validate -> { errors.add(:primary_email, 'duplicates a preexisting secondary email') if Member.where.not(id: id).find_by(secondary_email: primary_email) }
+  validate -> { errors.add(:secondary_email, 'duplicates a preexisting primary email') if Member.where.not(id: id).find_by(primary_email: secondary_email) }
   validates :graduation_year, presence: true
 
   strip_attributes
