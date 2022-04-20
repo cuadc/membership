@@ -1,7 +1,7 @@
 Rails.application.config.content_security_policy do |policy|
   policy.default_src :self
   policy.font_src    :self
-  policy.img_src     :self
+  policy.img_src     :self, :data
   policy.object_src  :none
   policy.child_src   'https://www.recaptcha.net'
   policy.script_src  :self, 'https://www.recaptcha.net', 'https://www.gstatic.com'

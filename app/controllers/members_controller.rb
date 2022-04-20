@@ -89,6 +89,7 @@ class MembersController < ApplicationController
         changeset: ver.changeset
       }
     end
+    @lookup_data = Membership::Lookup.about(@member.crsid)
   end
 
   def destroy

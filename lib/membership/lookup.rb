@@ -4,11 +4,16 @@ module Membership
   module Lookup
     class << self
       def about(crsid)
+        return nil unless crsid.present?
         body = fetch(crsid)
         data = JSON.parse(body)
         data = data['result']['person']
-        data.delete('identifier')
-        data
+        if data.present?
+          data.delete('identifier')
+          data
+        end
+      rescue
+        return nil
       end
 
       def fetch(crsid)
