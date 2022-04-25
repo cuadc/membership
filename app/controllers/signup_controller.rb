@@ -12,7 +12,7 @@ class SignupController < ApplicationController
     @member = Member.new(member_params)
     @member.mtype_id = 999
     @member.validate_secondary_email = true
-    if @member.save && verify_recaptcha(model: @member)
+    if @member.valid? && verify_recaptcha(model: @member) && @member.save
       WelcomeMailer.with(member: @member, request_uuid: request.uuid, request_ip: request.ip).new_signup_email.deliver_now
       redirect_to :pay
     else

@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :provider_accounts, dependent: :delete_all
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, email: true
 
   strip_attributes
 
