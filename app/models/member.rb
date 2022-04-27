@@ -39,7 +39,7 @@ class Member < ApplicationRecord
   validates :name, presence: true
   validates :crsid, presence: false, uniqueness: { allow_blank: true }
   validates :primary_email, presence: true, uniqueness: true, email: true
-  validates :secondary_email, presence: false, uniqueness: true, email: true, if: -> { !validate_secondary_email }
+  validates :secondary_email, presence: false, uniqueness: { allow_blank: true }, email: true, if: -> { !validate_secondary_email }
   validates :secondary_email, presence: true, uniqueness: true, email: true, if: -> { validate_secondary_email }
   validate -> { errors.add(:secondary_email, 'needs to be different') if primary_email == secondary_email }
   validate -> { errors.add(:primary_email, 'duplicates a preexisting secondary email') if Member.where.not(id: id).find_by(secondary_email: primary_email) }
