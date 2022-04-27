@@ -117,7 +117,7 @@
           <td><%= ver[:user] %></td>
           <td>
             <% ver[:changeset].each do |field, change| %>
-              <%= field %> changed from <%= change[0] || 'nil' %> to <%= change[1] %><br>
+              <%= field %> changed from <%= change[0].inspect %> to <%= change[1].inspect %><br>
             <% end %>
           </td>
         </tr>
