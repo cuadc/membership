@@ -10,6 +10,6 @@ Please note the this project is currently a work in progress.
 The intention is to keep the project very simple and provide nothing more than a basic web frontend for the membership database. That being said, if you do notice something that's broken, could use improvement or is otherwise not working properly then please do contribute! You can submit bug reports, feature requests and pull requests on GitHub.
 
 ## Copyright
-Copyright (c) 2020–2021 Charlie Jonas and contributors.\
+Copyright (c) 2020–2022 Charlie Jonas and contributors.\
 The CUADC Membership System is released under Version 3 of the GNU General Public License.\
 See the LICENSE file for full details.
