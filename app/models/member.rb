@@ -24,6 +24,8 @@ class Member < ApplicationRecord
   has_many :purchase_ingest_items
 
   scope :ordinary, -> { where(mtype_id: 1) }
+  scope :associate, -> { where(mtype_id: 2) }
+  scope :honorary, -> { where(mtype_id: 4) }
   scope :graduating, -> { where(mtype_id: 1).where("graduation_year <= ?", Date.today.year) }
   scope :not_legacy_email, -> { where("primary_email NOT LIKE 'unknown-member-email-_%@cuadc.org'") }
   scope :not_manual_expires, -> { left_joins(:purchase_ingest_items).where('purchase_ingest_items.member_id IS NULL').where('members.expiry IS NULL OR members.expiry > ?', Date.today) }

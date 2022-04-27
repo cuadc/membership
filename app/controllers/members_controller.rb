@@ -47,8 +47,9 @@ class MembersController < ApplicationController
   end
 
   def import
-    @members = Member.not_expired.map { |i| i.not_legacy_email }.reduce(&:+)
-    response.headers["Content-Disposition"] = "attachment"
+    @members = Member.ordinary.not_legacy_email.not_manual_expires +
+      Member.ordinary.not_legacy_email.not_canned_expires +
+      Member.associate.not_legacy_email + Member.honorary.not_legacy_email
   end
 
   def new
