@@ -4,6 +4,8 @@ set -euo pipefail
 cd /opt/membership
 export RAILS_ENV="production"
 
+git reset --hard
+git clean -df
 git pull
 /opt/embedded/ruby/bin/bundle install
 /opt/embedded/ruby/bin/bundle exec bin/rails assets:precompile
