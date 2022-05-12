@@ -35,7 +35,7 @@ class Member < ApplicationRecord
 
   attr_accessor :validate_secondary_email
 
-  before_validation :normalise_crsid
+  before_validation :normalise_fields
   validates :name, presence: true
   validates :crsid, presence: false, uniqueness: { allow_blank: true }
   validates :primary_email, presence: true, uniqueness: true, email: true
@@ -59,20 +59,20 @@ class Member < ApplicationRecord
   def contact_email
     if mtype_id == 2 # Associate
       if secondary_email.present?
-        secondary_email
+        secondary_email.downcase
       else
         if primary_email.ends_with? "@cam.ac.uk"
           if graduation_year >= 2018
-            crsid + "@cantab.ac.uk"
+            "#{crsid}@cantab.ac.uk".downcase
           else
             nil
           end
         else
-          primary_email
+          primary_email.downcase
         end
       end
     elsif mtype_id.in? [1,3,4] # Ordinary, Special, Honorary
-      primary_email
+      primary_email.downcase
     else # Suspended, Banned, Awaiting Payment
       nil
     end
@@ -117,7 +117,9 @@ class Member < ApplicationRecord
 
   private
 
-  def normalise_crsid
+  def normalise_fields
     self.crsid = crsid.downcase unless crsid.blank?
+    self.primary_email = primary_email.downcase unless primary_email.blank?
+    self.secondary_email = secondary_email.downcase unless secondary_email.blank?
   end
 end

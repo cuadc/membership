@@ -1,3 +1,3 @@
 <% @members.each do |member| -%>
-<%= "#{member.contact_email}\n" if member.contact_email -%>
+<%= "#{member.contact_email.downcase}\n" if member.contact_email -%>
 <% end -%>
