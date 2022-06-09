@@ -6,6 +6,8 @@
   <%= link_to "Edit details", edit_member_path(@member) %>
   |
   <%= link_to 'view on Camdram', Membership::Camdram.client.base_url + "/people/by-id/#{@member.camdram_id}" %>
+  |
+  <%= link_to 'view on Lookup', "https://www.lookup.cam.ac.uk/person/crsid/#{@member.crsid}/details" %>
 </p>
 
 <% if @member.expired? %>
