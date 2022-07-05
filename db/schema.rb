@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2022_06_06_184637) do
 
   create_table "sent_mails", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "mailer_class", null: false
-    t.string "mailer_method", null: false
+    t.string "mailer_action", null: false
     t.string "address", null: false
     t.timestamp "submitted", null: false
   end

@@ -12,7 +12,7 @@ module ActionMailer
     def sent_to?(recipient, timerange)
       SentMail.where(
         mailer_class: @mailer_class.to_s,
-        mailer_method: @action.to_s,
+        mailer_action: @action.to_s,
         submitted: DateTime.now - timerange..DateTime.now,
         address: recipient).any?
     end

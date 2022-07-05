@@ -5,7 +5,7 @@ class EmailDeliveryObserver
     message.recipients.uniq.each do |addr|
       SentMail.create(
         mailer_class: message.instance_variable_get("@mailer_class").to_s,
-        mailer_method: message.instance_variable_get("@action").to_s,
+        mailer_action: message.instance_variable_get("@action").to_s,
         address: addr,
         submitted: message.date
       )
