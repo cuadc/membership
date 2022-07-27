@@ -8,7 +8,7 @@ gem 'mysql2', '~> 0.5'
 gem 'puma', '~> 5.6'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.4'
-gem 'dotenv-rails', '~> 2.7'
+gem 'dotenv-rails', '~> 2.8'
 
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
