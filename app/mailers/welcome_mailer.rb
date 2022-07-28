@@ -3,11 +3,13 @@
 class WelcomeMailer < ApplicationMailer
   def card_awaiting_email
     @member = params[:member]
+    return if @member.no_mail
     mail(to: @member.primary_email, subject: 'CUADC Membership Card')
   end
 
   def new_signup_email
     @member = params[:member]
+    return if @member.no_mail
     @request_uuid = params[:request_uuid]
     @request_ip = params[:request_ip]
     to_addr = overridable_to('members@cuadc.org')
@@ -18,6 +20,7 @@ class WelcomeMailer < ApplicationMailer
 
   def thank_you_email
     @member = params[:member]
+    return if @member.no_mail
     mail(to: @member.primary_email, subject: 'CUADC Membership Signup')
   end
 end

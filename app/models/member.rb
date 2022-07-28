@@ -57,6 +57,7 @@ class Member < ApplicationRecord
   end
 
   def contact_email
+    return nil if no_mail
     if mtype_id == 2 # Associate
       if secondary_email.present?
         secondary_email.downcase
