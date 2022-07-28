@@ -30,7 +30,7 @@ class MembersController < ApplicationController
   end
 
   def camdram_associations_needed
-    @members = Member.where(mtype_id: 1, camdram_id: nil).last(50)
+    @members = Member.where(mtype_id: 1, camdram_id: nil).where.not(created_at: nil).last(50)
   end
 
   def cards_needed
