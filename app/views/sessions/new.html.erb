@@ -1,6 +1,6 @@
 <% content_for :heading, 'Login' %>
 
-<div class="login">
+<div class="login mb-3">
   <%= image_tag 'cuadc_logo.png', height: '200', width: '173', class: 'mb-4' %>
   <%= link_to '/auth/ucamraven', class: "btn btn-lg btn-primary btn-block ravenbtn" do %>
     <%= image_tag 'raven.png', class: 'ravenicon' %>
@@ -8,7 +8,12 @@
   <% end %>
 </div>
 
+<p class="text-center font-weight-light">
+  Please use the <%= link_to 'designated form', '/signup' %> instead of this login if you wish to signup for Membership.
+</p>
+
 <p class="legal-notice bg-dark text-light">
-  Please note that this is a secure system and that access is restricted to authorised individuals only.
+  Note that this is a secure system and that access is restricted to authorised individuals only.
   Use by others is in contravention of the Computer Misuse Act 1990 and illegal under UK law.
+  The system operators are notified of all failed access attempts.
 </p>
