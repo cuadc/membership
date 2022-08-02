@@ -5,9 +5,19 @@ namespace :membership do
     desc "Mark graduated Ordinary Members as Associate Members"
     task process_graduates: :environment do
       PaperTrail.request.whodunnit = 'Batch Job'
-      Member.graduating.find_each do |member|
+      grads = Member.graduating
+      puts 'Unsubscribe the following addresses from the soc-adc-members list:'
+      grads.each do |member|
+        old_email = member.contact_email
         member.mtype_id = 2
-        member.save(validate: false)
+        if member.save(validate: false)
+          puts old_email if old_email
+        end
+      end
+      grads.each do |m|
+        unless m.changed?
+          GraduatingMailer.with(member: m).confer_email.deliver_now
+        end
       end
     end
 

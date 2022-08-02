@@ -1,0 +1,25 @@
+Dear <%= @member.name %>,
+
+This is an automated message from the CUADC Membership System, but
+replies to this address are monitored.
+
+This is to inform you that in line with the constitution, you have now
+been conferred Associate Membership of the Club. We have done this
+because we believe you are no longer a student at the University of
+Cambridge, or are no longer a student at a higher educational
+establishment and resident within the City of Cambridge.
+
+If this is a mistake, please urgently apprise us of your situation by
+replying to this email. This is important if you wish to continue taking
+part in student shows.
+
+Further, the contact email address we have on file for you is shown
+below. If this is no longer accurate or you have another preferred
+address, please get in touch so that we can continue to inform you of
+events such as the annual Club Dinner and Garden Party.
+
+  <%= @member.contact_email || 'NO EMAIL ADDRESS AVAILABLE' %>
+
+Kind regards,
+
+The CUADC Membership System
