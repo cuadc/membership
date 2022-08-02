@@ -9,13 +9,10 @@ class WelcomeMailer < ApplicationMailer
 
   def new_signup_email
     @member = params[:member]
-    return if @member.no_mail
     @request_uuid = params[:request_uuid]
     @request_ip = params[:request_ip]
     to_addr = overridable_to('members@cuadc.org')
-    reply_to_addr = [@member.primary_email]
-    reply_to_addr << @member.secondary_email unless @member.secondary_email.nil?
-    mail(to: to_addr, reply_to: reply_to_addr.uniq, bcc: 'chtj2@srcf.net', subject: 'CUADC Membership Signup')
+    mail(to: to_addr, reply_to: @member.both_emails, bcc: 'chtj2@srcf.net', subject: 'CUADC Membership Signup')
   end
 
   def thank_you_email
