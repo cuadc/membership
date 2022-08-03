@@ -30,7 +30,7 @@ gem 'attr_encrypted', '~> 3.1'
 gem 'strip_attributes', '~> 1.13'
 
 # HTTP security headers
-gem 'secure_headers', '~> 6.3'
+gem 'secure_headers', '~> 6.4'
 
 # Administrator interface
 gem 'rails_admin', '~> 3.0'
