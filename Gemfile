@@ -17,7 +17,7 @@ gem 'dotenv-rails', '~> 2.8'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Auditing
-gem 'paper_trail', '~> 12.3'
+gem 'paper_trail', '~> 13.0'
 gem 'paper_trail-association_tracking', '~> 2.2'
 
 # Stopping the script kiddies
