@@ -1,7 +1,10 @@
 class ConvertPaperTrailYamlToJson < ActiveRecord::Migration[6.1]
   def up
-    add_column :versions, :new_object, :json
-    add_column :versions, :new_object_changes, :json
+    # The largest text column available in all supported RDBMS.
+    TEXT_BYTES = 1_073_741_823
+
+    add_column :versions, :new_object, :text, limit: TEXT_BYTES
+    add_column :versions, :new_object_changes, :text, limit: TEXT_BYTES
     PaperTrail::Version.where.not(object: nil).find_each do |version|
       version.update_column(:new_object, YAML.load(version.object))
       if version.object_changes
