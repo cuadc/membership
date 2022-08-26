@@ -17,6 +17,7 @@
 #  card_issued     :date
 #  inhibited       :boolean          default(FALSE), not null
 #  notes           :text(65535)
+#  no_mail         :boolean          default(FALSE), not null
 #
 class Member < ApplicationRecord
   belongs_to :institution
