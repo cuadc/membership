@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_26_130624) do
+ActiveRecord::Schema.define(version: 2022_08_26_143536) do
 
   create_table "institutions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -118,15 +118,17 @@ ActiveRecord::Schema.define(version: 2022_08_26_130624) do
     t.bigint "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
+    t.text "old_object", size: :long
     t.datetime "created_at", precision: 6
+    t.text "old_object_changes", size: :long
     t.integer "transaction_id"
     t.string "item_subtype"
     t.string "request_uuid"
     t.bigint "session"
     t.string "ip"
     t.string "user_agent"
-    t.json "object"
-    t.json "object_changes"
+    t.text "object", size: :long
+    t.text "object_changes", size: :long
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
     t.index ["transaction_id"], name: "index_versions_on_transaction_id"
   end
