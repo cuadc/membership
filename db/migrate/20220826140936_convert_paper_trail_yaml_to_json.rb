@@ -13,6 +13,13 @@ class ConvertPaperTrailYamlToJson < ActiveRecord::Migration[6.1]
   end
 
   def down
-    raise ActiveRecord::IrreversibleMigration
+    ActiveRecord::Base.transaction do
+      ActiveRecord::Base.connection.execute('LOCK TABLE versions WRITE')
+      PaperTrail::Version.find_each do |version|
+        version.update_column(:new_object, nil)
+        version.update_column(:new_object_changes, nil)
+      end
+      ActiveRecord::Base.connection.execute('UNLOCK TABLES')
+    end
   end
 end
