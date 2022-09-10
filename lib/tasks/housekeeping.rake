@@ -4,7 +4,7 @@ namespace :membership do
   namespace :housekeeping do
     desc "Mark graduated Ordinary Members as Associate Members"
     task process_graduates: :environment do
-      PaperTrail.request.whodunnit = 'Batch Job'
+      PaperTrail.request.whodunnit = 'Graduation Batch Job'
       grads = Member.graduating
       puts 'Unsubscribe the following addresses from the soc-adc-members list:'
       grads.each do |member|
@@ -31,13 +31,32 @@ namespace :membership do
 
     desc "Find non-students via Lookup"
     task scan_lookup: :environment do
-      Member.ordinary.each do |m|
-        next unless m.crsid.present?
+      doy = Date.today.yday()
+      return if doy < 2 || doy > 364
+      PaperTrail.request.whodunnit = 'Lookup Synchronisation Batch Job'
+      Member.ordinary.where.not(crsid: nil).each do |m|
         result = Membership::Lookup.is_student?(m.crsid)
         if result.nil?
           puts "#{m.crsid} was not found in Lookup"
         elsif !result
           puts "#{m.crsid} is not a student"
+          if m.graduation_year > Date.today.year
+            m.graduation_year = Date.today.year
+          end
+          m.mtype_id = 2
+          m.save!
+        end
+      end
+      Member.associate.where.not(crsid: nil).each do |m|
+        result = Membership::Lookup.is_student?(m.crsid)
+        if result.nil?
+          puts "#{m.crsid} was not found in Lookup" if m.graduation_year >= 2013
+        elsif result
+          puts "#{m.crsid} is a student"
+          new_year = Date.today.month >= 8 ? Date.today.year + 1 : Date.today.year
+          m.mtype_id = 1
+          m.graduation_year = new_year
+          m.save!
         end
       end
     end
