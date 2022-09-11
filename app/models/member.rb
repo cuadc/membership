@@ -46,6 +46,7 @@ class Member < ApplicationRecord
   validate -> { errors.add(:primary_email, 'duplicates a preexisting secondary email') if Member.where.not(id: id).find_by(secondary_email: primary_email) }
   validate -> { errors.add(:secondary_email, 'duplicates a preexisting primary email') if Member.where.not(id: id).find_by(primary_email: secondary_email) }
   validates :graduation_year, presence: true
+  validate :crsid_must_be_valid
 
   strip_attributes
   has_paper_trail ignore: [:created_at, :updated_at]
@@ -128,5 +129,16 @@ class Member < ApplicationRecord
     self.crsid = crsid.downcase unless crsid.blank?
     self.primary_email = primary_email.downcase unless primary_email.blank?
     self.secondary_email = secondary_email.downcase unless secondary_email.blank?
+  end
+
+  def crsid_must_be_valid
+    if crsid.present?
+      result = Membership::Lookup.is_student?(crsid)
+      if result.nil?
+        errors.add(:crsid, "couldn't be found in University Lookup")
+      elsif !result
+        errors.add(:crsid, "does not appear to belong to a student, according to University Lookup")
+      end
+    end
   end
 end
