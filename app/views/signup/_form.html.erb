@@ -7,7 +7,6 @@
   </div>
 <% end %>
 
-<%#= form_with model: @member, local: true do |form| %>
 <%= form_with scope: :member, url: '/signup', local: true do |form| %>
   <div class="form-group row">
     <%= form.label :name, class: 'col-sm-3 col-form-label' %>
@@ -51,10 +50,10 @@
 
   <div class="form-group row">
     <%= form.label :institution_id, 'College/Institution', class: 'col-sm-3 col-form-label' %>
-    <div class="col-sm-9"><%# TODO make a list of admin-only Institutions %>
-      <%= form.collection_select :institution_id, Institution.where.not(id: 1).order(:id), :id, :name, class: 'form-control' %>
+    <div class="col-sm-9">
+      <%= form.collection_select :institution_id, @institutions, :id, :name, class: 'form-control' %>
       <small id="member_institution_id_help_tag" class="form-text text-muted">
-        If your higher educational establishment isn't shown here then please select 'Unknown'.
+        If your higher educational establishment isn't shown here then please email <%= mail_to 'sysop@membership.cuadc.org' %>.
       </small>
     </div>
   </div>
