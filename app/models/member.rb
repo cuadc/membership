@@ -35,6 +35,7 @@ class Member < ApplicationRecord
   scope :canned_expires_in, ->(days) { joins(:purchase_ingest_items).where('purchase_ingest_items.expires < ?', Date.today + days) }
 
   attr_accessor :validate_secondary_email
+  attr_accessor :validate_cam_email
 
   before_validation :normalise_fields
   validates :name, presence: true
@@ -47,6 +48,7 @@ class Member < ApplicationRecord
   validate -> { errors.add(:secondary_email, 'duplicates a preexisting primary email') if Member.where.not(id: id).find_by(primary_email: secondary_email) }
   validates :graduation_year, presence: true
   validate :crsid_must_be_valid
+  validate :cam_email_must_be_valid, if: -> { validate_cam_email }
 
   strip_attributes
   has_paper_trail ignore: [:created_at, :updated_at]
@@ -138,6 +140,17 @@ class Member < ApplicationRecord
         errors.add(:crsid, "couldn't be found in University Lookup")
       elsif !result
         errors.add(:crsid, "does not appear to belong to a student, according to University Lookup")
+      end
+    end
+  end
+
+  def cam_email_must_be_valid
+    if primary_email.present? && primary_email.ends_with?("@cam.ac.uk")
+      result = Membership::SmtpCallout.is_accepted?(primary_email)
+      if result.nil?
+        errors.add(:primary_email, "could not be determined as a valid or invalid Cambridge University email address")
+      elsif !result
+        errors.add(:primary_email, "does not appear to be a valid Cambridge University email address")
       end
     end
   end
