@@ -35,6 +35,7 @@ class Member < ApplicationRecord
   scope :canned_expires_in, ->(days) { joins(:purchase_ingest_items).where('purchase_ingest_items.expires < ?', Date.today + days) }
 
   attr_accessor :validate_secondary_email
+  attr_accessor :validate_crsid
   attr_accessor :validate_cam_email
 
   before_validation :normalise_fields
@@ -47,7 +48,7 @@ class Member < ApplicationRecord
   validate -> { errors.add(:primary_email, 'duplicates a preexisting secondary email') if Member.where.not(id: id).find_by(secondary_email: primary_email) }
   validate -> { errors.add(:secondary_email, 'duplicates a preexisting primary email') if Member.where.not(id: id).find_by(primary_email: secondary_email) }
   validates :graduation_year, presence: true
-  validate :crsid_must_be_valid
+  validate :crsid_must_be_valid, if: -> { validate_crsid }
   validate :cam_email_must_be_valid, if: -> { validate_cam_email }
 
   strip_attributes
