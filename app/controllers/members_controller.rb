@@ -45,8 +45,7 @@ class MembersController < ApplicationController
   def issue_card
     member = Member.find(params[:id])
     raise 'protected operation' if member.inhibited? && !current_user.sysop?
-    raise 'card already issued' if member.card_issued.present?
-    member.update!(card_issued: Date.today)
+    member.update!(card_issued: Date.today, needs_card: false)
     WelcomeMailer.with(member: member).card_awaiting_email.deliver_now
     redirect_to cards_needed_members_path
   end
