@@ -19,13 +19,18 @@ class MembersController < ApplicationController
     item = PurchaseIngestItem.needs_linking.find(params.require(:item))
     member = Member.needs_linking.detect { |i| i.id.to_s == params.require(:member) }
     raise 'protected operation' if member.inhibited? && !current_user.sysop?
+    is_new_member = member.mtype_id == 999
     memoized_date = item.purchased.dup
     ActiveRecord::Base.transaction do
       item.update!(member: member)
-      member.update!(mtype_id: 1, expiry: nil) # Canned expiry
+      member.update!(mtype_id: 1, needs_card: true, expiry: nil) # Canned expiry
     end
     PurchaseIngestItem.find(item.id).update!(purchased: memoized_date) # Sigh, MySQL.
-    WelcomeMailer.with(member: member).thank_you_email.deliver_now
+    if is_new_member
+      WelcomeMailer.with(member: member).new_mem_thank_you_email.deliver_now
+    else
+      WelcomeMailer.with(member: member).renewal_thank_you_email.deliver_now
+    end
     redirect_to pending_signups_members_path
   end
 
@@ -34,7 +39,7 @@ class MembersController < ApplicationController
   end
 
   def cards_needed
-    @members = Member.where(mtype_id: 1, card_issued: nil).where.not(created_at: nil)
+    @members = Member.where(needs_card: true)
   end
 
   def issue_card

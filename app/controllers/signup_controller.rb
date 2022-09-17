@@ -23,7 +23,7 @@ class SignupController < ApplicationController
     @member.validate_crsid = true
     @member.validate_cam_email = true
     if @member.valid? && verify_recaptcha(model: @member) && @member.save
-      WelcomeMailer.with(member: @member, request_uuid: request.uuid, request_ip: request.ip).new_signup_email.deliver_now
+      WelcomeMailer.with(member: @member, request_uuid: request.uuid, request_ip: request.ip).new_signup_notification_email.deliver_now
       redirect_to :pay
     else
       render :new
