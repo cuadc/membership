@@ -67,7 +67,6 @@
         <%= content_tag(:th, 'Name') %>
         <%= content_tag(:th, 'Email') %>
         <%= content_tag(:th, 'Type') %>
-        <%= content_tag(:th, 'Renewed') %>
         <%= content_tag(:th, 'Purchase Time') %>
         <%= content_tag(:th, 'Expiry') %>
         <%= content_tag(:th, 'Link') %>
@@ -79,7 +78,6 @@
           <%= content_tag(:td, item.name) %>
           <%= content_tag(:td, item.email) %>
           <%= content_tag(:td, item.mtype) %>
-          <%= content_tag(:td, item.renewed?) %>
           <%= content_tag(:td, item.purchased.strftime("%d/%m/%Y %H:%M:%S")) %>
           <%= content_tag(:td, item.expires.try(:strftime, "%d/%m/%Y")) %>
           <td>

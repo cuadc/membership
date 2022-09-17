@@ -31,12 +31,4 @@ class PurchaseIngestItem < ApplicationRecord
   def self.needs_linking
     PurchaseIngestItem.where(member: nil).where('purchased > ?', Date.today - 60.days).order(:purchased)
   end
-
-  def renewed?
-    if first?
-      ''
-    else
-      'Yes'
-    end
-  end
 end
