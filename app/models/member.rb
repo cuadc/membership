@@ -87,7 +87,7 @@ class Member < ApplicationRecord
 
   def both_emails
     return [] if no_mail
-    [primary_email.downcase, secondary_email.downcase].compact.uniq
+    [primary_email, secondary_email].compact.map(&:downcase).uniq
   end
 
   def canned_expiry?
