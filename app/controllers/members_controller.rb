@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
   def index
-    @members = Member.includes(:mtype, :purchase_ingest_items).where.not(mtype_id: 999).order(:graduation_year)
+    @members = Member.includes(:mtype, :purchase_ingest_items).where.not(mtype_id: [998, 999]).order(:graduation_year)
   end
 
   def ballot_list
