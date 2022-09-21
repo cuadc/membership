@@ -1,0 +1,20 @@
+<% content_for :title, 'Subscription' %>
+<% content_for :heading, 'Verify your Email' %>
+
+<% if @token %>
+  <p>Thank you for verifying your email address, <%= @token.email %>.</p>
+  <p>You still need to verify <%= @tokens.first.email %> in order to complete signup.</p>
+<% else %>
+  <p>
+    Please check the email inboxes of both the addresses you gave on the previous
+    form, where you should find a unique verification link. You will need to click
+    on both links (or copy & paste the URLs into your web browser) in order to
+    verify your email addresses. After you have completed this step, you will be
+    prompted for payment.
+  </p>
+<% end %>
+
+<p>
+  If you are experiencing technical issues with verifying your email, please contact
+  <%= mail_to 'sysop@membership.cuadc.org' %>.
+</p>

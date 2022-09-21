@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_17_200424) do
+ActiveRecord::Schema.define(version: 2022_09_21_201220) do
+
+  create_table "email_verification_tokens", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "uuid", null: false
+    t.boolean "verified", default: false, null: false
+    t.bigint "member_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_email_verification_tokens_on_member_id"
+  end
 
   create_table "institutions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -134,6 +144,7 @@ ActiveRecord::Schema.define(version: 2022_09_17_200424) do
     t.index ["transaction_id"], name: "index_versions_on_transaction_id"
   end
 
+  add_foreign_key "email_verification_tokens", "members"
   add_foreign_key "provider_accounts", "users"
   add_foreign_key "purchase_ingest_items", "members"
   add_foreign_key "sessions", "users"

@@ -7,6 +7,7 @@ Type.create(id: 3, name: "Special")
 Type.create(id: 4, name: "Honorary")
 Type.create(id: 5, name: "Suspended")
 Type.create(id: 6, name: "Banned")
+Type.create(id: 998, name: "Awaiting Email Verification")
 Type.create(id: 999, name: "Awaiting Payment")
 
 Institution.create(id: 1, name: "ADC Theatre")

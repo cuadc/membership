@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback' => 'sessions#create', as: :auth_callback
   get '/auth/failure' => 'sessions#failure', as: :auth_failure
 
-  get '/pay' => 'signup#pay'
   get '/signup' => 'signup#new'
   post '/signup' => 'signup#create'
+  get '/verify' => 'signup#verify'
+  get '/pay' => 'signup#pay'
 end

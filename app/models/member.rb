@@ -24,6 +24,7 @@ class Member < ApplicationRecord
   belongs_to :institution
   belongs_to :mtype, class_name: 'Type'
   has_many :purchase_ingest_items
+  has_many :email_verification_tokens, dependent: :delete_all
 
   scope :ordinary, -> { where(mtype_id: 1) }
   scope :associate, -> { where(mtype_id: 2) }
