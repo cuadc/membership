@@ -11,6 +11,7 @@ class SignupController < ApplicationController
         @tokens = @token.member.email_verification_tokens.where(verified: false)
         if @tokens.length == 0
           @token.member.update!(mtype_id: 999)
+          WelcomeMailer.with(member: @token.member).new_signup_notification_email.deliver_now
           redirect_to :pay
         end
       end
@@ -44,7 +45,6 @@ class SignupController < ApplicationController
         secondary_token = EmailVerificationToken.generate(@member.secondary_email, @member.id)
         WelcomeMailer.with(token: primary_token).verification_email.deliver_now
         WelcomeMailer.with(token: secondary_token).verification_email.deliver_now
-        WelcomeMailer.with(member: @member, request_uuid: request.uuid, request_ip: request.ip).new_signup_notification_email.deliver_now
         redirect_to :verify
       else
         render :new

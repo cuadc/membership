@@ -18,15 +18,10 @@ using an unrecognised and/or non-academic email address then you *must*
 take steps to confirm that they are taking a course of higher study at a
 Cambridge-based institution.
 
-The details submitted can be previewed below.
+The details submitted can be previewed below, or viewed, checked and
+amended at https://membership.cuadc.org/members/<%= @member.id %>
 
   ID: <%= @member.id %>
-  <% if @request_uuid %>
-  Request: <%= @request_uuid %>
-  <% end %>
-  <% if @request_ip %>
-  IP address: <%= @request_ip %>
-  <% end %>
   Name: <%= @member.name %>
   CRSid: <%= @member.crsid %>
   Primary email: <%= @member.primary_email %>
