@@ -10,6 +10,10 @@ class MembersController < ApplicationController
     ].reduce(&:+).sort_by(&:graduation_year)
   end
 
+  def pending_verifications
+    @members = Member.where(mtype_id: 998)
+  end
+
   def pending_signups
     @purchase_ingest_items = PurchaseIngestItem.needs_linking
     @members = Member.needs_linking

@@ -1,0 +1,29 @@
+<% content_for :heading, 'Pending Verifications' %>
+
+<p>
+  This page lists those who have signed up for membership, but who
+  have yet to verify their primary and secondary email addresses.
+  Until they do this, they cannot progress to the next step to pay
+  for their membership and are therefore not members of the Club.
+</p>
+
+<table class="table table-condensed table-bordered table-hover">
+  <thead>
+    <%= content_tag :tr do %>
+      <%= content_tag(:th, 'Name') %>
+      <%= content_tag(:th, 'Primary Email') %>
+      <%= content_tag(:th, 'Secondary Email') %>
+      <%= content_tag(:th, 'Signup Time') %>
+    <% end %>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <%= content_tag :tr do %>
+        <%= content_tag(:td, link_to(member.name, member)) %>
+        <%= content_tag(:td, member.primary_email) %>
+        <%= content_tag(:td, member.secondary_email) %>
+        <%= content_tag(:td, member.try(:created_at).try(:strftime, "%d/%m/%Y %H:%M:%S")) %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

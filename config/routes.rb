@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :members do
     get 'ballot_list', on: :collection
+    get 'pending_verifications', on: :collection
     get 'pending_signups', on: :collection
     post 'link_signups', on: :collection
     get 'camdram_associations_needed', on: :collection
