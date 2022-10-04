@@ -78,18 +78,21 @@
   <summary>Data from University Lookup</summary>
   <hr class="invisible my-1">
   <% if @lookup_data %>
-    Cancelled = <%= @lookup_data['cancelled'] %><br>
-    Staff = <%= @lookup_data['staff'] %><br>
-    Student = <%= @lookup_data['student'] %><br>
+    Pronouns = <%= get_lookup_attribute(@lookup_data, 'pronouns') %><br>
     Display Name = <%= @lookup_data['displayName'] %><br>
     Registered Name = <%= @lookup_data['registeredName'] %><br>
-    Visible Name = <%= @lookup_data['visibleName'] %><br>
     First Name = <%= get_lookup_attribute(@lookup_data, 'firstName') %><br>
     Surname = <%= get_lookup_attribute(@lookup_data, 'surname') %><br>
+    Email = <%= get_lookup_attribute(@lookup_data, 'email') %><br>
+    Departing Email = <%= get_lookup_attribute(@lookup_data, 'departingEmail') %><br>
     Jackdaw Institution = <%= get_lookup_attribute(@lookup_data, 'jdInstid') %><br>
     Jackdaw College = <%= get_lookup_attribute(@lookup_data, 'jdCollege') %><br>
     MIS Affiliation = <%= get_lookup_attribute(@lookup_data, 'misAffiliation') %><br>
-    Departing Email = <%= get_lookup_attribute(@lookup_data, 'departingEmail') %><br>
+    Student = <%= @lookup_data['student'] %><br>
+    Staff = <%= @lookup_data['staff'] %><br>
+    Cancelled = <%= @lookup_data['cancelled'] %><br>
+    Finishing Date = <%= get_lookup_attribute(@lookup_data, 'finishingDate') %><br>
+    Cancelled Date = <%= get_lookup_attribute(@lookup_data, 'cancelledDate') %><br>
     Photo:<br>
       <img src="data:image/jpeg;base64,<%= get_lookup_photo(@lookup_data) %>" />
   <% else %>
