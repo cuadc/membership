@@ -10,12 +10,13 @@ class SignupController < ApplicationController
         @token.update!(verified: true)
         @tokens = @token.member.email_verification_tokens.where(verified: false)
         if @tokens.length == 0
-          mail_already_sent = @token.member.mtype_id == 999
-          @token.member.update!(mtype_id: 999)
-          unless mail_already_sent
+          if @token.member.mtype_id == 998
+            @token.member.update!(mtype_id: 999)
             WelcomeMailer.with(member: @token.member).new_signup_notification_email.deliver_now
           end
-          redirect_to :pay
+          if @token.member.mtype_id == 999
+            redirect_to :pay
+          end
         end
       end
     end
