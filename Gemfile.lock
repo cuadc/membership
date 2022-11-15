@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/CHTJonas/camdram-ruby.git
-  revision: 103e4cc630348c6dff1e8f26e4eb6f51a1dbe97e
+  revision: 8fd88329f30a3b235d6aeeda6ee1260ed62e54fc
   specs:
     camdram (2.0.0)
       mime-types (~> 3.2)
@@ -113,7 +113,7 @@ GEM
     faraday (2.6.0)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.1)
+    faraday-net_http (3.0.2)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
