@@ -55,9 +55,9 @@ class MembersController < ApplicationController
   end
 
   def import
-    @members = Member.ordinary.not_legacy_email.not_manual_expires +
+    @members = (Member.ordinary.not_legacy_email.not_manual_expires +
       Member.ordinary.not_legacy_email.not_canned_expires +
-      Member.associate.not_legacy_email + Member.honorary.not_legacy_email
+      Member.associate.not_legacy_email + Member.honorary.not_legacy_email).sort(&:id)
   end
 
   def new
