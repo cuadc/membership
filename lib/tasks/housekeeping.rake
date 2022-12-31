@@ -31,8 +31,8 @@ namespace :membership do
 
     desc "Find non-students via Lookup"
     task scan_lookup: :environment do
-      doy = Date.today.yday()
-      return if doy < 2 || doy > 364
+      doy = Date.today.yday
+      next if doy < 2 || doy > 364
       PaperTrail.request.whodunnit = 'Lookup Synchronisation Batch Job'
       Member.ordinary.where.not(crsid: nil).each do |m|
         result = Membership::Lookup.is_student?(m.crsid)
