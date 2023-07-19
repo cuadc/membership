@@ -33,7 +33,7 @@ gem 'strip_attributes', '~> 1.13'
 gem 'secure_headers', '~> 6.5'
 
 # Administrator interface
-gem 'rails_admin', '~> 3.0'
+gem 'rails_admin', '~> 3.1'
 gem 'rails_admin_history_rollback', '~> 1.0'
 
 # Static page serving
