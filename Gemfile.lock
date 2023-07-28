@@ -239,7 +239,7 @@ GEM
     regexp_parser (2.6.0)
     request_store (1.5.1)
       rack (>= 1.4)
-    rexml (3.2.5)
+    rexml (3.2.6)
     ruby2_keywords (0.0.5)
     ruby_multiton (0.1.2)
       extensible (~> 0.1.3)
