@@ -49,6 +49,7 @@ class Member < ApplicationRecord
   validate -> { errors.add(:secondary_email, 'needs to be different') if primary_email == secondary_email }
   validate -> { errors.add(:primary_email, 'duplicates a preexisting secondary email') if Member.where.not(id: id).find_by(secondary_email: primary_email) }
   validate -> { errors.add(:secondary_email, 'duplicates a preexisting primary email') if Member.where.not(id: id).find_by(primary_email: secondary_email) }
+  validate -> { errors.add(:secondary_email, 'must be a non-academic email') if secondary_email.present? && ( secondary_email.ends_with?(".edu") || secondary_email.ends_with?(".ac.uk") ) }
   validates :graduation_year, presence: true
   validate :crsid_must_be_valid, if: -> { validate_crsid }
   validate :cam_email_must_be_valid, if: -> { validate_cam_email }
