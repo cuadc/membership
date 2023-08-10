@@ -10,22 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_21_201220) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_08_10_200251) do
   create_table "email_verification_tokens", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "uuid", null: false
     t.boolean "verified", default: false, null: false
     t.bigint "member_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["member_id"], name: "index_email_verification_tokens_on_member_id"
   end
 
   create_table "institutions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "members", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -38,8 +37,8 @@ ActiveRecord::Schema.define(version: 2022_09_21_201220) do
     t.bigint "mtype_id", null: false
     t.date "expiry"
     t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.date "card_issued"
     t.boolean "inhibited", default: false, null: false
     t.text "notes"
@@ -57,8 +56,8 @@ ActiveRecord::Schema.define(version: 2022_09_21_201220) do
     t.string "provider", null: false
     t.string "uid", null: false
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["provider", "uid"], name: "index_provider_accounts_on_provider_and_uid", unique: true
     t.index ["user_id"], name: "index_provider_accounts_on_user_id"
   end
@@ -73,8 +72,8 @@ ActiveRecord::Schema.define(version: 2022_09_21_201220) do
     t.timestamp "starts", null: false
     t.timestamp "expires"
     t.bigint "member_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["member_id"], name: "index_purchase_ingest_items_on_member_id"
   end
 
@@ -87,8 +86,8 @@ ActiveRecord::Schema.define(version: 2022_09_21_201220) do
 
   create_table "sessions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.datetime "login_at", null: false
-    t.datetime "expires_at", null: false
+    t.datetime "login_at", precision: nil, null: false
+    t.datetime "expires_at", precision: nil, null: false
     t.string "ip", null: false
     t.string "user_agent", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
@@ -101,15 +100,15 @@ ActiveRecord::Schema.define(version: 2022_09_21_201220) do
 
   create_table "types", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "sysop", default: false, null: false
     t.boolean "active", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -130,7 +129,7 @@ ActiveRecord::Schema.define(version: 2022_09_21_201220) do
     t.string "event", null: false
     t.string "whodunnit"
     t.text "old_object", size: :long
-    t.datetime "created_at", precision: 6
+    t.datetime "created_at"
     t.text "old_object_changes", size: :long
     t.integer "transaction_id"
     t.string "item_subtype"

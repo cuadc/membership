@@ -7,6 +7,11 @@
   margin: 0 auto;
 }
 
+.login > form {
+  display: block;
+  width: 100%;
+}
+
 .ravenbtn .ravenicon {
   width:34px;
   height:34px;

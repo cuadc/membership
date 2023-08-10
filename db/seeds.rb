@@ -1,5 +1,5 @@
 cj = User.create(name: "Charlie Jonas", email: "charlie@charliejonas.co.uk", sysop: true)
-ProviderAccount.create(provider: "ucamraven", uid: "chtj2", user: cj)
+ProviderAccount.create(provider: "ucam-raven", uid: "chtj2", user: cj)
 
 Type.create(id: 1, name: "Ordinary")
 Type.create(id: 2, name: "Associate")

@@ -1,82 +1,104 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.8'
+ruby "3.2.2"
 
-gem 'rails', '~> 6.1.7'
-gem 'mysql2', '~> 0.5'
-gem 'puma', '~> 6.1'
-gem 'sass-rails', '>= 6'
-gem 'webpacker', '~> 5.4'
-gem 'dotenv-rails', '~> 2.8'
+# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+gem "rails", "~> 7.0.6"
 
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails"
+
+# Use mysql as the database for Active Record
+gem "mysql2", "~> 0.5"
+
+# Use the Puma web server [https://github.com/puma/puma]
+gem "puma", "~> 5.0"
+
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+# gem "turbo-rails"
+
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+# gem "stimulus-rails"
+
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+# gem "bcrypt", "~> 3.1.7"
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem "bootsnap", require: false
+
+# Use Sass to process CSS
+gem "sassc-rails"
+
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
 
 # Auditing
-gem 'paper_trail', '~> 13.0'
-gem 'paper_trail-association_tracking', '~> 2.2'
+gem "paper_trail", "~> 15.0"
+gem "paper_trail-association_tracking", "~> 2.2"
 
 # Stopping the script kiddies
-gem 'recaptcha', '~> 5.9'
+gem "recaptcha", "~> 5.9"
+
+# Static environmental configuration
+gem "dotenv-rails", "~> 2.8"
 
 # Encrypt sensitive model attributes
-gem 'attr_encrypted', '~> 3.1'
+gem "attr_encrypted", "~> 4.0"
 
 # Remove whitespace from model attributes
-gem 'strip_attributes', '~> 1.13'
+gem "strip_attributes", "~> 1.13"
 
 # HTTP security headers
-gem 'secure_headers', '~> 6.5'
+gem "secure_headers", "~> 6.5"
 
 # Administrator interface
-gem 'rails_admin', '~> 3.0'
-gem 'rails_admin_history_rollback', '~> 1.0'
+gem "rails_admin", "~> 3.0"
+gem "rails_admin_history_rollback", "~> 1.0"
 
 # Static page serving
-gem 'high_voltage', '~> 3.1'
+gem "high_voltage", "~> 3.1"
 
 # Raven OmniAuth login flow
-gem 'omniauth-ucam-raven', '~> 2.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
+gem "omniauth-ucam-raven", github: "CHTJonas/omniauth-ucam-raven"
 
 # Camdram API wrapper
-gem 'camdram', git: 'https://github.com/CHTJonas/camdram-ruby.git', require: 'camdram/client'
+gem "camdram", github: "CHTJonas/camdram-ruby", require: "camdram/client"
 
 # Date/time handling
-gem 'chronic', '~> 0.10.2'
-gem 'chronic_duration', '~> 0.10.6'
-gem 'datey', '~> 1.1'
-
-# Nicer console
-gem 'pry-rails', '~> 0.3.9'
+gem "chronic", "~> 0.10.2"
+gem "chronic_duration", "~> 0.10.6"
+gem "datey", "~> 1.1"
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'sqlite3'
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.8'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  # Annotate models
-  gem 'annotate'
+  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem "web-console"
+
+  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
+  # gem "rack-mini-profiler"
+
+  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
+  # gem "spring"
+
+  # Annotate model files
+  gem "annotate"
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "webdrivers"
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
