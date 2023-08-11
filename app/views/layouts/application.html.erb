@@ -27,6 +27,7 @@
               <li class="nav-item"><%= link_to 'Ballot List', ballot_list_members_path, class: 'nav-link' %></li>
               <% if current_user.sysop? %>
                 <li class="nav-item"><%= link_to 'Sysop Interface', rails_admin_path, class: 'nav-link' %></li>
+                <li class="nav-item"><%= link_to 'System Info', info_path, class: 'nav-link' %></li>
               <% end %>
             <% end %>
           </ul>

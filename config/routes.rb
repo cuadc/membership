@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   post '/signup' => 'signup#create'
   get '/verify' => 'signup#verify'
   get '/pay' => 'signup#pay'
+
+  get '/info' => 'misc#info'
 end
