@@ -44,6 +44,7 @@ class Member < ApplicationRecord
   validates :graduation_year, presence: true
   validate :crsid_must_be_valid, if: -> { CurrentRequest.is_signup? }
   validate :cam_email_must_be_valid, if: -> { CurrentRequest.is_signup? }
+  validate :primary_email_must_be_academic, if: -> { CurrentRequest.is_signup? }
 
   strip_attributes
   has_paper_trail ignore: [:created_at, :updated_at]
@@ -114,6 +115,14 @@ class Member < ApplicationRecord
         errors.add(:primary_email, "could not be determined as a valid or invalid Cambridge University email address")
       elsif !result
         errors.add(:primary_email, "does not appear to be a valid Cambridge University email address")
+      end
+    end
+  end
+
+  def primary_email_must_be_academic
+    if primary_email.present?
+      unless primary_email.ends_with?(".ac.uk") || primary_email.ends_with?(".edu")
+        errors.add(:primary_email, "does not appear to be an academic email address")
       end
     end
   end
