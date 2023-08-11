@@ -2,9 +2,9 @@
 
 <p>
   This page lists all members of the society, including those who have graduated,
-  those whose membership has expired and those who have been suspended or banned.
-  It should <b>not</b> be used for AGMs, SGMs, ballots or elections; please use
-  the dedicated <%= link_to 'ballot list page', ballot_list_members_path %> instead.
+  and those who have been suspended or banned. It should <b>not</b> be used for
+  AGMs, SGMs, ballots or elections; please use the dedicated
+  <%= link_to 'ballot list page', ballot_list_members_path %> instead.
   You can search this page from your web browser by pressing ctrl+F (cmd+F on Mac).
 </p>
 
@@ -16,7 +16,6 @@
       <%= content_tag(:th, 'Contact Email') %>
       <%= content_tag(:th, 'Graduation Year') %>
       <%= content_tag(:th, 'Membership Type') %>
-      <%= content_tag(:th, 'Subscription Expiry') %>
     <% end %>
   </thead>
   <tbody>
@@ -35,7 +34,6 @@
         <%= content_tag(:td, member.contact_email || '-') %>
         <%= content_tag(:td, member.graduation_year) %>
         <%= content_tag(:td, member.mtype.name) %>
-        <%= content_tag(:td, expiry_text(member)) %>
       <% end %>
     <% end %>
   </tbody>

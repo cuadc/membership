@@ -4,10 +4,7 @@ class MembersController < ApplicationController
   end
 
   def ballot_list
-    @members = [
-      Member.includes(:mtype, :purchase_ingest_items).ordinary.not_manual_expires.order(:graduation_year),
-      Member.includes(:mtype, :purchase_ingest_items).ordinary.not_canned_expires.order(:graduation_year)
-    ].reduce(&:+).sort_by(&:graduation_year)
+    @members = Member.ordinary.order(:graduation_year)
   end
 
   def pending_verifications
@@ -23,18 +20,13 @@ class MembersController < ApplicationController
     item = PurchaseIngestItem.needs_linking.find(params.require(:item))
     member = Member.needs_linking.detect { |i| i.id.to_s == params.require(:member) }
     raise 'protected operation' if member.inhibited? && !current_user.sysop?
-    is_new_member = member.mtype_id == 999
     memoized_date = item.purchased.dup
     ActiveRecord::Base.transaction do
       item.update!(member: member)
-      member.update!(mtype_id: 1, needs_card: true, expiry: nil) # Canned expiry
+      member.update!(mtype_id: 1, needs_card: true)
     end
     PurchaseIngestItem.find(item.id).update!(purchased: memoized_date) # Sigh, MySQL.
-    if is_new_member
-      WelcomeMailer.with(member: member).new_mem_thank_you_email.deliver_now
-    else
-      WelcomeMailer.with(member: member).renewal_thank_you_email.deliver_now
-    end
+    WelcomeMailer.with(member: member).new_mem_thank_you_email.deliver_now
     redirect_to pending_signups_members_path
   end
 
@@ -55,9 +47,8 @@ class MembersController < ApplicationController
   end
 
   def import
-    @members = (Member.ordinary.not_legacy_email.not_manual_expires +
-      Member.ordinary.not_legacy_email.not_canned_expires +
-      Member.associate.not_legacy_email + Member.honorary.not_legacy_email).sort(&:id)
+    # Mailing list subscribers - Ordinary, Associate and Honorary members.
+    @members = Member.where(mtype_id: [1, 2, 4]).not_legacy_email.order(:id)
   end
 
   def new
@@ -111,7 +102,7 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:name, :camdram_id, :crsid, :primary_email, :secondary_email, :institution_id, :graduation_year, :mtype_id, :canned_expiry, :notes)
+    params.require(:member).permit(:name, :camdram_id, :crsid, :primary_email, :secondary_email, :institution_id, :graduation_year, :mtype_id, :notes)
   end
 
   def user_name_from_whodunnit(ver)

@@ -19,12 +19,6 @@ class WelcomeMailer < ApplicationMailer
     mail(to: @member.primary_email, subject: 'CUADC Membership Signup')
   end
 
-  def renewal_thank_you_email
-    @member = params[:member]
-    return if @member.no_mail
-    mail(to: @member.primary_email, subject: 'CUADC Membership Renewal')
-  end
-
   def verification_email
     @token = params[:token]
     mail(to: @token.email, subject: 'CUADC Membership Email Verification')

@@ -2,10 +2,11 @@
 <h5><%= @show.name %></h5>
 
 <p>
-  This page shows the results of the cross-check between the list of people involved with the show according to Camdram and the CUADC membership database.
-  Ordinary Members with unexpired membership are listed in the green section and everyone else in the red section.
-  Recognised members will be listed with a link to their individual pages on the membership system.
-  You can also <%= link_to 'view this show on Camdram', Membership::Camdram.url_for(@show) %>.
+  This page shows the results of the cross-check between the list of people involved
+  with the show according to Camdram and the CUADC membership database. Ordinary Members
+  are listed in the green section and everyone else in the red section. Recognised members
+  will be listed with a link to their individual pages on the membership system. You can
+  also <%= link_to 'view this show on Camdram', Membership::Camdram.url_for(@show) %>.
 </p>
 
 <div class="alert alert-success" role="alert">

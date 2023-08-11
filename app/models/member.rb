@@ -10,7 +10,6 @@
 #  institution_id  :bigint           not null
 #  graduation_year :integer          not null
 #  mtype_id        :bigint           not null
-#  expiry          :date
 #  name            :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
@@ -31,10 +30,6 @@ class Member < ApplicationRecord
   scope :honorary, -> { where(mtype_id: 4) }
   scope :graduating, -> { where(mtype_id: 1).where("graduation_year <= ?", Date.today.year) }
   scope :not_legacy_email, -> { where("primary_email NOT LIKE 'unknown-member-email-_%@cuadc.org'") }
-  scope :not_manual_expires, -> { left_joins(:purchase_ingest_items).where('purchase_ingest_items.member_id IS NULL').where('members.expiry IS NULL OR members.expiry > ?', Date.today) }
-  scope :not_canned_expires, -> { joins(:purchase_ingest_items).where('purchase_ingest_items.expires IS NULL OR purchase_ingest_items.expires > ?', Date.today) }
-  scope :manual_expires_in, ->(days) { left_joins(:purchase_ingest_items).where('purchase_ingest_items.member_id IS NULL').where('members.expiry < ?', Date.today + days) }
-  scope :canned_expires_in, ->(days) { joins(:purchase_ingest_items).where('purchase_ingest_items.expires < ?', Date.today + days) }
 
   attr_accessor :validate_secondary_email
   attr_accessor :validate_crsid
@@ -58,10 +53,7 @@ class Member < ApplicationRecord
   has_paper_trail ignore: [:created_at, :updated_at]
 
   def self.needs_linking
-    interval = 30.days
-    Member.where(mtype_id: 999).where.not(created_at: nil) +
-      Member.where(mtype_id: 1).manual_expires_in(interval).where('members.expiry > ?', Date.today - interval) +
-      Member.where(mtype_id: 1).canned_expires_in(interval).where('purchase_ingest_items.expires > ?', Date.today - interval)
+    Member.where(mtype_id: 999).where.not(created_at: nil)
   end
 
   def contact_email
@@ -90,35 +82,6 @@ class Member < ApplicationRecord
   def both_emails
     return [] if no_mail
     [primary_email, secondary_email].compact.map(&:downcase).uniq
-  end
-
-  def canned_expiry?
-    purchase_ingest_items.present?
-  end
-
-  def canned_expiry
-    if canned_expiry?
-      # We don't expect more than two or three purchase_ingest_items
-      # per member, so doing the logic here is quicker than going
-      # back to query the database.
-      if purchase_ingest_items.select { |i| i.mtype == 'Life' }.present?
-        nil
-      else
-        purchase_ingest_items.sort_by(&:purchased).last.expires.to_date
-      end
-    else
-      expiry
-    end
-  end
-
-  def canned_expiry=(date)
-    unless canned_expiry?
-      self.expiry = date
-    end
-  end
-
-  def expired?
-    canned_expiry.present? && canned_expiry <= Date.today
   end
 
   def suspended?

@@ -17,7 +17,7 @@ class CamdramShowsController < ApplicationController
       if member.nil?
         @invalid_tuples.push([person, nil])
       else
-        if member.mtype_id == 1 && !member.expired?
+        if member.mtype_id == 1
           @valid_tuples.push([person, member])
         else
           @invalid_tuples.push([person, member])

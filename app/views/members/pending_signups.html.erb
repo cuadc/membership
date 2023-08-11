@@ -1,28 +1,19 @@
 <% content_for :heading, 'Pending Signups' %>
 
 <p>
-  This page lists pending signups and upcoming renewals, together with
-  purchase data that's been ingested from Spektrix. For brevity, only
-  recent records are displayed here. If you need to link Spektrix purchases
-  with memberships that have expired a long time ago then please contact
-  support.
+  This page lists pending membership signups together with purchase data
+  that's been ingested from Spektrix. For brevity, only recent records are
+  displayed here. If you need to link Spektrix purchases with memberships
+  signups from a long time ago then please contact support.
 </p>
 <p>
   You should regularly check this page and link individuals' signups with
-  their purchases. When a member is 'linked' the following things will
-  happen automatically:
-  <ul>
-    <li>Their membership status will be updated from "Awaiting Payment" to "Ordinary
-  Member".</li>
-    <li>Their membership expiry date will be set if they have only purchased Annual Membership.</li>
-  </ul>
-  Note that you will need to manually concatenate three purchases of
-  Annual Subscription into Lifetime Subscription. Neither this software
-  nor Spektrix will do this automatically.
+  their purchases. When a member is 'linked' their membership status will
+  be updated from "Awaiting Payment" to "Ordinary Member".
 </p>
 
 <%= form_tag link_signups_members_path, method: :post do %>
-  <h5 class="mt-5">Membership System Signups &amp; Upcoming Renewals</h5>
+  <h5 class="mt-5">New Membership Signups</h5>
   <table class="table table-condensed table-bordered table-hover">
     <thead>
       <%= content_tag :tr do %>
@@ -30,7 +21,6 @@
         <%= content_tag(:th, 'Primary Email') %>
         <%= content_tag(:th, 'Secondary Email') %>
         <%= content_tag(:th, 'Signup Time') %>
-        <%= content_tag(:th, 'Renewal Date') %>
         <%= content_tag(:th, 'Link') %>
       <% end %>
     </thead>
@@ -40,16 +30,7 @@
           <%= content_tag(:td, link_to(member.name, member)) %>
           <%= content_tag(:td, member.primary_email) %>
           <%= content_tag(:td, member.secondary_email) %>
-          <% if member.mtype_id == 999 %>
-            <%= content_tag(:td, member.try(:created_at).try(:strftime, "%d/%m/%Y %H:%M:%S")) %>
-          <% else %>
-            <%= content_tag(:td, 'N/A') %>
-          <% end %>
-          <% if member.mtype_id == 999 %>
-            <%= content_tag(:td, 'N/A') %>
-          <% else %>
-            <%= content_tag(:td, member.canned_expiry.strftime("%d/%m/%Y")) %>
-          <% end %>
+          <%= content_tag(:td, member.created_at.strftime("%d/%m/%Y %H:%M:%S")) %>
           <td>
             <label class="btn btn-secondary" id="btn-member-<%= member.id %>">
               <input type="radio" name="member" value="<%= member.id %>" id="member-<%= member.id %>"> Link
@@ -68,7 +49,6 @@
         <%= content_tag(:th, 'Email') %>
         <%= content_tag(:th, 'Type') %>
         <%= content_tag(:th, 'Purchase Time') %>
-        <%= content_tag(:th, 'Expiry') %>
         <%= content_tag(:th, 'Link') %>
       <% end %>
     </thead>
@@ -79,7 +59,6 @@
           <%= content_tag(:td, item.email) %>
           <%= content_tag(:td, item.mtype) %>
           <%= content_tag(:td, item.purchased.strftime("%d/%m/%Y %H:%M:%S")) %>
-          <%= content_tag(:td, item.expires.try(:strftime, "%d/%m/%Y")) %>
           <td>
             <label class="btn btn-secondary" id="btn-item-<%= item.id %>">
               <input type="radio" name="item" value="<%= item.id %>" id="item-<%= item.id %>"> Link

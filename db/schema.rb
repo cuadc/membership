@@ -35,7 +35,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_200251) do
     t.bigint "institution_id", null: false
     t.integer "graduation_year", null: false
     t.bigint "mtype_id", null: false
-    t.date "expiry"
     t.string "name"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil

@@ -10,11 +10,7 @@
   <%= link_to 'view on Lookup', "https://www.lookup.cam.ac.uk/person/crsid/#{@member.crsid}/details" %>
 </p>
 
-<% if @member.expired? %>
-  <div class="alert alert-warning" role="alert">
-    This person's membership has expired!
-  </div>
-<% elsif @member.suspended? %>
+<% if @member.suspended? %>
   <div class="alert alert-danger" role="alert">
     This person's membership has been suspended!
   </div>
@@ -63,14 +59,24 @@
       <td>Membership Type:</td>
       <td><%= @member.mtype.name %></td>
     </tr>
-    <tr>
-      <td>Membership Expiry:</td>
-      <td><%= member_expiry(@member) %></td>
-    </tr>
-    <tr>
-      <td>Membership Card Issued:</td>
-      <td><%= @member.card_issued.try(:strftime, "%d/%m/%Y") %></td>
-    </tr>
+    <% if @member.created_at %>
+      <tr>
+        <td>Signed Up:</td>
+        <td><%= @member.created_at.strftime("%d/%m/%Y") %></td>
+      </tr>
+    <% end %>
+    <% if @member.purchase_ingest_items.first %>
+      <tr>
+        <td>Payment Received:</td>
+        <td><%= @member.purchase_ingest_items.first.strftime("%d/%m/%Y") %></td>
+      </tr>
+    <% end %>
+    <% if @member.card_issued %>
+      <tr>
+        <td>Membership Card Issued:</td>
+        <td><%= @member.card_issued.strftime("%d/%m/%Y") %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 

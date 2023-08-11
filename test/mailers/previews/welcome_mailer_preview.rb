@@ -17,9 +17,4 @@ class WelcomeMailerPreview < ActionMailer::Preview
     member = Member.first
     WelcomeMailer.with(member: member).new_mem_thank_you_email
   end
-
-  def renewal_thank_you_email
-    member = Member.first
-    WelcomeMailer.with(member: member).renewal_thank_you_email
-  end
 end

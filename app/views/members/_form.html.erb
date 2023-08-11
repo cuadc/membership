@@ -82,18 +82,6 @@
   </div>
 
   <div class="form-group row">
-    <%= form.label :canned_expiry, 'Expiry', class: 'col-sm-3 col-form-label' %>
-    <div class="col-sm-9">
-      <%= form.text_field :canned_expiry, class: 'form-control disabled', readonly: @member.canned_expiry? %>
-      <small id="cannedExpiryHelpTag" class="form-text text-muted">
-        The date upon which the membership expires i.e. the day after the last valid day.
-        This is labelled as 'start renewal period' in the Spektrix sales interface.
-        Please format date as yyyy-mm-dd or leave blank for life membership.
-      </small>
-    </div>
-  </div>
-
-  <div class="form-group row">
     <%= form.label :notes, class: 'col-sm-3 col-form-label' %>
     <div class="col-sm-9">
       <%= form.text_area :notes, rows: 5, class: 'form-control' %>

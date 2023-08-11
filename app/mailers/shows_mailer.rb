@@ -4,7 +4,7 @@ class ShowsMailer < ApplicationMailer
   def overview_email
     @shows = Membership::Camdram.client.get_society(1).shows
     to_addr = overridable_to('members@cuadc.org')
-    mail(to: to_addr, bcc: 'chtj2@srcf.net', subject: 'CUADC Show Membership Report')
+    mail(to: to_addr, subject: 'CUADC Show Membership Report')
   end
 
   def individual_email
@@ -13,7 +13,6 @@ class ShowsMailer < ApplicationMailer
     return if to_addr.empty?
     @show = Membership::Camdram.client.get_show(show_id)
     tuples = @show.roles.map(&:person).uniq(&:id).map { |p| [p, Member.find_by(camdram_id: p.id)] }
-    @expired_tuples = tuples.select { |p| p[1].present? && p[1].mtype_id == 1 && p[1].expired? }
     @non_member_tuples = tuples.select { |p| p[1].nil? || (p[1].present? && p[1].mtype_id != 1) }
     mail(to: to_addr, bcc: 'chtj2@srcf.net', subject: 'CUADC Show Membership Report')
   end

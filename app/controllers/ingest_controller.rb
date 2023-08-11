@@ -3,8 +3,6 @@ class IngestController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :check_token!
 
-  def expiry; end
-
   def purchase
     # Strip the BOM.
     str = request.body.string.force_encoding('utf-8').sub("\xEF\xBB\xBF", '')
@@ -12,13 +10,12 @@ class IngestController < ApplicationController
       unless PurchaseIngestItem.find_by(cid: row["Customer Id"], purchased: row["Purchase Date"])
         PurchaseIngestItem.create do |item|
           item.cid = row["Customer Id"]
-          item.name = "#{row["First Name"]} #{row["Last Name"]}"
+          item.name = "#{row["First Name"]} #{row["Last Name"]}" # Sigh, Spektrix.
           item.email = row["Email Address"]
           item.mtype = row["Membership Name"].sub('CUADC ', '')
           item.first = row["First Of This Membership"]
           item.purchased = row["Purchase Date"]
           item.starts = row["Start Date"]
-          item.expires = Date.parse(row["Expiry Date"]) + 1.day if row["Expiry Date"].present? # Sigh, Spektrix.
         end
       end
     end

@@ -14,24 +14,14 @@ the Committee if they are experiencing issues in so doing.
   <% people = show.roles.map(&:person).uniq(&:id) %>
   <% tuples = people.map { |p| [p, Member.find_by(camdram_id: p.id)] } %>
 <%= "#{show.name}:" %>
-  <% expired_tuples = tuples.select { |p| p[1].present? && p[1].mtype_id == 1 && p[1].expired? } %>
-  <% if expired_tuples.length > 0 %>
-  The following individuals' Memberships have expired and need renewing:
-  <% expired_tuples.each do |tuple| %>
-    <%= "* #{tuple[0].name}" %>
-  <% end %>
-  <% end %>
   <% non_member_tuples = tuples.select { |p| p[1].nil? || (p[1].present? && p[1].mtype_id != 1) } %>
   <% if non_member_tuples.length > 0 %>
-  <% if expired_tuples.length > 0 %>
-
-  <% end %>
   The following individuals are not Ordinary Members:
   <% non_member_tuples.each do |tuple| %>
     <%= "* #{tuple[0].name}" %>
   <% end %>
   <% end %>
-  <% if expired_tuples.length == 0 && non_member_tuples.length == 0 %>
+  <% if non_member_tuples.length == 0 %>
   Nothing to report.
   <% end %>
 
