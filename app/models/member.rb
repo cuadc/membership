@@ -31,23 +31,19 @@ class Member < ApplicationRecord
   scope :graduating, -> { where(mtype_id: 1).where("graduation_year <= ?", Date.today.year) }
   scope :not_legacy_email, -> { where("primary_email NOT LIKE 'unknown-member-email-_%@cuadc.org'") }
 
-  attr_accessor :validate_secondary_email
-  attr_accessor :validate_crsid
-  attr_accessor :validate_cam_email
-
   before_validation :normalise_fields
   validates :name, presence: true
   validates :crsid, presence: false, uniqueness: { allow_blank: true }
   validates :primary_email, presence: true, uniqueness: true, email: true
-  validates :secondary_email, presence: false, uniqueness: { allow_blank: true }, email: true, if: -> { !validate_secondary_email }
-  validates :secondary_email, presence: true, uniqueness: true, email: true, if: -> { validate_secondary_email }
+  validates :secondary_email, presence: false, uniqueness: { allow_blank: true }, email: true, if: -> { !CurrentRequest.is_signup? }
+  validates :secondary_email, presence: true, uniqueness: true, email: true, if: -> { CurrentRequest.is_signup? }
   validate -> { errors.add(:secondary_email, 'needs to be different') if primary_email == secondary_email }
   validate -> { errors.add(:primary_email, 'duplicates a preexisting secondary email') if Member.where.not(id: id).find_by(secondary_email: primary_email) }
   validate -> { errors.add(:secondary_email, 'duplicates a preexisting primary email') if Member.where.not(id: id).find_by(primary_email: secondary_email) }
   validate -> { errors.add(:secondary_email, 'must be a non-academic email') if secondary_email.present? && ( secondary_email.ends_with?(".edu") || secondary_email.ends_with?(".ac.uk") ) }
   validates :graduation_year, presence: true
-  validate :crsid_must_be_valid, if: -> { validate_crsid }
-  validate :cam_email_must_be_valid, if: -> { validate_cam_email }
+  validate :crsid_must_be_valid, if: -> { CurrentRequest.is_signup? }
+  validate :cam_email_must_be_valid, if: -> { CurrentRequest.is_signup? }
 
   strip_attributes
   has_paper_trail ignore: [:created_at, :updated_at]

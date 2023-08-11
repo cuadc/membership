@@ -30,6 +30,7 @@ class SignupController < ApplicationController
   end
 
   def create
+    CurrentRequest.signup = true
     PaperTrail.request.whodunnit = 'Web Signup'
     @member = Member.new(member_params)
     if @member.institution_id.present?
@@ -40,9 +41,6 @@ class SignupController < ApplicationController
       end
     end
     @member.mtype_id = 998
-    @member.validate_secondary_email = true
-    @member.validate_crsid = true
-    @member.validate_cam_email = true
     ActiveRecord::Base.transaction do
       if @member.valid? && verify_recaptcha(model: @member) && @member.save
         primary_token = EmailVerificationToken.generate(@member.primary_email, @member.id)
