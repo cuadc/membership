@@ -68,7 +68,7 @@
     <% if @member.purchase_ingest_items.first %>
       <tr>
         <td>Payment Received:</td>
-        <td><%= @member.purchase_ingest_items.first.strftime("%d/%m/%Y") %></td>
+        <td><%= @member.purchase_ingest_items.first.purchased.strftime("%d/%m/%Y") %></td>
       </tr>
     <% end %>
     <% if @member.card_issued %>
