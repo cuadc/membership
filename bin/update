@@ -7,6 +7,6 @@ export RAILS_ENV="production"
 git reset --hard
 git clean -df
 git pull
-/opt/embedded/ruby/bin/bundle install
-/opt/embedded/ruby/bin/bundle exec bin/rails assets:precompile
-/opt/embedded/ruby/bin/bundle exec bin/rails db:migrate
+/opt/ruby-3.2.2/bin/bundle install
+/opt/ruby-3.2.2/bin/bundle exec bin/rails assets:precompile
+/opt/ruby-3.2.2/bin/bundle exec bin/rails db:migrate
