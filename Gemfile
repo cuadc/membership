@@ -72,6 +72,9 @@ gem "omniauth-ucam-raven", github: "CHTJonas/omniauth-ucam-raven"
 # Camdram API wrapper
 gem "camdram", github: "CHTJonas/camdram-ruby", require: "camdram/client"
 
+# Sympa mailing list API wrapper
+gem 'savon', '~> 2.14'
+
 # Date/time handling
 gem "chronic", "~> 0.10.2"
 gem "chronic_duration", "~> 0.10.6"
