@@ -13,7 +13,7 @@
     <%= content_tag :tr do %>
       <%= content_tag(:th, 'Full Name') %>
       <%= content_tag(:th, 'CRSid') %>
-      <%= content_tag(:th, 'Contact Email') %>
+      <%= content_tag(:th, 'Registered Emails') %>
       <%= content_tag(:th, 'Graduation Year') %>
       <%= content_tag(:th, 'Membership Type') %>
     <% end %>
@@ -31,7 +31,11 @@
       <%= content_tag(:tr, class: ('alert alert-danger' if member.suspended? || member.banned?)) do %>
         <%= content_tag(:td, link_to(member.name, member)) %>
         <%= content_tag(:td, member.crsid) %>
-        <%= content_tag(:td, member.contact_email || '-') %>
+        <%= content_tag :td do %>
+          <%= member.primary_email || '-' %>
+          <br>
+          <%= member.secondary_email || '-' %>
+        <% end %>
         <%= content_tag(:td, member.graduation_year) %>
         <%= content_tag(:td, member.mtype.name) %>
       <% end %>
