@@ -16,6 +16,13 @@ module Membership
         return nil
       end
 
+      def is_active?(crsid)
+        data = about(crsid)
+        !data['cancelled']
+      rescue
+        return nil
+      end
+
       def is_student?(crsid)
         data = about(crsid)
         !data['cancelled'] && data['student']

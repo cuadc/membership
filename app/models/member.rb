@@ -58,8 +58,10 @@ class Member < ApplicationRecord
     if mtype_id == 2 # Associate
       if secondary_email.present?
         secondary_email.downcase
+      elsif ::Membership::Lookup.is_active?(crsid) && primary_email == "#{crsid}@cam.ac.uk"
+        primary_email.downcase
       else
-        if primary_email.ends_with? "@cam.ac.uk"
+        if primary_email == "#{crsid}@cam.ac.uk"
           if graduation_year >= 2018
             "#{crsid}@cantab.ac.uk".downcase
           else
