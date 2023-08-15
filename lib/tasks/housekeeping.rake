@@ -29,6 +29,11 @@ namespace :membership do
       puts "New show IDs: #{new_show_ids}" unless new_show_ids.empty?
     end
 
+    desc "Synchronise the list of soc-adc-members subscribers"
+    task sync_sympa: :environment do
+      ::Membership::SympaSync.sync_members(Member.all)
+    end
+
     desc "Find non-students via Lookup"
     task scan_lookup: :environment do
       doy = Date.today.yday
