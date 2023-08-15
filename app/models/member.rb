@@ -58,7 +58,7 @@ class Member < ApplicationRecord
     if mtype_id == 2 # Associate
       if secondary_email.present?
         secondary_email.downcase
-      elsif ::Membership::Lookup.is_active?(crsid) && primary_email == "#{crsid}@cam.ac.uk"
+      elsif ::Membership::Lookup.is_active?(crsid) && primary_email == "#{crsid}@cam.ac.uk" && ::Membership::SmtpCallout.is_accepted?(primary_email)
         primary_email.downcase
       else
         if primary_email == "#{crsid}@cam.ac.uk"
