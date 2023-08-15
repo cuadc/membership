@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd /opt/membership
+cd /opt/membership-v4
 export RAILS_ENV="production"
 
 git reset --hard
