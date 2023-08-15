@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class IncompleteMailer < ApplicationMailer
   def no_details_email
     @member = params[:member]

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ShowsMailer < ApplicationMailer
   def overview_email
     @shows = Membership::Camdram.client.get_society(1).shows

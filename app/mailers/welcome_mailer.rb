@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class WelcomeMailer < ApplicationMailer
   def card_awaiting_email
     @member = params[:member]

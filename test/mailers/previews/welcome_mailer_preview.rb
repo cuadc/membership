@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class WelcomeMailerPreview < ActionMailer::Preview
   def card_awaiting_email
     member = Member.first

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ShowsMailerPreview < ActionMailer::Preview
   def overview_email
     ShowsMailer.overview_email

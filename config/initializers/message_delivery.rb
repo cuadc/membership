@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ActionMailer
   class MessageDelivery < Delegator
     def deliver_once_within(timerange)

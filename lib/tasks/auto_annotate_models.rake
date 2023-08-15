@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 if Rails.env.development?
   require 'annotate'
   task :set_annotation_options do

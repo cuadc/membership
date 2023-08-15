@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class GraduatingMailer < ApplicationMailer
   def check_email
     @member = params[:member]

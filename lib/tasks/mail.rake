@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 namespace :membership do
   namespace :mail do
     desc "Email administrative staff a membership report overview for all upcoming shows"

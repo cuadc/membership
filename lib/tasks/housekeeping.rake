@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 namespace :membership do
   namespace :housekeeping do
     desc "Mark graduated Ordinary Members as Associate Members"

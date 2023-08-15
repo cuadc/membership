@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 rails_environment = ENV.fetch('RAILS_ENV') { 'development' }
 threads_count = ENV.fetch('RAILS_MAX_THREADS') { 5 }
 workers_count = ENV.fetch('WEB_CONCURRENCY') { 2 }

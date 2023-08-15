@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EmailDeliveryObserver
   def self.delivered_email(message)
     message.recipients.uniq.each do |addr|
