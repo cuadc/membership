@@ -13,7 +13,7 @@ Rails.application.configure do
     policy.child_src   'https://www.recaptcha.net'
     policy.script_src  :self, 'https://www.recaptcha.net', 'https://www.gstatic.com'
     policy.style_src   :self, :https, :unsafe_inline
-    policy.report_uri "https://www.xjupiter.net/cgi-bin/beacon"
+    #policy.report_uri "https://www.xjupiter.net/cgi-bin/beacon"
   end
 
   # Generate session nonces for permitted importmap and inline scripts
