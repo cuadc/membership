@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_10_200251) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_20_152543) do
   create_table "email_verification_tokens", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "uuid", null: false
@@ -43,6 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_200251) do
     t.text "notes"
     t.boolean "no_mail", default: false, null: false
     t.boolean "needs_card", default: false, null: false
+    t.text "ucam_lookup_data"
+    t.boolean "ucam_mail_accepted"
     t.index ["camdram_id"], name: "index_members_on_camdram_id", unique: true
     t.index ["crsid"], name: "index_members_on_crsid", unique: true
     t.index ["institution_id"], name: "index_members_on_institution_id"

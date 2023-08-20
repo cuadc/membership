@@ -29,39 +29,26 @@ namespace :membership do
 
     desc "Synchronise the list of soc-adc-members subscribers"
     task sync_sympa: :environment do
+      doy = Date.today.yday
+      next if doy < 2 || doy > 364
+      PaperTrail.request.whodunnit = 'Sympa Synchronisation Batch Job'
       ::Membership::SympaSync.sync_members(Member.all)
     end
 
-    desc "Find non-students via Lookup"
-    task scan_lookup: :environment do
+    desc "Synchronise the lookup information of all ucam members"
+    task sync_lookup: :environment do
       doy = Date.today.yday
       next if doy < 2 || doy > 364
       PaperTrail.request.whodunnit = 'Lookup Synchronisation Batch Job'
-      Member.ordinary.where.not(crsid: nil).each do |m|
-        result = Membership::Lookup.is_student?(m.crsid)
-        if result.nil?
-          puts "#{m.crsid} was not found in Lookup"
-        elsif !result
-          puts "#{m.crsid} is not a student"
-          if m.graduation_year > Date.today.year
-            m.graduation_year = Date.today.year
-          end
-          m.mtype_id = 2
-          m.save!
-        end
-      end
-      Member.associate.where.not(crsid: nil).each do |m|
-        result = Membership::Lookup.is_student?(m.crsid)
-        if result.nil?
-          puts "#{m.crsid} was not found in Lookup" if m.graduation_year >= 2013
-        elsif result
-          puts "#{m.crsid} is a student"
-          new_year = Date.today.month >= 8 ? Date.today.year + 1 : Date.today.year
-          m.mtype_id = 1
-          m.graduation_year = new_year
-          m.save!
-        end
-      end
+      ::Membership::LookupSync.sync_members(Member.where.not(crsid: nil))
+    end
+
+    desc "Synchronise the SMTP callout information of all ucam members"
+    task sync_smtp_callout: :environment do
+      doy = Date.today.yday
+      next if doy < 2 || doy > 364
+      PaperTrail.request.whodunnit = 'SMTP Callout Synchronisation Batch Job'
+      ::Membership::SmtpSync.sync_members(Member.where.not(crsid: nil))
     end
   end
 end

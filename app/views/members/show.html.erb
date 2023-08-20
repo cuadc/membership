@@ -83,24 +83,24 @@
 <details class="border rounded p-1 mb-3">
   <summary>Data from University Lookup</summary>
   <hr class="invisible my-1">
-  <% if @lookup_data %>
-    Pronouns = <%= get_lookup_attribute(@lookup_data, 'pronouns') %><br>
-    Display Name = <%= @lookup_data['displayName'] %><br>
-    Registered Name = <%= @lookup_data['registeredName'] %><br>
-    First Name = <%= get_lookup_attribute(@lookup_data, 'firstName') %><br>
-    Surname = <%= get_lookup_attribute(@lookup_data, 'surname') %><br>
-    Email = <%= get_lookup_attribute(@lookup_data, 'email') %><br>
-    Departing Email = <%= get_lookup_attribute(@lookup_data, 'departingEmail') %><br>
-    Jackdaw Institution = <%= get_lookup_attribute(@lookup_data, 'jdInstid') %><br>
-    Jackdaw College = <%= get_lookup_attribute(@lookup_data, 'jdCollege') %><br>
-    MIS Affiliation = <%= get_lookup_attribute(@lookup_data, 'misAffiliation') %><br>
-    Student = <%= @lookup_data['student'] %><br>
-    Staff = <%= @lookup_data['staff'] %><br>
-    Cancelled = <%= @lookup_data['cancelled'] %><br>
-    Finishing Date = <%= get_lookup_attribute(@lookup_data, 'finishingDate') %><br>
-    Cancelled Date = <%= get_lookup_attribute(@lookup_data, 'cancelledDate') %><br>
+  <% if @member.ucam_lookup_data.present? %>
+    Pronouns = <%= get_lookup_attribute(@member.ucam_lookup_data, 'pronouns') %><br>
+    Display Name = <%= @member.ucam_lookup_data['displayName'] %><br>
+    Registered Name = <%= @member.ucam_lookup_data['registeredName'] %><br>
+    First Name = <%= get_lookup_attribute(@member.ucam_lookup_data, 'firstName') %><br>
+    Surname = <%= get_lookup_attribute(@member.ucam_lookup_data, 'surname') %><br>
+    Email = <%= get_lookup_attribute(@member.ucam_lookup_data, 'email') %><br>
+    Departing Email = <%= get_lookup_attribute(@member.ucam_lookup_data, 'departingEmail') %><br>
+    Jackdaw Institution = <%= get_lookup_attribute(@member.ucam_lookup_data, 'jdInstid') %><br>
+    Jackdaw College = <%= get_lookup_attribute(@member.ucam_lookup_data, 'jdCollege') %><br>
+    MIS Affiliation = <%= get_lookup_attribute(@member.ucam_lookup_data, 'misAffiliation') %><br>
+    Student = <%= @member.ucam_lookup_data['student'] %><br>
+    Staff = <%= @member.ucam_lookup_data['staff'] %><br>
+    Cancelled = <%= @member.ucam_lookup_data['cancelled'] %><br>
+    Finishing Date = <%= get_lookup_attribute(@member.ucam_lookup_data, 'finishingDate') %><br>
+    Cancelled Date = <%= get_lookup_attribute(@member.ucam_lookup_data, 'cancelledDate') %><br>
     Photo:<br>
-      <img src="data:image/jpeg;base64,<%= get_lookup_photo(@lookup_data) %>" />
+      <img src="data:image/jpeg;base64,<%= get_lookup_photo(@member.ucam_lookup_data) %>" />
   <% else %>
     Unavailable
   <% end %>

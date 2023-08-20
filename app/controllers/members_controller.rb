@@ -20,7 +20,7 @@ class MembersController < ApplicationController
     item = PurchaseIngestItem.needs_linking.find(params.require(:item))
     member = Member.needs_linking.detect { |i| i.id.to_s == params.require(:member) }
     raise 'protected operation' if member.inhibited? && !current_user.sysop?
-    if member.crsid.present? && !Membership::Lookup.is_student?(member.crsid)
+    if member.crsid.present? && !member.ucam_student?
       redirect_to pending_signups_members_path and return
     end
     memoized_date = item.purchased.dup
@@ -92,7 +92,6 @@ class MembersController < ApplicationController
         changeset: ver.changeset
       }
     end
-    @lookup_data = Membership::Lookup.about(@member.crsid)
   end
 
   def destroy

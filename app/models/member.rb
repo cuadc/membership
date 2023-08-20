@@ -2,28 +2,32 @@
 #
 # Table name: members
 #
-#  id              :bigint           not null, primary key
-#  camdram_id      :integer
-#  crsid           :string(255)
-#  primary_email   :string(255)      not null
-#  secondary_email :string(255)
-#  institution_id  :bigint           not null
-#  graduation_year :integer          not null
-#  mtype_id        :bigint           not null
-#  name            :string(255)
-#  created_at      :datetime
-#  updated_at      :datetime
-#  card_issued     :date
-#  inhibited       :boolean          default(FALSE), not null
-#  notes           :text(65535)
-#  no_mail         :boolean          default(FALSE), not null
-#  needs_card      :boolean          default(FALSE), not null
+#  id                 :bigint           not null, primary key
+#  camdram_id         :integer
+#  crsid              :string(255)
+#  primary_email      :string(255)      not null
+#  secondary_email    :string(255)
+#  institution_id     :bigint           not null
+#  graduation_year    :integer          not null
+#  mtype_id           :bigint           not null
+#  name               :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  card_issued        :date
+#  inhibited          :boolean          default(FALSE), not null
+#  notes              :text(65535)
+#  no_mail            :boolean          default(FALSE), not null
+#  needs_card         :boolean          default(FALSE), not null
+#  ucam_lookup_data   :text(65535)
+#  ucam_mail_accepted :boolean
 #
 class Member < ApplicationRecord
   belongs_to :institution
   belongs_to :mtype, class_name: 'Type'
   has_many :purchase_ingest_items
   has_many :email_verification_tokens, dependent: :delete_all
+
+  serialize :ucam_lookup_data, Hash
 
   scope :ordinary, -> { where(mtype_id: 1) }
   scope :associate, -> { where(mtype_id: 2) }
@@ -58,8 +62,8 @@ class Member < ApplicationRecord
     if mtype_id == 2 # Associate
       if secondary_email.present?
         secondary_email.downcase
-      elsif ::Membership::Lookup.is_active?(crsid) && primary_email == "#{crsid}@cam.ac.uk" && ::Membership::SmtpCallout.is_accepted?(primary_email)
-        primary_email.downcase
+      elsif crsid_active? && ucam_mail_accepted?
+        "#{crsid.downcase}@cam.ac.uk"
       else
         if primary_email == "#{crsid}@cam.ac.uk"
           if graduation_year >= 2018
@@ -91,6 +95,20 @@ class Member < ApplicationRecord
     mtype_id == 6
   end
 
+  def crsid_active?
+    return nil unless ucam_lookup_data.present?
+    !ucam_lookup_data['cancelled']
+  rescue
+    return nil
+  end
+
+  def ucam_student?
+    return nil unless ucam_lookup_data.present?
+    ucam_lookup_data['student']
+  rescue
+    return nil
+  end
+
   private
 
   def normalise_fields
@@ -101,7 +119,8 @@ class Member < ApplicationRecord
 
   def crsid_must_be_valid
     if crsid.present?
-      result = Membership::Lookup.is_student?(crsid)
+      ucam_lookup_data = ::Membership::Lookup.about(crsid)
+      result = ucam_student?
       if result.nil?
         errors.add(:crsid, "couldn't be found in University Lookup")
       elsif !result

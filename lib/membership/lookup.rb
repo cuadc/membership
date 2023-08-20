@@ -16,20 +16,6 @@ module Membership
         return nil
       end
 
-      def is_active?(crsid)
-        data = about(crsid)
-        !data['cancelled']
-      rescue
-        return nil
-      end
-
-      def is_student?(crsid)
-        data = about(crsid)
-        !data['cancelled'] && data['student']
-      rescue
-        return nil
-      end
-
       def fetch(crsid)
         uri = URI('https://chtj2.user.srcf.net/cgi-bin/lookup')
         uri.query = URI.encode_www_form(crsid: crsid)
