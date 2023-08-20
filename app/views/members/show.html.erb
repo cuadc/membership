@@ -128,8 +128,12 @@
           <td><%= ver[:user] %></td>
           <td>
             <% ver[:changeset].each do |field, change| %>
-              <%= field %> changed from <%= change[0].inspect %> to <%= change[1].inspect %><br>
-            <% end %>
+              <% if field == "ucam_lookup_data" %>
+                ucam_lookup_data memoisation updated
+              <% else %>
+                <%= field %> changed from <%= change[0].inspect %> to <%= change[1].inspect %><br>
+              <% end %>
+            <% end if ver[:changeset].present? %>
           </td>
         </tr>
       <% end %>

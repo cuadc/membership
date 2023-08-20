@@ -85,11 +85,16 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
     @audit = []
     @member.versions.each do |ver|
+      changeset = begin
+        ver.changeset
+      rescue
+        nil
+      end
       @audit << {
         event: ver.event,
         time: ver.created_at,
         user: user_name_from_whodunnit(ver),
-        changeset: ver.changeset
+        changeset: changeset
       }
     end
   end
