@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_152543) do
     t.text "notes"
     t.boolean "no_mail", default: false, null: false
     t.boolean "needs_card", default: false, null: false
-    t.text "ucam_lookup_data"
+    t.text "ucam_lookup_data", size: :long
     t.boolean "ucam_mail_accepted"
     t.index ["camdram_id"], name: "index_members_on_camdram_id", unique: true
     t.index ["crsid"], name: "index_members_on_crsid", unique: true

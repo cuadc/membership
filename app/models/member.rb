@@ -18,7 +18,7 @@
 #  notes              :text(65535)
 #  no_mail            :boolean          default(FALSE), not null
 #  needs_card         :boolean          default(FALSE), not null
-#  ucam_lookup_data   :text(65535)
+#  ucam_lookup_data   :text(4294967295)
 #  ucam_mail_accepted :boolean
 #
 class Member < ApplicationRecord
