@@ -40,7 +40,9 @@ namespace :membership do
       doy = Date.today.yday
       next if doy < 2 || doy > 364
       PaperTrail.request.whodunnit = 'Lookup Synchronisation Batch Job'
-      ::Membership::LookupSync.sync_members(Member.where.not(crsid: nil))
+      ActiveRecord::Base.transaction do
+        ::Membership::LookupSync.sync_members(Member.where.not(crsid: nil))
+      end
     end
 
     desc "Synchronise the SMTP callout information of all ucam members"
@@ -48,7 +50,9 @@ namespace :membership do
       doy = Date.today.yday
       next if doy < 2 || doy > 364
       PaperTrail.request.whodunnit = 'SMTP Callout Synchronisation Batch Job'
-      ::Membership::SmtpSync.sync_members(Member.where.not(crsid: nil))
+      ActiveRecord::Base.transaction do
+        ::Membership::SmtpSync.sync_members(Member.where.not(crsid: nil))
+      end
     end
   end
 end
