@@ -109,6 +109,13 @@ class Member < ApplicationRecord
     return nil
   end
 
+  def ucam_staff?
+    return nil unless ucam_lookup_data.present?
+    !ucam_lookup_data['cancelled'] && ucam_lookup_data['staff']
+  rescue
+    return nil
+  end
+
   private
 
   def normalise_fields
