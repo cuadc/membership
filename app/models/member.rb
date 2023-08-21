@@ -104,7 +104,7 @@ class Member < ApplicationRecord
 
   def ucam_student?
     return nil unless ucam_lookup_data.present?
-    ucam_lookup_data['student']
+    !ucam_lookup_data['cancelled'] && ucam_lookup_data['student']
   rescue
     return nil
   end
