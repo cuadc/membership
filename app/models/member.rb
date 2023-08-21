@@ -138,10 +138,10 @@ class Member < ApplicationRecord
 
   def cam_email_must_be_valid
     if primary_email.present? && primary_email.ends_with?("@cam.ac.uk")
-      result = Membership::SmtpCallout.is_accepted?(primary_email)
-      if result.nil?
+      ucam_mail_accepted = ::Membership::SmtpCallout.is_accepted?(primary_email)
+      if ucam_mail_accepted.nil?
         errors.add(:primary_email, "could not be determined as a valid or invalid Cambridge University email address")
-      elsif !result
+      elsif !ucam_mail_accepted
         errors.add(:primary_email, "does not appear to be a valid Cambridge University email address")
       end
     end
