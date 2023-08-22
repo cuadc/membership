@@ -44,11 +44,11 @@ class Member < ApplicationRecord
   validate -> { errors.add(:secondary_email, 'needs to be different') if primary_email == secondary_email }
   validate -> { errors.add(:primary_email, 'duplicates a preexisting secondary email') if Member.where.not(id: id).find_by(secondary_email: primary_email) }
   validate -> { errors.add(:secondary_email, 'duplicates a preexisting primary email') if Member.where.not(id: id).find_by(primary_email: secondary_email) }
-  validate -> { errors.add(:secondary_email, 'must be a non-academic email') if CurrentRequest.is_signup? && secondary_email.present? && ( secondary_email.ends_with?(".edu") || secondary_email.ends_with?(".ac.uk") ) }
   validates :graduation_year, presence: true
   validate :crsid_must_be_valid, if: -> { CurrentRequest.is_signup? }
   validate :cam_email_must_be_valid, if: -> { CurrentRequest.is_signup? }
   validate :primary_email_must_be_academic, if: -> { CurrentRequest.is_signup? }
+  validate :secondary_email_must_not_be_academic, if: -> { CurrentRequest.is_signup? }
 
   strip_attributes
   has_paper_trail ignore: [:created_at, :updated_at]
@@ -149,9 +149,17 @@ class Member < ApplicationRecord
 
   def primary_email_must_be_academic
     if primary_email.present?
-      unless primary_email.ends_with?(".ac.uk") || primary_email.ends_with?(".edu")
+      unless primary_email.ends_with?(".ac.uk")
         errors.add(:primary_email, "does not appear to be an academic email address")
       end
+    end
+  end
+end
+
+def secondary_email_must_not_be_academic
+  if secondary_email.present?
+    if secondary_email.ends_with?(".ac.uk") || secondary_email.ends_with?(".edu")
+      errors.add(:secondary_email, "appears to be an academic email address")
     end
   end
 end
