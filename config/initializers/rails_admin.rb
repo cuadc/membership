@@ -6,7 +6,7 @@ RailsAdmin.config do |config|
   config.show_gravatar = false
 
   config.authenticate_with do
-    unless current_user.sysop?
+    unless current_user.present? && current_user.sysop?
       redirect_to main_app.root_path
     end
   end

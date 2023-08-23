@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     unless session_valid? && user_logged_in? && current_user.active?
       invalidate_session
       unless params[:controller] == "high_voltage/pages" && params[:action] == "show" && params[:id] == "about"
-        redirect_to login_path
+        redirect_to main_app.login_path
       end
     end
   end
