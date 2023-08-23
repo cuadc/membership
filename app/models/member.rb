@@ -126,7 +126,7 @@ class Member < ApplicationRecord
 
   def crsid_must_be_valid
     if crsid.present?
-      ucam_lookup_data = ::Membership::Lookup.about(crsid)
+      self.ucam_lookup_data = ::Membership::Lookup.about(crsid)
       result = ucam_student?
       if result.nil?
         errors.add(:crsid, "couldn't be found in University Lookup")
@@ -138,7 +138,7 @@ class Member < ApplicationRecord
 
   def cam_email_must_be_valid
     if primary_email.present? && primary_email.ends_with?("@cam.ac.uk")
-      ucam_mail_accepted = ::Membership::SmtpCallout.is_accepted?(primary_email)
+      self.ucam_mail_accepted = ::Membership::SmtpCallout.is_accepted?(primary_email)
       if ucam_mail_accepted.nil?
         errors.add(:primary_email, "could not be determined as a valid or invalid Cambridge University email address")
       elsif !ucam_mail_accepted
