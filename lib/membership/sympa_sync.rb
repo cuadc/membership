@@ -22,13 +22,15 @@ module Membership
           emails = get_all_mem_emails(member)
           emails.delete(member.contact_email)
           emails.each do |email|
-            puts "Would unsubcribe #{email}" if subscribers.include?(email)
-            # client.call(:del, message: { 'list' => LIST, 'email' => email, 'quiet' => QUIET }, cookies: cookies, attributes: { "xmlns:ns0" => "urn:sympasoap" })
+            if subscribers.include?(email)
+              client.call(:del, message: { 'list' => LIST, 'email' => email, 'quiet' => QUIET }, cookies: cookies, attributes: { "xmlns:ns0" => "urn:sympasoap" })
+            end
           end
           next if member.contact_email.blank?
           next if member.contact_email.start_with?("unknown-member-email-") && member.contact_email.end_with?("@cuadc.org")
-          puts "Would subscribe #{member.contact_email}" unless subscribers.include?(member.contact_email)
-          # client.call(:add, message: { 'list' => LIST, 'email' => member.contact_email, 'gecos' => member.name, 'quiet' => QUIET }, cookies: cookies, attributes: { "xmlns:ns0" => "urn:sympasoap" })
+          unless subscribers.include?(member.contact_email)
+            client.call(:add, message: { 'list' => LIST, 'email' => member.contact_email, 'gecos' => member.name, 'quiet' => QUIET }, cookies: cookies, attributes: { "xmlns:ns0" => "urn:sympasoap" })
+          end
         end
         nil
       end
