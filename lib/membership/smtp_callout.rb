@@ -6,8 +6,13 @@ module Membership
       def is_accepted?(email)
         return nil unless email.present?
         body = fetch(email)
+        return nil if body.nil?
         data = JSON.parse(body)
-        data = data['result']
+        if data['operation'] == "cam-smtp-callout"
+          return true if data['exitstatus'] == 0
+          return false if data['exitstatus'] == 1
+        end
+        nil
       rescue
         return nil
       end
