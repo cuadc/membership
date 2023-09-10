@@ -41,7 +41,8 @@ namespace :membership do
       next if doy < 2 || doy > 364
       PaperTrail.request.whodunnit = 'Lookup Synchronisation Batch Job'
       ActiveRecord::Base.transaction do
-        ::Membership::LookupSync.sync_members(Member.where.not(crsid: nil))
+        members = Member.where.not(crsid: nil)
+        ::Membership::LookupSync.sync_members(members)
       end
     end
 
@@ -51,7 +52,8 @@ namespace :membership do
       next if doy < 2 || doy > 364
       PaperTrail.request.whodunnit = 'SMTP Callout Synchronisation Batch Job'
       ActiveRecord::Base.transaction do
-        ::Membership::SmtpSync.sync_members(Member.where.not(crsid: nil))
+        members = Member.where.not(crsid: nil).where("primary_email NOT LIKE '%@cam.ac.uk'")
+        ::Membership::SmtpSync.sync_members(members)
       end
     end
   end
