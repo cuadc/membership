@@ -6,6 +6,9 @@ module Membership
 
     class << self
       def sync_members(enumerator)
+        # Don't do anything unless we're in prod
+        return unless Rails.env.production?
+
         # Do not ask why the SOAP client and/or server requires
         # this particular combination of namespace, identifier
         # and attributes to be set to the values below. It just
