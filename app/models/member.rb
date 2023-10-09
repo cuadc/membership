@@ -36,6 +36,8 @@ class Member < ApplicationRecord
   scope :not_legacy_email, -> { where("primary_email NOT LIKE 'unknown-member-email-_%@cuadc.org'") }
 
   before_validation :normalise_fields
+  after_commit :sync_with_sympa!
+
   validates :name, presence: true
   validates :crsid, presence: false, uniqueness: { allow_blank: true }
   validates :primary_email, presence: true, uniqueness: true, email: true
@@ -114,6 +116,10 @@ class Member < ApplicationRecord
     !ucam_lookup_data['cancelled'] && ucam_lookup_data['staff']
   rescue
     return nil
+  end
+
+  def sync_with_sympa!
+    ::Membership::SympaSync.sync_members([self])
   end
 
   private
