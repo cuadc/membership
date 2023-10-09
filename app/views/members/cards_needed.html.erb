@@ -23,7 +23,7 @@
     <% @members.each do |member| %>
       <%= content_tag :tr do %>
         <%= content_tag(:td, link_to(member.name, member)) %>
-        <%= content_tag(:td, link_to('Card Issued', issue_card_member_path(member.id), class: 'btn btn-primary', data: { confirm: 'Are you sure?' }, method: :post)) %>
+        <%= content_tag(:td, button_to('Card Issued', issue_card_member_path(member.id), class: 'btn btn-primary', data: { confirm: 'Are you sure?' })) %>
       <% end %>
     <% end %>
   </tbody>
