@@ -234,7 +234,7 @@ GEM
     psych (5.1.0)
       stringio
     public_suffix (5.0.3)
-    puma (6.3.1)
+    puma (6.4.0)
       nio4r (~> 2.0)
     racc (1.7.1)
     rack (2.2.8)
@@ -386,7 +386,7 @@ DEPENDENCIES
   omniauth-ucam-raven!
   paper_trail (~> 15.0)
   paper_trail-association_tracking (~> 2.2)
-  puma (~> 6.3)
+  puma (~> 6.4)
   rails (~> 7.1.0)
   rails_admin (~> 3.0)
   rails_admin_history_rollback (~> 1.0)
