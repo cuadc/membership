@@ -3,12 +3,17 @@ module Membership
     class << self
       def sync_members(enumerator)
         for m in enumerator
+          data = ::Membership::Lookup.about(m.crsid)
+          if data.nil?
+            puts "#{m.crsid} was not found in Lookup" if m.graduation_year >= 2013
+            next
+          end
           ulr = UcamLookupRecord.find_or_create_by(member: m)
-          ulr.data = ::Membership::Lookup.about(m.crsid)
+          ulr.data = data
           m.ucam_lookup_record = ulr
           result = m.ucam_student?
           if result.nil?
-            puts "#{m.crsid} was not found in Lookup" if m.graduation_year >= 2013
+            puts "could not determine whether #{m.crsid} is a student"
             next
           elsif result
             if m.mtype_id == 2
