@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_20_152543) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_11_162231) do
   create_table "email_verification_tokens", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "uuid", null: false
@@ -43,7 +43,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_152543) do
     t.text "notes"
     t.boolean "no_mail", default: false, null: false
     t.boolean "needs_card", default: false, null: false
-    t.text "ucam_lookup_data", size: :long
     t.boolean "ucam_mail_accepted"
     t.index ["camdram_id"], name: "index_members_on_camdram_id", unique: true
     t.index ["crsid"], name: "index_members_on_crsid", unique: true
@@ -105,6 +104,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_152543) do
     t.datetime "updated_at", precision: nil
   end
 
+  create_table "ucam_lookup_records", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.text "data", size: :long, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_ucam_lookup_records_on_member_id", unique: true
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -148,4 +155,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_152543) do
   add_foreign_key "provider_accounts", "users"
   add_foreign_key "purchase_ingest_items", "members"
   add_foreign_key "sessions", "users"
+  add_foreign_key "ucam_lookup_records", "members"
 end

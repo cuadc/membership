@@ -18,16 +18,16 @@
 #  notes              :text(65535)
 #  no_mail            :boolean          default(FALSE), not null
 #  needs_card         :boolean          default(FALSE), not null
-#  ucam_lookup_data   :text(4294967295)
 #  ucam_mail_accepted :boolean
 #
 class Member < ApplicationRecord
   belongs_to :institution
   belongs_to :mtype, class_name: 'Type'
-  has_many :purchase_ingest_items
-  has_many :email_verification_tokens, dependent: :delete_all
+  has_many :purchase_ingest_items, dependent: :destroy
+  has_many :email_verification_tokens, dependent: :destroy
+  has_one :ucam_lookup_record, dependent: :destroy
 
-  serialize :ucam_lookup_data, Hash
+  delegate :data, to: :ucam_lookup_record, allow_nil: true, prefix: :ucam_lookup
 
   scope :ordinary, -> { where(mtype_id: 1) }
   scope :associate, -> { where(mtype_id: 2) }
@@ -132,7 +132,9 @@ class Member < ApplicationRecord
 
   def crsid_must_be_valid
     if crsid.present?
-      self.ucam_lookup_data = ::Membership::Lookup.about(crsid)
+      ulr = UcamLookupRecord.find_or_create_by(member: self)
+      ulr.data = ::Membership::Lookup.about(crsid)
+      self.ucam_lookup_record = ulr
       result = ucam_student?
       if result.nil?
         errors.add(:crsid, "couldn't be found in University Lookup")
