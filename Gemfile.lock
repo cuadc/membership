@@ -289,7 +289,7 @@ GEM
     rake (13.0.6)
     rdoc (6.5.0)
       psych (>= 4.0.0)
-    recaptcha (5.15.0)
+    recaptcha (5.16.0)
     regexp_parser (2.8.2)
     reline (0.3.9)
       io-console (~> 0.5)
@@ -390,7 +390,7 @@ DEPENDENCIES
   rails (~> 7.1.1)
   rails_admin (~> 3.0)
   rails_admin_history_rollback (~> 1.0)
-  recaptcha (~> 5.15)
+  recaptcha (~> 5.16)
   sassc-rails
   savon (~> 2.14)
   secure_headers (~> 6.5)
