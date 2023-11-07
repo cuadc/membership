@@ -287,7 +287,7 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rake (13.0.6)
-    rdoc (6.5.0)
+    rdoc (6.6.0)
       psych (>= 4.0.0)
     recaptcha (5.15.0)
     regexp_parser (2.8.2)
