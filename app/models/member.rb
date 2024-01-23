@@ -118,6 +118,10 @@ class Member < ApplicationRecord
     return nil
   end
 
+  def sync_with_lookup!
+    ::Membership::LookupSync.sync_members([self])
+  end
+
   def sync_with_sympa!
     ::Membership::SympaSync.sync_members([self])
   end
