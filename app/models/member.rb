@@ -118,6 +118,20 @@ class Member < ApplicationRecord
     return nil
   end
 
+  def ug?
+    return nil unless ucam_lookup_data.present?
+    ucam_lookup_data["groups"].select { |g| g["name"].end_with? "-sis-ug" }.count > 0
+  rescue
+    return nil
+  end
+
+  def pg?
+    return nil unless ucam_lookup_data.present?
+    ucam_lookup_data["groups"].select { |g| g["name"].end_with? "-sis-pg" }.count > 0
+  rescue
+    return nil
+  end
+
   def sync_with_lookup!
     ::Membership::LookupSync.sync_members([self])
   end
