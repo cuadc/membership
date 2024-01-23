@@ -18,17 +18,20 @@ module Membership
           elsif result
             if m.mtype_id == 2
               puts "#{m.crsid} is a student"
-              new_year = Date.today.month >= 8 ? Date.today.year + 1 : Date.today.year
               m.mtype_id = 1
-              m.graduation_year = new_year
+            end
+            if m.graduation_year < Date.today.year
+              puts "corrected graduation year for #{m.crsid}"
+              m.graduation_year = Date.today.year
             end
           else
             if m.mtype_id == 1
               puts "#{m.crsid} is not a student"
-              if m.graduation_year > Date.today.year
-                m.graduation_year = Date.today.year
-              end
               m.mtype_id = 2
+            end
+            if m.graduation_year > Date.today.year
+              puts "corrected graduation year for #{m.crsid}"
+              m.graduation_year = Date.today.year
             end
           end
           m.save!
