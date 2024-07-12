@@ -1,1 +1,5 @@
 <%= yield %>
+
+--
+This email was sent on <%= DateTime.now.inspect %> to 
+<%= message.to_addrs.join(", ") %> from the CUADC Membership System.
