@@ -8,8 +8,6 @@ Rails.application.routes.draw do
     get 'camdram_associations_needed', on: :collection
     get 'cards_needed', on: :collection
     post 'issue_card', on: :member
-    get 'mailing_list', on: :collection
-    get 'import', on: :collection
     put 'ingest/purchase', on: :collection
   end
 

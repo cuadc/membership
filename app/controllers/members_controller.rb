@@ -49,12 +49,8 @@ class MembersController < ApplicationController
     redirect_to cards_needed_members_path
   end
 
-  def import
-    # Mailing list subscribers - Ordinary, Associate and Honorary members.
-    @members = Member.where(mtype_id: [1, 2, 4]).not_legacy_email.order(:id)
-  end
-
   def new
+    raise 'protected operation' unless current_user.sysop?
     @member = Member.new
   end
 
@@ -63,6 +59,7 @@ class MembersController < ApplicationController
   end
 
   def create
+    raise 'protected operation' unless current_user.sysop?
     @member = Member.new(member_params)
     if @member.save
       redirect_to @member
