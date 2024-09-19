@@ -1,5 +1,8 @@
 class SignupController < ApplicationController
   skip_before_action :check_user!
+  before_action do
+    @institutions = Institution.where.not(id: [1, 34, 35])
+  end
 
   def verify
     PaperTrail.request.whodunnit = 'Email Verification'
@@ -26,20 +29,27 @@ class SignupController < ApplicationController
 
   def new
     @member = Member.new
-    @institutions = Institution.where.not(id: [1, 34, 35])
   end
 
   def create
     CurrentRequest.signup = true
     PaperTrail.request.whodunnit = 'Web Signup'
     @member = Member.new(member_params)
+
+    # Check that the privacy policy was accepted by the user
+    unless params[:privacy_policy][:accepted] == "1"
+      @member.errors.add(:base, "You must accept the privacy policy")
+      render :new and return
+    end
+
+    # Check that the institution is valid
     if @member.institution_id.present?
-      @institutions = Institution.where.not(id: [1, 34, 35])
       unless @institutions.include?(@member.institution)
         @member.errors.add(:institution, "is invalid")
         render :new and return
       end
     end
+
     @member.mtype_id = 998
     ActiveRecord::Base.transaction do
       if @member.valid? && verify_recaptcha(model: @member) && @member.save

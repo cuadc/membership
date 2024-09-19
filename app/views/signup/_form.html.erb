@@ -65,6 +65,20 @@
     </div>
   </div>
 
+  <%= fields :privacy_policy do |fields| %>
+    <div class="form-group row">
+      <%= fields.label :accepted, 'Privacy policy', class: 'col-sm-3 col-form-label' %>
+      <div class="col-sm-9">
+        <div class="form-check">
+          <%= fields.check_box :accepted, class: 'form-check-input' %>
+          <label class="form-check-label" for="privacy_policy_accepted">
+            I understand and accept the <a href="https://cuadc.org/privacy-policy/">privacy policy</a>
+          </label>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
   <div class="form-group row">
     <%= form.label :recaptcha, 'Are you a human?', class: 'col-sm-3 col-form-label' %>
     <div class="col-sm-9">
