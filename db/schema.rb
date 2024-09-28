@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_11_162231) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_28_175939) do
   create_table "email_verification_tokens", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "uuid", null: false
@@ -44,12 +44,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_11_162231) do
     t.boolean "no_mail", default: false, null: false
     t.boolean "needs_card", default: false, null: false
     t.boolean "ucam_mail_accepted"
+    t.string "uuid", null: false
     t.index ["camdram_id"], name: "index_members_on_camdram_id", unique: true
     t.index ["crsid"], name: "index_members_on_crsid", unique: true
     t.index ["institution_id"], name: "index_members_on_institution_id"
     t.index ["mtype_id"], name: "index_members_on_mtype_id"
     t.index ["primary_email"], name: "index_members_on_primary_email", unique: true
     t.index ["secondary_email"], name: "index_members_on_secondary_email", unique: true
+    t.index ["uuid"], name: "index_members_on_uuid", unique: true
   end
 
   create_table "provider_accounts", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|

@@ -19,6 +19,7 @@
 #  no_mail            :boolean          default(FALSE), not null
 #  needs_card         :boolean          default(FALSE), not null
 #  ucam_mail_accepted :boolean
+#  uuid               :string(255)      not null
 #
 class Member < ApplicationRecord
   belongs_to :institution
@@ -35,6 +36,9 @@ class Member < ApplicationRecord
   scope :graduating, -> { where(mtype_id: 1).where("graduation_year <= ?", Date.today.year) }
   scope :not_legacy_email, -> { where("primary_email NOT LIKE 'unknown-member-email-_%@cuadc.org'") }
 
+  after_initialize do
+    self.uuid = SecureRandom.uuid unless self.uuid
+  end
   before_validation :normalise_fields
   after_commit :sync_with_sympa!
 
@@ -43,10 +47,11 @@ class Member < ApplicationRecord
   validates :primary_email, presence: true, uniqueness: true, email: true
   validates :secondary_email, presence: false, uniqueness: { allow_blank: true }, email: true, if: -> { !CurrentRequest.is_signup? }
   validates :secondary_email, presence: true, uniqueness: true, email: true, if: -> { CurrentRequest.is_signup? }
+  validates :graduation_year, presence: true
+  validates :uuid, presence: true, uniqueness: true, uuid: true
   validate -> { errors.add(:secondary_email, 'needs to be different') if primary_email == secondary_email }
   validate -> { errors.add(:primary_email, 'duplicates a preexisting secondary email') if Member.where.not(id: id).find_by(secondary_email: primary_email) }
   validate -> { errors.add(:secondary_email, 'duplicates a preexisting primary email') if Member.where.not(id: id).find_by(primary_email: secondary_email) }
-  validates :graduation_year, presence: true
   validate :crsid_must_be_valid, if: -> { CurrentRequest.is_signup? }
   validate :cam_email_must_be_valid, if: -> { CurrentRequest.is_signup? }
   validate :primary_email_must_be_academic, if: -> { CurrentRequest.is_signup? }
