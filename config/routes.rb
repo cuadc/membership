@@ -27,5 +27,7 @@ Rails.application.routes.draw do
   get '/pay' => 'signup#pay'
 
   get '/info' => 'misc#info'
+  get '/cudar-optout' => 'misc#cudar_optout'
+  delete '/cudar-resign' => 'misc#cudar_resign'
   get '/ping', to: ->(env) { [200, {}, ["pong\n"]] }
 end

@@ -1,0 +1,22 @@
+<p>
+  CUADC is updating its privacy policy in order to build longstanding and
+  meaningful relationships with members and to facilitate alumni interaction,
+  communication and fundraising. This will involve sharing the names, colleges,
+  CRSids and graduation years of our members from 2015 onwards with the
+  University of Cambridge Development & Alumni Relations office.
+</p>
+
+<p>
+  You can view this updated privacy policy at
+  <a href="https://cuadc.org/privacy-policy/">https://cuadc.org/privacy-policy/</a>.
+</p>
+
+<p>
+  If you wish to opt out of this, you must resign your CUADC membership.
+  You may do this by clicking the button below.
+</p>
+
+<%= form_with url: "/cudar-resign", method: :delete do |form| %>
+  <%= form.hidden_field :uuid, value: @member.uuid %>
+  <%= form.submit "I, #{@member.name}, resign my membership from the Cambridge University Amateur Dramatic Club", class: "btn btn-danger" %>
+<% end %>
