@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/CHTJonas/omniauth-ucam-raven.git
-  revision: b4bb9c2a1114c6f88dcd70ac99a16d8ffb7c52be
+  revision: 13e5a3b69bdd70cc48647ba60abb7ee0d823c336
   specs:
     omniauth-ucam-raven (3.0.0.pre.rc1)
       omniauth (~> 2.1)
