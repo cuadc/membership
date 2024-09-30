@@ -1,12 +1,13 @@
 class EmailDeliveryObserver
   def self.delivered_email(message)
-    message.recipients.uniq.each do |addr|
-      SentMail.create(
-        mailer_class: message.instance_variable_get("@mailer_class").to_s,
-        mailer_action: message.instance_variable_get("@action").to_s,
-        address: addr,
-        submitted: message.date
-      )
-    end
+    info = message.instance_variable_get(:@_membership_mail_info)
+    SentMail.create(
+      mailer_class: info[:mailer_class],
+      mailer_action: info[:mailer_action],
+      submitted: DateTime.now,
+      to: message.to.to_s,
+      cc: message.cc.to_s,
+      bcc: message.bcc.to_s,
+    )
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_28_175939) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_30_145316) do
   create_table "email_verification_tokens", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "uuid", null: false
@@ -82,8 +82,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_28_175939) do
   create_table "sent_mails", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "mailer_class", null: false
     t.string "mailer_action", null: false
-    t.string "address", null: false
+    t.string "address"
     t.timestamp "submitted", null: false
+    t.text "to", size: :long
+    t.text "cc", size: :long
+    t.text "bcc", size: :long
   end
 
   create_table "sessions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
