@@ -19,7 +19,7 @@ class MiscController < ApplicationController
   private
 
   def check_opt_out_expiry!
-    if Date.today >= Date.parse('2024-09-07')
+    if Date.today >= Date.parse('2024-10-07')
       render inline: "Sorry, but you must have opted out before 7th October.", layout: true
     end
   end

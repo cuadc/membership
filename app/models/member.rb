@@ -142,7 +142,8 @@ class Member < ApplicationRecord
   end
 
   def sync_with_sympa!
-    ::Membership::SympaSync.sync_members([self])
+    # Disabled 30/09/24 due to some kind of SOAP issue
+    #::Membership::SympaSync.sync_members([self])
   end
 
   private
