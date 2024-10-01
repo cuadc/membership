@@ -47,7 +47,7 @@ gem "paper_trail-association_tracking", "~> 2.2"
 gem "recaptcha", "~> 5.15"
 
 # Static environmental configuration
-gem "dotenv-rails", "~> 2.8"
+gem "dotenv-rails", "~> 3.1"
 
 # Encrypt sensitive model attributes
 gem "attr_encrypted", "~> 4.0"
