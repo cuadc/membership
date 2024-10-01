@@ -54,6 +54,8 @@ module Membership
 
       private
 
+      @@email_regexp = /\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\b/
+
       def get_all_mem_emails(member)
         emails = [
           member.primary_email,
@@ -66,6 +68,11 @@ module Membership
             "#{member.crsid}@cantab.ac.uk",
             "#{member.crsid}@cantab.net"
           ])
+        end
+        member.versions.each do |ver|
+          emails.concat(ver.changeset["primary_email"] || [])
+          emails.concat(ver.changeset["secondary_email"] || [])
+          emails.concat((ver.changeset["notes"] || []).reject(&:blank?).map { |str| str.scan(@@email_regexp) }.flatten)
         end
         emails.reject(&:blank?).sort.uniq
       end
