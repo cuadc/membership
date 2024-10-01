@@ -40,7 +40,8 @@ class Member < ApplicationRecord
     self.uuid = SecureRandom.uuid unless self.uuid
   end
   before_validation :normalise_fields
-  after_commit :sync_with_sympa!
+  after_save_commit :sync_with_sympa!
+  after_destroy_commit :remove_from_sympa!
 
   validates :name, presence: true
   validates :crsid, presence: false, uniqueness: { allow_blank: true }
@@ -143,6 +144,10 @@ class Member < ApplicationRecord
 
   def sync_with_sympa!
     ::Membership::SympaSync.sync_members([self])
+  end
+
+  def remove_from_sympa!
+    ::Membership::SympaSync.remove_member(self)
   end
 
   private
