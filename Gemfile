@@ -63,7 +63,7 @@ gem "rails_admin", "~> 3.0"
 gem "rails_admin_history_rollback", "~> 1.0"
 
 # Static page serving
-gem "high_voltage", "~> 3.1"
+gem "high_voltage", "~> 4.0"
 
 # Raven OmniAuth login flow
 gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
