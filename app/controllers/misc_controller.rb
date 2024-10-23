@@ -11,7 +11,7 @@ class MiscController < ApplicationController
   end
 
   def cudar_resign
-    @member = Member.find_by(uuid: params[:uuid])
+    @member = Member.find_by!(uuid: params[:uuid])
     PaperTrail.request.whodunnit = @member.name
     @member.destroy
   end
