@@ -2,7 +2,7 @@ class WelcomeMailer < ApplicationMailer
   def card_awaiting_email
     @member = params[:member]
     return if @member.no_mail
-    mail(to: @member.primary_email, subject: 'CUADC Membership Card')
+    mail(to: @member.contact_email, subject: 'CUADC Membership Card')
   end
 
   def new_signup_notification_email
@@ -14,7 +14,7 @@ class WelcomeMailer < ApplicationMailer
   def new_mem_thank_you_email
     @member = params[:member]
     return if @member.no_mail
-    mail(to: @member.primary_email, subject: 'CUADC Membership Signup')
+    mail(to: @member.contact_email, subject: 'CUADC Membership Signup')
   end
 
   def verification_email
