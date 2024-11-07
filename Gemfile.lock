@@ -357,7 +357,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uri (0.13.1)
+    uri (1.0.0)
     useragent (0.16.10)
     wasabi (5.0.3)
       addressable
