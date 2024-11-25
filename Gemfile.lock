@@ -218,7 +218,7 @@ GEM
       timeout
     net-smtp (0.5.0)
       net-protocol
-    nio4r (2.7.3)
+    nio4r (2.7.4)
     nkf (0.2.0)
     nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
@@ -248,7 +248,7 @@ GEM
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
-    puma (6.4.3)
+    puma (6.5.0)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.7)
@@ -403,7 +403,7 @@ DEPENDENCIES
   omniauth-ucam-raven!
   paper_trail (~> 15.0)
   paper_trail-association_tracking (~> 2.2)
-  puma (~> 6.4)
+  puma (~> 6.5)
   rails (~> 7.2.1)
   rails_admin (~> 3.0)
   rails_admin_history_rollback (~> 1.0)
