@@ -40,7 +40,7 @@ gem "sassc-rails"
 # gem "image_processing", "~> 1.2"
 
 # Auditing
-gem "paper_trail", "~> 15.0"
+gem "paper_trail", "~> 16.0"
 gem "paper_trail-association_tracking", "~> 2.2"
 
 # Stopping the script kiddies
