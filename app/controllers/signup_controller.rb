@@ -6,20 +6,17 @@ class SignupController < ApplicationController
 
   def verify
     PaperTrail.request.whodunnit = 'Email Verification'
-    if params[:uuid]
-      ActiveRecord::Base.transaction do
-        @token = EmailVerificationToken.find_by(uuid: params[:uuid])
-        return unless @token
-        @token.update!(verified: true)
-        @tokens = @token.member.email_verification_tokens.where(verified: false)
-        if @tokens.length == 0
-          if @token.member.mtype_id == 998
-            @token.member.update!(mtype_id: 999)
-            WelcomeMailer.with(member: @token.member).new_signup_notification_email.deliver_now
-          end
-          if @token.member.mtype_id == 999
-            redirect_to :pay
-          end
+    ActiveRecord::Base.transaction do
+      @token = EmailVerificationToken.find_by!(uuid: params[:uuid])
+      @token.update!(verified: true)
+      @tokens = @token.member.email_verification_tokens.where(verified: false)
+      if @tokens.length == 0
+        if @token.member.mtype_id == 998
+          @token.member.update!(mtype_id: 999)
+          WelcomeMailer.with(member: @token.member).new_signup_notification_email.deliver_now
+        end
+        if @token.member.mtype_id == 999
+          redirect_to :pay
         end
       end
     end
