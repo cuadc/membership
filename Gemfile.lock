@@ -334,7 +334,7 @@ GEM
       nori (~> 2.4)
       wasabi (>= 3.7, < 6)
     secure_headers (6.7.0)
-    securerandom (0.3.2)
+    securerandom (0.4.0)
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
