@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(auth_hash)
     if user.nil?
       ApplicationMailer.new.mail(
-        to: User.where(sysop: true).pluck(:email),
+        to: User.where(sysop: true, active: true).pluck(:email),
         subject: 'CUADC Membership Login Attempt Denied',
         body: <<~END
           Hello,
