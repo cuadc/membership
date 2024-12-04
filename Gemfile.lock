@@ -170,7 +170,7 @@ GEM
     irb (1.14.1)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.8.2)
+    json (2.9.0)
     jwt (2.9.3)
       base64
     kaminari (1.2.2)
@@ -362,7 +362,7 @@ GEM
       concurrent-ruby (~> 1.0)
     uri (1.0.2)
     useragent (0.16.10)
-    wasabi (5.0.3)
+    wasabi (5.1.0)
       addressable
       faraday (>= 1.9, < 3)
       nokogiri (>= 1.13.9)
