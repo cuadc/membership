@@ -56,7 +56,7 @@ gem "attr_encrypted", "~> 4.0"
 gem "strip_attributes", "~> 1.14"
 
 # HTTP security headers
-gem "secure_headers", "~> 6.5"
+gem "secure_headers", "~> 7.0"
 
 # Administrator interface
 gem "rails_admin", "~> 3.2"
