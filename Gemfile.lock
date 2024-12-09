@@ -201,7 +201,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.1105)
     mini_mime (1.1.5)
-    minitest (5.25.3)
+    minitest (5.25.4)
     msgpack (1.7.5)
     multi_json (1.15.0)
     multi_xml (0.7.1)
@@ -222,9 +222,9 @@ GEM
       net-protocol
     nio4r (2.7.4)
     nkf (0.2.0)
-    nokogiri (1.16.8-arm64-darwin)
+    nokogiri (1.17.0-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.8-x86_64-linux)
+    nokogiri (1.17.0-x86_64-linux)
       racc (~> 1.4)
     nori (2.7.1)
       bigdecimal
@@ -286,12 +286,12 @@ GEM
     rails-html-sanitizer (1.6.1)
       loofah (~> 2.21)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
-    rails_admin (3.2.1)
+    rails_admin (3.3.0)
       activemodel-serializers-xml (>= 1.0)
       csv
       kaminari (>= 0.14, < 2.0)
       nested_form (~> 0.3)
-      rails (>= 6.0, < 8)
+      rails (>= 6.0, < 9)
       turbo-rails (>= 1.0, < 3)
     rails_admin_history_rollback (1.0.3)
       paper_trail (>= 3.0.6)
@@ -361,7 +361,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uri (1.0.2)
-    useragent (0.16.10)
+    useragent (0.16.11)
     wasabi (5.1.0)
       addressable
       faraday (>= 1.9, < 3)
@@ -407,7 +407,7 @@ DEPENDENCIES
   paper_trail-association_tracking (~> 2.2)
   puma (~> 6.5)
   rails (~> 7.2.1)
-  rails_admin (~> 3.2)
+  rails_admin (~> 3.3)
   rails_admin_history_rollback (~> 1.0)
   recaptcha (~> 5.17)
   sassc-rails
