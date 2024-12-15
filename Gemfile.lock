@@ -242,7 +242,7 @@ GEM
     omniauth-rails_csrf_protection (1.0.2)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
-    paper_trail (15.2.0)
+    paper_trail (16.0.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
     paper_trail-association_tracking (2.2.1)
@@ -403,7 +403,7 @@ DEPENDENCIES
   mysql2 (~> 0.5)
   omniauth-rails_csrf_protection (~> 1.0, >= 1.0.1)
   omniauth-ucam-raven!
-  paper_trail (~> 15.0)
+  paper_trail (~> 16.0)
   paper_trail-association_tracking (~> 2.2)
   puma (~> 6.5)
   rails (~> 7.2.1)
