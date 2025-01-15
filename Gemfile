@@ -44,7 +44,7 @@ gem "paper_trail", "~> 15.0"
 gem "paper_trail-association_tracking", "~> 2.2"
 
 # Stopping the script kiddies
-gem "recaptcha", "~> 5.18"
+gem "recaptcha", "~> 5.19"
 
 # Static environmental configuration
 gem "dotenv-rails", "~> 3.1"
