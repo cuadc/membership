@@ -50,7 +50,7 @@ gem "recaptcha", "~> 5.19"
 gem "dotenv-rails", "~> 3.1"
 
 # Encrypt sensitive model attributes
-gem "attr_encrypted", "~> 4.0"
+gem "attr_encrypted", "~> 4.2"
 
 # Remove whitespace from model attributes
 gem "strip_attributes", "~> 1.14"
