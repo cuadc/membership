@@ -251,7 +251,7 @@ GEM
       date
       stringio
     public_suffix (6.0.1)
-    puma (6.5.0)
+    puma (6.6.0)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.8)
@@ -405,7 +405,7 @@ DEPENDENCIES
   omniauth-ucam-raven!
   paper_trail (~> 15.0)
   paper_trail-association_tracking (~> 2.2)
-  puma (~> 6.5)
+  puma (~> 6.6)
   rails (~> 7.2.1)
   rails_admin (~> 3.3)
   rails_admin_history_rollback (~> 1.0)
