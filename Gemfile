@@ -53,7 +53,7 @@ gem "dotenv-rails", "~> 3.1"
 gem "attr_encrypted", "~> 4.0"
 
 # Remove whitespace from model attributes
-gem "strip_attributes", "~> 1.14"
+gem "strip_attributes", "~> 2.0"
 
 # HTTP security headers
 gem "secure_headers", "~> 6.5"
