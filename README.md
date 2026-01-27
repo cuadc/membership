@@ -1,4 +1,4 @@
-<img align="right" src="https://cuadc.org/wp-content/themes/cuadc%20update/Images/logo.png">
+<img align="right" width="250" src="https://docushare.cuadc.org/assets/CUADC%20Branding/cuadc_logo_blue.png">
 
 # CUADC Membership System
 
